@@ -17,5 +17,9 @@ export const StorybookButton = ({
   label,
   ...props
 }: ButtonProps) => {
-return <Button size={size} className="">{label.toUpperCase()}</Button>;
+  return (
+    <Button size={size} {...props}>
+      {label.toUpperCase()}
+    </Button>
+  );
 };
