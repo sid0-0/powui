@@ -72,13 +72,13 @@ function Button({
   const loadRef = (node: HTMLButtonElement) => {
     if (!node) return;
     elem.current = node;
-    elem.current.addEventListener("mousedown", (e) => {
+    elem.current.addEventListener("mousedown", () => {
       buttonStateToggle(true, node);
     });
-    elem.current.addEventListener("mouseup", (e) => {
+    elem.current.addEventListener("mouseup", () => {
       buttonStateToggle(false, node);
     });
-    elem.current.addEventListener("mouseleave", (e) => {
+    elem.current.addEventListener("mouseleave", () => {
       buttonStateToggle(false, node);
     });
     if (ref && typeof ref === "function") {
