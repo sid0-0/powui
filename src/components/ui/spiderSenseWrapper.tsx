@@ -1,6 +1,6 @@
 import { pickRandomFromArray } from "@/utils/general";
 import mojs from "@mojs/core";
-import { useCallback, useRef, type MouseEventHandler } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 export const COLORS_LIST = [
   {
@@ -70,13 +70,15 @@ const SpiderSenseWrapper = (
     children: React.ReactNode;
     shape?: "zigzag" | "line";
     color?: string;
+    trigger?: "hover" | "click" | "mount" | "manual";
+    getManualTrigger?: (trigger: () => void) => void;
   }>
 ) => {
-  const { children, color, shape } = props;
+  const { children, color, shape, trigger = "hover", getManualTrigger } = props;
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const shootLines: MouseEventHandler<HTMLDivElement> = useCallback(() => {
+  const shootLines = useCallback(() => {
     if (!containerRef.current) return;
     const windowWidth = window.innerWidth,
       windowHeight = window.innerHeight;
@@ -111,6 +113,7 @@ const SpiderSenseWrapper = (
         stroke: chosenColor,
         strokeDasharray: "100%",
         strokeDashoffset: { "-100%": "100%" },
+        strokeWidth: 5,
         duration: 500,
         easing: "quad.out",
         isShowEnd: false,
@@ -120,14 +123,25 @@ const SpiderSenseWrapper = (
     burst.play();
   }, [color, shape]);
 
+  useEffect(() => {
+    getManualTrigger?.(shootLines);
+  }, [getManualTrigger, shootLines]);
+
   const registerRef = useCallback((node: HTMLDivElement | null) => {
     if (node) {
       containerRef.current = node;
+      if (trigger === "mount") {
+        setTimeout(shootLines, 0);
+      }
     }
   }, []);
 
   return (
-    <div ref={registerRef} onMouseOver={shootLines}>
+    <div
+      ref={registerRef}
+      onMouseOver={trigger === "hover" ? shootLines : () => {}}
+      onClick={trigger === "click" ? shootLines : () => {}}
+    >
       {children}
     </div>
   );
