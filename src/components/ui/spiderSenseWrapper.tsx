@@ -99,21 +99,21 @@ const SpiderSenseWrapper = (
       top: itemDim.top + itemSize.y / 2,
       radiusX: itemSize.x / 1.2,
       radiusY: itemSize.y / 1.2,
-      count: Math.max(8, (Math.PI * (itemSize.x + itemSize.y)) / 100),
+      count: Math.max(4, (Math.PI * averageRadius) / 20),
 
       children: {
         shape: chosenShape,
         radius: averageRadius / 4,
         scale: {
-          [windowWidth / (itemDim.width * 8)]:
-            windowHeight / (itemDim.height * 8),
+          [windowWidth / (itemDim.width * 6)]:
+            windowHeight / (itemDim.height * 6),
         },
         fill: "none",
         points: 7,
         stroke: chosenColor,
         strokeDasharray: "100%",
         strokeDashoffset: { "-100%": "100%" },
-        strokeWidth: 5,
+        strokeWidth: averageRadius / 20,
         duration: 500,
         easing: "quad.out",
         isShowEnd: false,
