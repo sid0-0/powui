@@ -1,0 +1,136 @@
+import { pickRandomFromArray } from "@/utils/general";
+import mojs from "@mojs/core";
+import { useCallback, useRef, type MouseEventHandler } from "react";
+
+export const COLORS_LIST = [
+  {
+    name: "Vibrant Red",
+    hex: "#FF0000",
+  },
+  {
+    name: "Electric Blue",
+    hex: "#00FFFF",
+  },
+  {
+    name: "Bright Orange",
+    hex: "#FF8C00",
+  },
+  {
+    name: "Lime Green",
+    hex: "#32CD32",
+  },
+  {
+    name: "Shocking Pink",
+    hex: "#FF1493",
+  },
+  {
+    name: "Deep Magenta",
+    hex: "#FF00FF",
+  },
+  {
+    name: "Sunny Yellow",
+    hex: "#FFD700",
+  },
+  {
+    name: "Royal Blue",
+    hex: "#4169E1",
+  },
+  {
+    name: "Fluorescent Green",
+    hex: "#00FF7F",
+  },
+  {
+    name: "Hot Pink",
+    hex: "#FF69B4",
+  },
+  {
+    name: "Electric Violet",
+    hex: "#8A2BE2",
+  },
+  {
+    name: "Crimson Red",
+    hex: "#DC143C",
+  },
+  {
+    name: "Aqua Marine",
+    hex: "#7FFFD4",
+  },
+  {
+    name: "Gold",
+    hex: "#FFBF00",
+  },
+  {
+    name: "Deep Sky Blue",
+    hex: "#00BFFF",
+  },
+];
+
+const SpiderSenseWrapper = (
+  props: React.PropsWithChildren<{
+    children: React.ReactNode;
+    shape?: "zigzag" | "line";
+    color?: string;
+  }>
+) => {
+  const { children, color, shape } = props;
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const shootLines: MouseEventHandler<HTMLDivElement> = useCallback(() => {
+    if (!containerRef.current) return;
+    const windowWidth = window.innerWidth,
+      windowHeight = window.innerHeight;
+    const itemDim = containerRef.current.getBoundingClientRect(),
+      itemSize = {
+        x: itemDim.right - itemDim.left,
+        y: itemDim.bottom - itemDim.top,
+      };
+
+    const chosenColor =
+      color ?? pickRandomFromArray(COLORS_LIST.map((x) => x.hex));
+    const chosenShape = shape ?? pickRandomFromArray(["line", "zigzag"]);
+
+    const averageRadius = (itemSize.x + itemSize.y) / 4;
+
+    const burst = new mojs.Burst({
+      left: itemDim.left + itemSize.x / 2,
+      top: itemDim.top + itemSize.y / 2,
+      radiusX: itemSize.x / 1.2,
+      radiusY: itemSize.y / 1.2,
+      count: Math.max(8, (Math.PI * (itemSize.x + itemSize.y)) / 100),
+
+      children: {
+        shape: chosenShape,
+        radius: averageRadius / 4,
+        scale: {
+          [windowWidth / (itemDim.width * 8)]:
+            windowHeight / (itemDim.height * 8),
+        },
+        fill: "none",
+        points: 7,
+        stroke: chosenColor,
+        strokeDasharray: "100%",
+        strokeDashoffset: { "-100%": "100%" },
+        duration: 500,
+        easing: "quad.out",
+        isShowEnd: false,
+      },
+    });
+
+    burst.play();
+  }, [color, shape]);
+
+  const registerRef = useCallback((node: HTMLDivElement | null) => {
+    if (node) {
+      containerRef.current = node;
+    }
+  }, []);
+
+  return (
+    <div ref={registerRef} onMouseOver={shootLines}>
+      {children}
+    </div>
+  );
+};
+
+export { SpiderSenseWrapper };

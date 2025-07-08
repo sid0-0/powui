@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@mojs/core':
+        specifier: ^1.7.1
+        version: 1.7.1
       '@radix-ui/react-slot':
         specifier: ^1.2.3
         version: 1.2.3(@types/react@19.1.8)(react@19.1.0)
@@ -456,6 +459,10 @@ packages:
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
+
+  '@mojs/core@1.7.1':
+    resolution: {integrity: sha512-DMe8b6DPiYqpPoVi9HiDTVTchDE47A6aqGD0b1yGmHrGnNO+I25fSKkVFxvjWrW1lAIqpV/ROMZH03GPl3d6PA==}
+    engines: {node: ^20, npm: ^10}
 
   '@neoconfetti/react@1.0.0':
     resolution: {integrity: sha512-klcSooChXXOzIm+SE5IISIAn3bYzYfPjbX7D7HoqZL84oAfgREeSg5vSIaSFH+DaGzzvImTyWe1OyrJ67vik4A==}
@@ -2514,6 +2521,10 @@ snapshots:
       '@types/mdx': 2.0.13
       '@types/react': 19.1.8
       react: 19.1.0
+
+  '@mojs/core@1.7.1':
+    dependencies:
+      '@babel/runtime': 7.27.6
 
   '@neoconfetti/react@1.0.0': {}
 
