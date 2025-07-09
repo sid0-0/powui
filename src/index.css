@@ -94,12 +94,23 @@ button {
 
 @utility spotty-bg-* {
   background: radial-gradient(
-        closest-side,
-        rgba(100, 100, 100, 0.2),
-        --value([color])
-      )
-      0 / 0.2em 0.2em space,
+      circle at center,
+      rgba(0, 0, 0, 0.3) 0.02rem,
+      --value([color]) 0
+    ),
     --value([color]);
+  background-size: 0.15rem 0.15rem;
+}
+
+@utility spotty-bg-diagonal-* {
+  background-image: radial-gradient(
+      circle at center,
+      rgba(0, 0, 0) 0.05rem,
+      transparent 0
+    ),
+    radial-gradient(circle at center, rgba(0, 0, 0) 0.05rem, --value([color]) 0);
+  background-size: 0.5rem 0.5rem;
+  background-position: 0 0, 0.25rem 0.25rem;
 }
 
 @theme inline {
