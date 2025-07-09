@@ -8,7 +8,7 @@ import cx from "classnames";
 const buttonVariants = cva(
   cx(
     "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
-    "border-3 border-solid border-black text-black shadow-[-6px_6px]",
+    "border-3 border-solid border-black text-black shadow-[-6px_6px] py-2 px-4",
     "filter-[url(#displacementFilter)]",
     "spotty-bg-[#eab308] hover:spotty-bg-[#ca8a04]",
     "transition-[translate,box-shadow] duration-50 linear",
