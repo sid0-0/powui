@@ -1,3 +1,8 @@
+/**
+ * Credits to Mike Quinn for the original snippet which inspired this whole project
+ * https://codepen.io/mprquinn/pen/OmOMrR
+ */
+
 import { pickRandomFromArray } from "@/utils/general";
 import mojs from "@mojs/core";
 import { useCallback, useEffect, useRef } from "react";
