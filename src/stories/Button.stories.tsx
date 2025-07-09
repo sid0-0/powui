@@ -4,6 +4,8 @@ import { fn } from "storybook/test";
 
 import { StorybookButton } from "./Button";
 
+import { Bomb } from "lucide-react";
+
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
   title: "Example/Button",
@@ -15,7 +17,13 @@ const meta = {
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
-  argTypes: {},
+  argTypes: {
+    className: {
+      table: {
+        disable: true,
+      },
+    },
+  },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { onClick: fn() },
 } satisfies Meta<typeof StorybookButton>;
@@ -40,7 +48,8 @@ export const Secondary: Story = {
 export const Large: Story = {
   args: {
     size: "lg",
-    label: "Play dumb!",
+    label: "Not that dumb!",
+    className: "text-2xl",
   },
 };
 
@@ -54,6 +63,6 @@ export const Small: Story = {
 export const Icon: Story = {
   args: {
     size: "icon",
-    label: "Play dumb!",
+    label: <Bomb />,
   },
 };

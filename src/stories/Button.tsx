@@ -5,9 +5,10 @@ export interface ButtonProps {
   /** How large should the button be? */
   size?: "default" | "sm" | "lg" | "icon";
   /** Button contents */
-  label: string;
+  label: React.ReactNode;
   /** Optional click handler */
   onClick?: () => void;
+  className?: string;
 }
 
 /** Primary UI component for user interaction */
@@ -17,9 +18,10 @@ export const StorybookButton = ({
   label,
   ...props
 }: ButtonProps) => {
+  const toRender = typeof label === "string" ? label.toUpperCase() : label;
   return (
     <Button size={size} {...props}>
-      {label.toUpperCase()}
+      {toRender}
     </Button>
   );
 };
