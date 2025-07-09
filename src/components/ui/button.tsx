@@ -11,7 +11,8 @@ const buttonVariants = cva(
     "border-3 border-solid border-black text-black shadow-[-6px_6px]",
     "filter-[url(#displacementFilter)]",
     "spotty-bg-[#eab308] hover:spotty-bg-[#ca8a04]",
-    "transition-[translate,box-shadow] duration-50 linear"
+    "transition-[translate,box-shadow] duration-50 linear",
+    "font-[Walter_Turncoat]"
   ),
   {
     variants: {

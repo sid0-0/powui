@@ -4,8 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 :root {
-  font-family: "Walter Turncoat", monospace, system-ui, Avenir, Helvetica, Arial,
-    sans-serif;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -75,7 +74,6 @@ h1 {
 
 button {
   padding: 0.6em 1.2em;
-  font-family: inherit;
   cursor: pointer;
 }
 
