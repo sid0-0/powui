@@ -1,36 +1,39 @@
-import { getEllipticalPoints, getRectangularPoints } from "@/lib/geometryUtils";
 import type React from "react";
+import { getRectangularPoints } from "@/lib/geometryUtils";
 import { useCallback, useMemo, useState } from "react";
 
 const HEIGHT_VARIANCE = 15;
 const FLATTERY_FACTOR = 2;
 
-const generateSVGPathBAM = (args: {
+const generateSVGPathCloud = (args: {
   points: { x: number; y: number }[];
   height: number;
   width: number;
   flatteryFactor: number;
 }) => {
   const { points, height, width, flatteryFactor } = args;
-  const path = [...points, points[0]].reduce((acc, point, index) => {
-    if (index === 0) {
-      return `M ${point.x} ${point.y}`;
-    } else {
-      const previousPoint = points[index - 1];
-      const referencePoint = {
-        x:
-          (width / 2 + flatteryFactor * ((point.x + previousPoint.x) / 2)) /
-          (1 + flatteryFactor),
-        y:
-          (height / 2 + flatteryFactor * ((point.y + previousPoint.y) / 2)) /
-          (1 + flatteryFactor),
-      };
 
-      return `${acc} Q ${referencePoint.x} ${referencePoint.y}, ${point.x} ${point.y}`;
+  let firstTrough = { x: 0, y: 0 };
+  const path = points.reduce((acc, point, index) => {
+    const nextPoint = points[index + 1] || points[0];
+    const trough = {
+      x:
+        (width / 2 + flatteryFactor * ((point.x + nextPoint.x) / 2)) /
+        (1 + flatteryFactor),
+      y:
+        (height / 2 + flatteryFactor * ((point.y + nextPoint.y) / 2)) /
+        (1 + flatteryFactor),
+    };
+
+    if (index === 0) {
+      firstTrough = trough;
+      return `M ${trough.x} ${trough.y}`;
+    } else {
+      return `${acc} Q ${point.x} ${point.y}, ${trough.x} ${trough.y}`;
     }
   }, "");
 
-  return `${path} Z`;
+  return `${path} Q ${points[0].x} ${points[0].y}, ${firstTrough.x} ${firstTrough.y} Z`;
 };
 
 const getPointsAndPath = (args: {
@@ -57,11 +60,11 @@ const getPointsAndPath = (args: {
   //   peakSeparation,
   //   heightVariance,
   // });
-  const path = generateSVGPathBAM({ points, height, width, flatteryFactor });
+  const path = generateSVGPathCloud({ points, height, width, flatteryFactor });
   return { points, path };
 };
 
-const BurstWrapper = (props: {
+const CloudWrapper = (props: {
   children: React.ReactNode;
   // heightVariance determines how low each peak can be
   heightVariance?: number;
@@ -103,4 +106,4 @@ const BurstWrapper = (props: {
   );
 };
 
-export { BurstWrapper };
+export { CloudWrapper };

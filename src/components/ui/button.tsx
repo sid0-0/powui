@@ -59,7 +59,6 @@ function Button({
   const elem = React.useRef<HTMLButtonElement>(null);
 
   const buttonStateToggle = (state: boolean, elem: HTMLButtonElement) => {
-    console.log("Button ref:", elem);
     if (!elem) return;
     if (state) {
       elem.style.setProperty("translate", "-4px 4px");
