@@ -1,7 +1,6 @@
 import type React from "react";
 import { useCallback, useMemo, useState } from "react";
 
-const MAX_LENGTH = 30;
 const HEIGHT_VARIANCE = 15;
 const FLATTERY_FACTOR = 2;
 
@@ -29,25 +28,51 @@ const resolvePointsFromLine = (
 
 // generate a straight line of points
 // with a random height variance
-const getPoints = (args: {
+const getRectangularPoints = (args: {
   height: number;
   width: number;
-  distanceBetweenPeaks: number;
+  peakSeparation: number;
   heightVariance: number;
 }) => {
-  const { height, width, distanceBetweenPeaks, heightVariance } = args;
+  const { height, width, peakSeparation, heightVariance } = args;
   const pickPoints = [];
   let currentX = 0;
 
   while (currentX < 2 * (width + height)) {
-    currentX =
-      currentX +
-      distanceBetweenPeaks +
-      (Math.random() - 0.5) * distanceBetweenPeaks;
+    currentX = currentX + (0.5 + Math.random()) * peakSeparation;
 
     pickPoints.push([currentX, Math.random() * heightVariance]);
   }
   return resolvePointsFromLine(pickPoints, height, width);
+};
+
+const getEllipticalPoints = (args: {
+  height: number;
+  width: number;
+  peakSeparation: number;
+  heightVariance: number;
+}) => {
+  const { height, width, peakSeparation, heightVariance } = args;
+
+  const theta = (2 * peakSeparation) / (width + height);
+  const a = width / 2;
+  const b = height / 2;
+  let peaksCounts = Math.ceil((2 * Math.PI) / theta);
+
+  const pickPoints = Array(peaksCounts)
+    .fill(null)
+    .map((_, index) => ({
+      x:
+        a +
+        a * Math.cos(theta * index) +
+        (Math.random() - 0.5) * heightVariance,
+      y:
+        b +
+        b * Math.sin(theta * index) +
+        (Math.random() - 0.5) * heightVariance,
+    }));
+
+  return pickPoints;
 };
 
 const generateSVGPathCloud = (args: {
@@ -57,27 +82,28 @@ const generateSVGPathCloud = (args: {
   flatteryFactor: number;
 }) => {
   const { points, height, width, flatteryFactor } = args;
-  const withLastPoint = [...points, points[0]];
-  const path = withLastPoint.reduce((acc, point, index) => {
-    const nextPoint =
-      index !== withLastPoint.length - 1 ? withLastPoint[index + 1] : points[1];
+
+  let firstTrough = { x: 0, y: 0 };
+  const path = points.reduce((acc, point, index) => {
+    const nextPoint = points[index + 1] || points[0];
+    const trough = {
+      x:
+        (width / 2 + flatteryFactor * ((point.x + nextPoint.x) / 2)) /
+        (1 + flatteryFactor),
+      y:
+        (height / 2 + flatteryFactor * ((point.y + nextPoint.y) / 2)) /
+        (1 + flatteryFactor),
+    };
 
     if (index === 0) {
-      return `M ${point.x} ${point.y}`;
+      firstTrough = trough;
+      return `M ${trough.x} ${trough.y}`;
     } else {
-      const referencePoint = {
-        x:
-          (width / 2 + flatteryFactor * ((point.x + nextPoint.x) / 2)) /
-          (1 + flatteryFactor),
-        y:
-          (height / 2 + flatteryFactor * ((point.y + nextPoint.y) / 2)) /
-          (1 + flatteryFactor),
-      };
-
-      return `${acc} Q ${point.x} ${point.y}, ${referencePoint.x} ${referencePoint.y}`;
+      return `${acc} Q ${point.x} ${point.y}, ${trough.x} ${trough.y}`;
     }
   }, "");
-  return `${path} Z`;
+
+  return `${path} Q ${points[0].x} ${points[0].y}, ${firstTrough.x} ${firstTrough.y} Z`;
 };
 
 const generateSVGPathBAM = (args: {
@@ -87,17 +113,11 @@ const generateSVGPathBAM = (args: {
   flatteryFactor: number;
 }) => {
   const { points, height, width, flatteryFactor } = args;
-  const withLastPoint = [...points, points[0]];
-
-  const path = withLastPoint.reduce((acc, point, index) => {
-    const previousPoint =
-      index !== 0
-        ? withLastPoint[index - 1]
-        : withLastPoint[withLastPoint.length - 1];
-
+  const path = [...points, points[0]].reduce((acc, point, index) => {
     if (index === 0) {
       return `M ${point.x} ${point.y}`;
     } else {
+      const previousPoint = points[index - 1];
       const referencePoint = {
         x:
           (width / 2 + flatteryFactor * ((point.x + previousPoint.x) / 2)) /
@@ -110,6 +130,7 @@ const generateSVGPathBAM = (args: {
       return `${acc} Q ${referencePoint.x} ${referencePoint.y}, ${point.x} ${point.y}`;
     }
   }, "");
+
   return `${path} Z`;
 };
 
@@ -117,30 +138,28 @@ const getPointsAndPath = (args: {
   height: number;
   width: number;
   heightVariance: number;
-  distanceBetweenPeaks: number;
+  peakSeparation: number;
   flatteryFactor: number;
 }) => {
-  const {
-    height,
-    width,
-    heightVariance,
-    distanceBetweenPeaks,
-    flatteryFactor,
-  } = args;
+  const { height, width, heightVariance, peakSeparation, flatteryFactor } =
+    args;
   if (height === 0 || width === 0) {
     return { points: [], path: "" };
   }
-  const points = getPoints(
-    {
-      height,
-      width,
-      distanceBetweenPeaks,
-      heightVariance,
-    }
-    // flatteryFactor
-  );
-  const path = generateSVGPathBAM({ points, height, width, flatteryFactor });
-  //   const path = generateSVGPathCloud(points, height, width);
+  const points = getRectangularPoints({
+    height,
+    width,
+    peakSeparation,
+    heightVariance,
+  });
+  // const points = getEllipticalPoints({
+  //   height,
+  //   width,
+  //   peakSeparation,
+  //   heightVariance,
+  // });
+  // const path = generateSVGPathBAM({ points, height, width, flatteryFactor });
+  const path = generateSVGPathCloud({ points, height, width, flatteryFactor });
   return { points, path };
 };
 
@@ -148,8 +167,8 @@ const ImpactWrapper = (props: {
   children: React.ReactNode;
   // heightVariance determines how low each peak can be
   heightVariance?: number;
-  // distanceBetweenPoints is used to determine distance between each peak
-  distanceBetweenPeaks?: number;
+  // peakSeparation is used to determine distance between each peak
+  peakSeparation?: number;
   // change this prop name at some point
   // flatteryFactor is a factor that determines how much the points are "flattened"
   flatteryFactor?: number;
@@ -157,9 +176,9 @@ const ImpactWrapper = (props: {
   const {
     children,
     heightVariance = HEIGHT_VARIANCE,
-    distanceBetweenPeaks = MAX_LENGTH,
     flatteryFactor = FLATTERY_FACTOR,
   } = props;
+
   const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
   const loadRef = useCallback((node: HTMLDivElement | null) => {
     setContainerRef(node);
@@ -167,15 +186,19 @@ const ImpactWrapper = (props: {
 
   const { height = 0, width = 0 } = containerRef?.getBoundingClientRect() ?? {};
 
+  const peakSeparation = props.peakSeparation ?? (height + width) / 10;
+
   const svgPath = useMemo(() => {
     return getPointsAndPath({
       height,
       width,
       heightVariance,
-      distanceBetweenPeaks,
+      peakSeparation,
       flatteryFactor,
     });
-  }, [height, width, heightVariance, distanceBetweenPeaks, flatteryFactor]);
+  }, [height, width, heightVariance, peakSeparation, flatteryFactor]);
+
+  console.log(svgPath.path);
 
   return (
     <div ref={loadRef} style={{ clipPath: `path("${svgPath.path}")` }}>

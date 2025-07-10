@@ -4,20 +4,20 @@ const StorybookImpact = (props: {
   height?: number;
   width?: number;
   heightVariance?: number;
-  distanceBetweenPeaks?: number;
+  peakSeparation?: number;
   flatteryFactor?: number;
 }) => {
   const {
     height = 240,
     width = 240,
     heightVariance,
-    distanceBetweenPeaks,
+    peakSeparation,
     flatteryFactor,
   } = props;
   return (
     <ImpactWrapper
       heightVariance={heightVariance}
-      distanceBetweenPeaks={distanceBetweenPeaks}
+      peakSeparation={peakSeparation}
       flatteryFactor={flatteryFactor}
     >
       <div

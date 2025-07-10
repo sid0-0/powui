@@ -30,7 +30,7 @@ export const StorybookSpiderSense = (props: {
       <br />
       <div className="flex items-center justify-center w-full">
         <SpiderSenseWrapper {...props} getManualTrigger={getManualTrigger}>
-          <img width={size} src="public/spider.svg" />
+          <img width={size} src="spider.svg" />
           {trigger !== "manual" && (
             <>
               <br />

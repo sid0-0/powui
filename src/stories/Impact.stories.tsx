@@ -22,7 +22,7 @@ const meta = {
       description: "Variance in height of the impact peaks",
       defaultValue: 15,
     },
-    distanceBetweenPeaks: {
+    peakSeparation: {
       control: { type: "range", min: 10, max: 200, step: 5 },
       description: "Distance between peaks in the impact area",
       defaultValue: 30,
