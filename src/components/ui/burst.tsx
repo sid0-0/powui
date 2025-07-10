@@ -39,42 +39,55 @@ const getPointsAndPath = (args: {
   heightVariance: number;
   peakSeparation: number;
   flatteryFactor: number;
+  huggingStyle: "elliptical" | "rectangular";
 }) => {
   const { height, width, heightVariance, peakSeparation, flatteryFactor } =
     args;
   if (height === 0 || width === 0) {
     return { points: [], path: "" };
   }
-  const points = getRectangularPoints({
-    height,
-    width,
-    peakSeparation,
-    heightVariance,
-  });
-  // const points = getEllipticalPoints({
-  //   height,
-  //   width,
-  //   peakSeparation,
-  //   heightVariance,
-  // });
+
+  let points: { x: number; y: number }[] = [];
+  if (args.huggingStyle === "rectangular") {
+    points = getRectangularPoints({
+      height,
+      width,
+      peakSeparation,
+      heightVariance,
+    });
+  } else {
+    points = getEllipticalPoints({
+      height,
+      width,
+      peakSeparation,
+      heightVariance,
+    });
+  }
   const path = generateSVGPathBAM({ points, height, width, flatteryFactor });
   return { points, path };
 };
 
-const BurstWrapper = (props: {
-  children: React.ReactNode;
-  // heightVariance determines how low each peak can be
+type TBurstWrapperProps = {
   heightVariance?: number;
   // peakSeparation is used to determine distance between each peak
   peakSeparation?: number;
   // change this prop name at some point
   // flatteryFactor is a factor that determines how much the points are "flattened"
   flatteryFactor?: number;
-}) => {
+  // huggingStyle determines the shape of the burst
+  huggingStyle?: "elliptical" | "rectangular";
+};
+
+const BurstWrapper = (
+  props: TBurstWrapperProps & {
+    children: React.ReactNode;
+  }
+) => {
   const {
     children,
     heightVariance = HEIGHT_VARIANCE,
     flatteryFactor = FLATTERY_FACTOR,
+    huggingStyle = "elliptical",
   } = props;
 
   const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
@@ -93,6 +106,7 @@ const BurstWrapper = (props: {
       heightVariance,
       peakSeparation,
       flatteryFactor,
+      huggingStyle,
     });
   }, [height, width, heightVariance, peakSeparation, flatteryFactor]);
 
@@ -103,4 +117,4 @@ const BurstWrapper = (props: {
   );
 };
 
-export { BurstWrapper };
+export { BurstWrapper, type TBurstWrapperProps };
