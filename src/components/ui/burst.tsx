@@ -163,7 +163,7 @@ const getPointsAndPath = (args: {
   return { points, path };
 };
 
-const ImpactWrapper = (props: {
+const BurstWrapper = (props: {
   children: React.ReactNode;
   // heightVariance determines how low each peak can be
   heightVariance?: number;
@@ -198,8 +198,6 @@ const ImpactWrapper = (props: {
     });
   }, [height, width, heightVariance, peakSeparation, flatteryFactor]);
 
-  console.log(svgPath.path);
-
   return (
     <div ref={loadRef} style={{ clipPath: `path("${svgPath.path}")` }}>
       {children}
@@ -207,4 +205,4 @@ const ImpactWrapper = (props: {
   );
 };
 
-export { ImpactWrapper };
+export { BurstWrapper };

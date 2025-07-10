@@ -1,9 +1,9 @@
 import type { StoryObj } from "@storybook/react-vite";
-import { StorybookImpact } from "./Impact";
+import { StorybookBurst } from "./Burst";
 
 const meta = {
-  title: "Example/Impact",
-  component: StorybookImpact,
+  title: "Example/Burst",
+  component: StorybookBurst,
   parameters: {},
   tags: ["autodocs"],
   argTypes: {

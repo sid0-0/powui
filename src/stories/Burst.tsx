@@ -1,6 +1,6 @@
-import { ImpactWrapper } from "@/components/ui/impact";
+import { BurstWrapper } from "@/components/ui/burst";
 
-const StorybookImpact = (props: {
+const StorybookBurst = (props: {
   height?: number;
   width?: number;
   heightVariance?: number;
@@ -15,7 +15,7 @@ const StorybookImpact = (props: {
     flatteryFactor,
   } = props;
   return (
-    <ImpactWrapper
+    <BurstWrapper
       heightVariance={heightVariance}
       peakSeparation={peakSeparation}
       flatteryFactor={flatteryFactor}
@@ -26,8 +26,8 @@ const StorybookImpact = (props: {
       >
         POW!
       </div>
-    </ImpactWrapper>
+    </BurstWrapper>
   );
 };
 
-export { StorybookImpact };
+export { StorybookBurst };
