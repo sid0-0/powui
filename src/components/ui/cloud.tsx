@@ -1,5 +1,5 @@
 import type React from "react";
-import { getRectangularPoints } from "@/lib/geometryUtils";
+import { getEllipticalPoints, getRectangularPoints } from "@/lib/geometryUtils";
 import { useCallback, useMemo, useState } from "react";
 
 const HEIGHT_VARIANCE = 15;
@@ -42,29 +42,41 @@ const getPointsAndPath = (args: {
   heightVariance: number;
   peakSeparation: number;
   flatteryFactor: number;
+  huggingStyle: "elliptical" | "rectangular";
 }) => {
-  const { height, width, heightVariance, peakSeparation, flatteryFactor } =
-    args;
+  const {
+    height,
+    width,
+    heightVariance,
+    peakSeparation,
+    flatteryFactor,
+    huggingStyle,
+  } = args;
   if (height === 0 || width === 0) {
     return { points: [], path: "" };
   }
-  const points = getRectangularPoints({
-    height,
-    width,
-    peakSeparation,
-    heightVariance,
-  });
-  // const points = getEllipticalPoints({
-  //   height,
-  //   width,
-  //   peakSeparation,
-  //   heightVariance,
-  // });
+
+  let points: { x: number; y: number }[] = [];
+  if (huggingStyle === "rectangular") {
+    points = getRectangularPoints({
+      height,
+      width,
+      peakSeparation,
+      heightVariance,
+    });
+  } else {
+    points = getEllipticalPoints({
+      height,
+      width,
+      peakSeparation,
+      heightVariance,
+    });
+  }
   const path = generateSVGPathCloud({ points, height, width, flatteryFactor });
   return { points, path };
 };
 
-const CloudWrapper = (props: {
+type TCloudWrapperProps = {
   children: React.ReactNode;
   // heightVariance determines how low each peak can be
   heightVariance?: number;
@@ -73,11 +85,16 @@ const CloudWrapper = (props: {
   // change this prop name at some point
   // flatteryFactor is a factor that determines how much the points are "flattened"
   flatteryFactor?: number;
-}) => {
+  // huggingStyle determines the shape of the cloud
+  huggingStyle?: "elliptical" | "rectangular";
+};
+
+const CloudWrapper = (props: TCloudWrapperProps) => {
   const {
     children,
     heightVariance = HEIGHT_VARIANCE,
     flatteryFactor = FLATTERY_FACTOR,
+    huggingStyle = "elliptical",
   } = props;
 
   const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
@@ -96,6 +113,7 @@ const CloudWrapper = (props: {
       heightVariance,
       peakSeparation,
       flatteryFactor,
+      huggingStyle,
     });
   }, [height, width, heightVariance, peakSeparation, flatteryFactor]);
 
@@ -106,4 +124,4 @@ const CloudWrapper = (props: {
   );
 };
 
-export { CloudWrapper };
+export { CloudWrapper, type TCloudWrapperProps };
