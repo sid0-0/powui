@@ -1,5 +1,8 @@
-import { Tooltip } from "@/components/ui/tooltip";
-import { TooltipContent, TooltipTrigger } from "@radix-ui/react-tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import styles from "@/styles/tooltip.module.scss";
 
@@ -8,7 +11,7 @@ export const StorybookTooltip = () => {
   return (
     <Tooltip>
       <TooltipTrigger className="border-black">shh!!</TooltipTrigger>
-      <TooltipContent  className="bg-black text-white">
+      <TooltipContent className="bg-black text-white">
         QUIET! OR THEY'LL HEAR US!
       </TooltipContent>
     </Tooltip>
