@@ -7,11 +7,13 @@ import {
 import styles from "@/styles/tooltip.module.scss";
 
 export const StorybookTooltip = () => {
-  console.log(styles);
   return (
     <Tooltip>
-      <TooltipTrigger className="border-black">shh!!</TooltipTrigger>
-      <TooltipContent className="bg-black text-white">
+      <TooltipTrigger>shh!!</TooltipTrigger>
+      <TooltipContent
+        className="bg-black text-white p-4"
+        arrowClassName="bg-black"
+      >
         QUIET! OR THEY'LL HEAR US!
       </TooltipContent>
     </Tooltip>
