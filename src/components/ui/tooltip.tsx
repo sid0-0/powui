@@ -77,7 +77,7 @@ const TooltipContainer = ({
   content?: React.ReactNode;
   className?: string;
   arrowClassName?: string;
-  side?: "top" | "bottom" | "left" | "right";
+  side?: TooltipPrimitive.TooltipContentProps["side"];
 }) => {
   return (
     <Tooltip>
