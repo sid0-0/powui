@@ -1,7 +1,9 @@
-import * as React from "react"
-import * as TooltipPrimitive from "@radix-ui/react-tooltip"
+import * as React from "react";
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
+
+import styles from "@/styles/tooltip.module.scss";
 
 function TooltipProvider({
   delayDuration = 0,
@@ -13,7 +15,7 @@ function TooltipProvider({
       delayDuration={delayDuration}
       {...props}
     />
-  )
+  );
 }
 
 function Tooltip({
@@ -23,13 +25,13 @@ function Tooltip({
     <TooltipProvider>
       <TooltipPrimitive.Root data-slot="tooltip" {...props} />
     </TooltipProvider>
-  )
+  );
 }
 
 function TooltipTrigger({
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Trigger>) {
-  return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />
+  return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />;
 }
 
 function TooltipContent({
@@ -52,22 +54,56 @@ function TooltipContent({
       >
         <div
           className={cn(
-            shape === "square" ? "rounded-full" : "clip-path-ellipse",
+            shape === "elliptical" ? "clip-path-ellipse" : "rounded-full",
             "bg-primary text-primary-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-fit origin-(--radix-tooltip-content-transform-origin) rounded-md px-3 py-1.5 text-xs text-balance",
             className
           )}
         >
           {children}
         </div>
-        <TooltipPrimitive.Arrow
-          className={cn(
-            "bg-primary fill-primary z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]",
-            arrowClassName
-          )}
-        />
       </TooltipPrimitive.Content>
     </TooltipPrimitive.Portal>
   );
 }
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
+const TooltipContainer = ({
+  triggerContent = "Hover me",
+  content = "Tooltip content",
+  className = "",
+  arrowClassName = "",
+  side = "top",
+}: {
+  triggerContent?: React.ReactNode;
+  content?: React.ReactNode;
+  className?: string;
+  arrowClassName?: string;
+  side?: "top" | "bottom" | "left" | "right";
+}) => {
+  return (
+    <Tooltip>
+      <TooltipTrigger>{triggerContent}</TooltipTrigger>
+      <TooltipContent
+        side={side}
+        className={cn(
+          "relative bg-white border-4 border-black text-black font-comic rounded-2xl px-4 py-3 shadow-[4px_4px_0px_black]",
+          styles.bounceMount,
+          className
+        )}
+        sideOffset={10}
+      >
+        {content}
+        <div
+          className={cn(
+            side === "bottom" && "rotate-180 top-0",
+            side === "right" && "rotate-90 top-1/2 !left-0",
+            side === "left" && "-rotate-90 top-0 !left-auto !right-0",
+            styles.comicArrow,
+            arrowClassName
+          )}
+        />
+      </TooltipContent>
+    </Tooltip>
+  );
+};
+
+export { TooltipContainer as Tooltip };
