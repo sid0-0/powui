@@ -5,7 +5,9 @@ import { StorybookTooltip } from "./Tooltip";
 const meta = {
   title: "Example/Tooltip",
   component: StorybookTooltip,
-  parameters: {},
+  parameters: {
+    layout: "centered",
+  },
   tags: ["autodocs"],
   argTypes: {
     className: {

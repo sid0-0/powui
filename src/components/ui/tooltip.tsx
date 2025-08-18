@@ -72,16 +72,18 @@ const TooltipContainer = ({
   className = "",
   arrowClassName = "",
   side = "top",
+  sideOffset = 20,
 }: {
   triggerContent?: React.ReactNode;
   content?: React.ReactNode;
   className?: string;
   arrowClassName?: string;
   side?: TooltipPrimitive.TooltipContentProps["side"];
+  sideOffset?: TooltipPrimitive.TooltipContentProps["sideOffset"];
 }) => {
-  let sideOffset = 20;
+  let adjustedSideOffset = sideOffset;
   if (side === "left" || side === "right") {
-    sideOffset += 12; // Adjust for horizontal sides
+    adjustedSideOffset += 12; // Adjust for horizontal sides
   }
 
   return (
@@ -95,7 +97,7 @@ const TooltipContainer = ({
           "filter-[url(#displacementFilter)]",
           className
         )}
-        sideOffset={sideOffset}
+        sideOffset={adjustedSideOffset}
       >
         {content}
         <div
