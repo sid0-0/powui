@@ -1,14 +1,15 @@
 .comicArrow {
   position: absolute;
   bottom: 0;
+  height: 0;
+  width: 0;
   border-right: 10px solid transparent;
   border-left: 10px solid transparent;
   border-top: 30px solid black;
   &:before {
     content: "";
-    position: absolute;
-    bottom: 10px;
-    translate: -50%;
+    display: block;
+    translate: -50% calc(-100% - 10px);
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
     border-top: 30px solid white;
