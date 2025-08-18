@@ -73,6 +73,8 @@ const TooltipContainer = ({
   arrowClassName = "",
   side = "top",
   sideOffset = 20,
+  type = "normal",
+  bubblePath = "normal",
 }: {
   triggerContent?: React.ReactNode;
   content?: React.ReactNode;
@@ -80,11 +82,59 @@ const TooltipContainer = ({
   arrowClassName?: string;
   side?: TooltipPrimitive.TooltipContentProps["side"];
   sideOffset?: TooltipPrimitive.TooltipContentProps["sideOffset"];
+  type?: "normal" | "bubbles";
+  bubblePath?: "normal" | "arc" | string;
 }) => {
   let adjustedSideOffset = sideOffset;
   if (side === "left" || side === "right") {
     adjustedSideOffset += 12; // Adjust for horizontal sides
   }
+
+  let bubbleArc = "";
+  if (type === "bubbles") {
+    if (bubblePath === "arc") {
+      bubbleArc = "M 50 0 Q 70 60 0 100";
+    } else if (bubblePath === "normal") {
+      bubbleArc = "M 50 0 L 50 100";
+    } else {
+      bubbleArc = bubblePath; // Use custom path if provided
+    }
+  }
+
+  const bubbleSVG = React.useMemo(() => {
+    if (type !== "bubbles") return null;
+    return (
+      <svg
+        width="50"
+        height="50"
+        viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        className="absolute top-full left-1/2 -translate-x-1/2 "
+      >
+        {/* <!-- bubbles sampled along the curve --> */}
+        <circle className={cn(styles.bub)} r="20">
+          <animateMotion path={bubbleArc} dur="0.5s" end="0.1s" fill="freeze" />
+        </circle>
+        <circle className={cn(styles.bub)} r="15">
+          <animateMotion
+            path={bubbleArc}
+            dur="0.5s"
+            end="0.28s"
+            fill="freeze"
+          />
+        </circle>
+        <circle className={cn(styles.bub)} r="10">
+          <animateMotion
+            path={bubbleArc}
+            dur="0.5s"
+            end="0.42s"
+            fill="freeze"
+          />
+        </circle>
+      </svg>
+    );
+  }, [bubbleArc, type]);
 
   return (
     <Tooltip>
@@ -100,20 +150,23 @@ const TooltipContainer = ({
         sideOffset={adjustedSideOffset}
       >
         {content}
-        <div
-          className={cn(
-            side === "top" && "translate-y-full -translate-x-1/2 left-1/2",
-            side === "bottom" &&
-              "rotate-180 -translate-x-1/2 left-1/2 top-0 -translate-y-full",
-            side === "right" &&
-              "rotate-90 top-1/2 -translate-y-1/2 right-full -translate-x-1/2",
-            side === "left" &&
-              "-rotate-90 top-1/2 -translate-y-1/2 left-full translate-x-1/2",
-            "filter-[url(#displacementFilter)]",
-            styles.comicArrow,
-            arrowClassName
-          )}
-        />
+        {type === "normal" && (
+          <div
+            className={cn(
+              side === "top" && "translate-y-full -translate-x-1/2 left-1/2",
+              side === "bottom" &&
+                "rotate-180 -translate-x-1/2 left-1/2 top-0 -translate-y-full",
+              side === "right" &&
+                "rotate-90 top-1/2 -translate-y-1/2 right-full -translate-x-1/2",
+              side === "left" &&
+                "-rotate-90 top-1/2 -translate-y-1/2 left-full translate-x-1/2",
+              "filter-[url(#displacementFilter)]",
+              styles.comicArrow,
+              arrowClassName
+            )}
+          />
+        )}
+        {type === "bubbles" && bubbleSVG}
       </TooltipContent>
     </Tooltip>
   );
