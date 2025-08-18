@@ -81,7 +81,9 @@ const TooltipContainer = ({
 }) => {
   return (
     <Tooltip>
-      <TooltipTrigger>{triggerContent}</TooltipTrigger>
+      <TooltipTrigger>
+        {triggerContent}
+      </TooltipTrigger>
       <TooltipContent
         side={side}
         className={cn(
@@ -90,14 +92,15 @@ const TooltipContainer = ({
           "filter-[url(#displacementFilter)]",
           className
         )}
-        sideOffset={10}
+        sideOffset={20}
       >
         {content}
         <div
           className={cn(
-            side === "bottom" && "rotate-180 top-0",
+            side === "bottom" && "rotate-180 -translate-x-1/2 left-1/2 top-0 -translate-y-[100%]",
             side === "right" && "rotate-90 top-1/2 !left-0",
-            side === "left" && "-rotate-90 top-0 !left-auto !right-0",
+            side === "left" && "-rotate-135 top-1/2 right-0",
+            side === "top" && "translate-y-full -translate-x-1/2 left-1/2",
             "filter-[url(#displacementFilter)]",
             styles.comicArrow,
             arrowClassName
