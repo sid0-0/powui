@@ -79,11 +79,14 @@ const TooltipContainer = ({
   arrowClassName?: string;
   side?: TooltipPrimitive.TooltipContentProps["side"];
 }) => {
+  let sideOffset = 20;
+  if (side === "left" || side === "right") {
+    sideOffset += 12; // Adjust for horizontal sides
+  }
+
   return (
     <Tooltip>
-      <TooltipTrigger>
-        {triggerContent}
-      </TooltipTrigger>
+      <TooltipTrigger>{triggerContent}</TooltipTrigger>
       <TooltipContent
         side={side}
         className={cn(
@@ -92,15 +95,18 @@ const TooltipContainer = ({
           "filter-[url(#displacementFilter)]",
           className
         )}
-        sideOffset={20}
+        sideOffset={sideOffset}
       >
         {content}
         <div
           className={cn(
-            side === "bottom" && "rotate-180 -translate-x-1/2 left-1/2 top-0 -translate-y-[100%]",
-            side === "right" && "rotate-90 top-1/2 !left-0",
-            side === "left" && "-rotate-135 top-1/2 right-0",
             side === "top" && "translate-y-full -translate-x-1/2 left-1/2",
+            side === "bottom" &&
+              "rotate-180 -translate-x-1/2 left-1/2 top-0 -translate-y-full",
+            side === "right" &&
+              "rotate-90 top-1/2 -translate-y-1/2 right-full -translate-x-1/2",
+            side === "left" &&
+              "-rotate-90 top-1/2 -translate-y-1/2 left-full translate-x-1/2",
             "filter-[url(#displacementFilter)]",
             styles.comicArrow,
             arrowClassName
