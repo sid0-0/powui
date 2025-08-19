@@ -9,22 +9,22 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  argTypes: {
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-  },
+  argTypes: {},
   args: {},
 } satisfies Meta<typeof StorybookTooltip>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Normal: Story = {
   args: {
-    primary: true,
-    label: "Play dumb!",
+    type: "normal",
+  },
+};
+
+export const Bubbles: Story = {
+  args: {
+    type: "bubbles",
+    bubblePath: "arc",
   },
 };

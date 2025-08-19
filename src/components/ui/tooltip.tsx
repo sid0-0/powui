@@ -66,6 +66,98 @@ function TooltipContent({
   );
 }
 
+const BubbleSvg = ({ bubblePath = "" }: { bubblePath: string }) => {
+  const [pathRef, setPathRef] = React.useState<SVGPathElement | null>(null);
+
+  const pathLength = React.useMemo(() => {
+    if (pathRef) {
+      return pathRef.getTotalLength();
+    }
+    return 0;
+  }, [pathRef]);
+
+  const bubbleArc = React.useMemo(() => {
+    if (bubblePath === "arc") {
+      return "M 50 0 Q 70 60 0 100";
+    }
+    if (bubblePath === "normal") {
+      return "M 50 0 L 50 100";
+    }
+    return bubblePath; // Use custom path if provided
+  }, [bubblePath]);
+
+  const bubbles = React.useMemo(() => {
+    if (!pathLength) return null;
+    const bubbleCount = 3;
+    const firstBubbleRadius = 8;
+    const radiusDiff = 5;
+    const animationTime = 300;
+    const lastBubbleRadius = firstBubbleRadius + (bubbleCount - 1) * radiusDiff;
+
+    const radiusOfAllBubbles = Array.from(
+      { length: bubbleCount },
+      (_, i) => firstBubbleRadius + i * radiusDiff
+    ).reduce((acc, r) => acc + r, 0);
+
+    const safetyDistanceOnBothEnds = 5;
+
+    const distanceBetweenBubbles =
+      (pathLength - 2 * radiusOfAllBubbles - 2 * safetyDistanceOnBothEnds) /
+      (bubbleCount - 1);
+
+    const allBubblesPositions: number[] = [];
+
+    Array.from({ length: bubbleCount }, (_, i) => {
+      const currentBubbleRadius = lastBubbleRadius - i * radiusDiff;
+      let position = currentBubbleRadius;
+      if (i > 0) {
+        const prevBubbleRadius = currentBubbleRadius + radiusDiff;
+        position +=
+          allBubblesPositions[i - 1] +
+          prevBubbleRadius +
+          distanceBetweenBubbles;
+      } else {
+        position += safetyDistanceOnBothEnds;
+      }
+      allBubblesPositions.push(position);
+    });
+
+    return allBubblesPositions.map((position, index) => (
+      <circle
+        key={index}
+        className={cn(styles.bub, styles.bubble)}
+        r={firstBubbleRadius + (bubbleCount - 1 - index) * radiusDiff}
+      >
+        <animateMotion
+          path={bubbleArc}
+          dur={`${animationTime}ms`}
+          end={`${(position / pathLength) * animationTime}ms`}
+          fill="freeze"
+        />
+      </circle>
+    ));
+  }, [bubbleArc, pathLength]);
+
+  const bubbleSVG = React.useMemo(() => {
+    return (
+      <svg
+        width="50"
+        height="50"
+        viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        className="absolute top-full left-1/2 -translate-x-1/2 "
+      >
+        <path d={bubbleArc} fill="none" stroke="none" ref={setPathRef} />
+        {/* <!-- bubbles sampled along the curve --> */}
+        {bubbles}
+      </svg>
+    );
+  }, [bubbleArc, bubbles]);
+
+  return bubbleSVG;
+};
+
 const TooltipContainer = ({
   triggerContent = "Hover me",
   content = "Tooltip content",
@@ -89,52 +181,6 @@ const TooltipContainer = ({
   if (side === "left" || side === "right") {
     adjustedSideOffset += 12; // Adjust for horizontal sides
   }
-
-  let bubbleArc = "";
-  if (type === "bubbles") {
-    if (bubblePath === "arc") {
-      bubbleArc = "M 50 0 Q 70 60 0 100";
-    } else if (bubblePath === "normal") {
-      bubbleArc = "M 50 0 L 50 100";
-    } else {
-      bubbleArc = bubblePath; // Use custom path if provided
-    }
-  }
-
-  const bubbleSVG = React.useMemo(() => {
-    if (type !== "bubbles") return null;
-    return (
-      <svg
-        width="50"
-        height="50"
-        viewBox="0 0 100 100"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        className="absolute top-full left-1/2 -translate-x-1/2 "
-      >
-        {/* <!-- bubbles sampled along the curve --> */}
-        <circle className={cn(styles.bub)} r="20">
-          <animateMotion path={bubbleArc} dur="0.5s" end="0.1s" fill="freeze" />
-        </circle>
-        <circle className={cn(styles.bub)} r="15">
-          <animateMotion
-            path={bubbleArc}
-            dur="0.5s"
-            end="0.28s"
-            fill="freeze"
-          />
-        </circle>
-        <circle className={cn(styles.bub)} r="10">
-          <animateMotion
-            path={bubbleArc}
-            dur="0.5s"
-            end="0.42s"
-            fill="freeze"
-          />
-        </circle>
-      </svg>
-    );
-  }, [bubbleArc, type]);
 
   return (
     <Tooltip>
@@ -166,7 +212,7 @@ const TooltipContainer = ({
             )}
           />
         )}
-        {type === "bubbles" && bubbleSVG}
+        {type === "bubbles" && <BubbleSvg bubblePath={bubblePath} />}
       </TooltipContent>
     </Tooltip>
   );

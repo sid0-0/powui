@@ -1,6 +1,12 @@
 import { Tooltip } from "@/components/ui/tooltip";
 
-export const StorybookTooltip = () => {
+export const StorybookTooltip = ({
+  type = "normal",
+  bubblePath = "normal",
+}: {
+  type?: "normal" | "bubbles";
+  bubblePath?: "normal" | "arc";
+}) => {
   return (
     <Tooltip
       triggerContent={
@@ -8,6 +14,8 @@ export const StorybookTooltip = () => {
       }
       content={<div className="text-4xl">Clark Kent is SUPERMAN!!</div>}
       sideOffset={-80}
+      type={type}
+      bubblePath={bubblePath}
     />
   );
 };
