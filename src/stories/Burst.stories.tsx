@@ -8,12 +8,12 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     height: {
-      control: { type: "range", min: 50, max: 500, step: 1 },
+      control: { type: "range", min: 200, max: 500, step: 1 },
       description: "Height of the impact area",
       defaultValue: 240,
     },
     width: {
-      control: { type: "range", min: 50, max: 500, step: 1 },
+      control: { type: "range", min: 200, max: 500, step: 1 },
       description: "Width of the impact area",
       defaultValue: 240,
     },
@@ -33,6 +33,16 @@ const meta = {
         "Flattery factor for the curvature of the impact path, higher values create more pronounced curves",
       defaultValue: 2,
     },
+    huggingStyle: {
+      control: false,
+      description: "Style of the burst, either 'elliptical' or 'rectangular'",
+      options: ["elliptical", "rectangular"],
+    },
+    curvedDips: {
+      control: false,
+      description: "Whether the dips between peaks are curved or straight",
+      defaultValue: false,
+    },
   },
 };
 
@@ -47,6 +57,13 @@ export const Rectangular: Story = {
 };
 
 export const Elliptical: Story = {
+  args: {
+    huggingStyle: "elliptical",
+    curvedDips: true,
+  },
+};
+
+export const EllipticalAngled: Story = {
   args: {
     huggingStyle: "elliptical",
   },

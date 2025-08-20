@@ -10,6 +10,7 @@ const generateSVGPathBAM = (args: {
   height: number;
   width: number;
   flatteryFactor: number;
+  curvedDips?: boolean;
 }) => {
   const { points, height, width, flatteryFactor } = args;
   const path = [...points, points[0]].reduce((acc, point, index) => {
@@ -25,8 +26,10 @@ const generateSVGPathBAM = (args: {
           (height / 2 + flatteryFactor * ((point.y + previousPoint.y) / 2)) /
           (1 + flatteryFactor),
       };
-
-      return `${acc} Q ${referencePoint.x} ${referencePoint.y}, ${point.x} ${point.y}`;
+      if (args.curvedDips) {
+        return `${acc} Q ${referencePoint.x} ${referencePoint.y}, ${point.x} ${point.y}`;
+      }
+      return `${acc} L ${referencePoint.x} ${referencePoint.y} L ${point.x} ${point.y}`;
     }
   }, "");
 
@@ -40,9 +43,16 @@ const getPointsAndPath = (args: {
   peakSeparation: number;
   flatteryFactor: number;
   huggingStyle: "elliptical" | "rectangular";
+  curvedDips?: boolean;
 }) => {
-  const { height, width, heightVariance, peakSeparation, flatteryFactor } =
-    args;
+  const {
+    height,
+    width,
+    heightVariance,
+    peakSeparation,
+    flatteryFactor,
+    curvedDips,
+  } = args;
   if (height === 0 || width === 0) {
     return { points: [], path: "" };
   }
@@ -63,7 +73,13 @@ const getPointsAndPath = (args: {
       heightVariance,
     });
   }
-  const path = generateSVGPathBAM({ points, height, width, flatteryFactor });
+  const path = generateSVGPathBAM({
+    points,
+    height,
+    width,
+    flatteryFactor,
+    curvedDips,
+  });
   return { points, path };
 };
 
@@ -76,6 +92,8 @@ type TBurstWrapperProps = {
   flatteryFactor?: number;
   // huggingStyle determines the shape of the burst
   huggingStyle?: "elliptical" | "rectangular";
+  // curvedDips determines if the dips between peaks are curved or not
+  curvedDips?: boolean;
 };
 
 const BurstWrapper = (
@@ -88,6 +106,7 @@ const BurstWrapper = (
     heightVariance = HEIGHT_VARIANCE,
     flatteryFactor = FLATTERY_FACTOR,
     huggingStyle = "elliptical",
+    curvedDips = false,
   } = props;
 
   const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
@@ -107,6 +126,7 @@ const BurstWrapper = (
       peakSeparation,
       flatteryFactor,
       huggingStyle,
+      curvedDips,
     });
   }, [height, width, heightVariance, peakSeparation, flatteryFactor]);
 

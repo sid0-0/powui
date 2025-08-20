@@ -13,6 +13,7 @@ const StorybookBurst = (
     peakSeparation,
     flatteryFactor,
     huggingStyle = "elliptical",
+    curvedDips = false,
   } = props;
   return (
     <BurstWrapper
@@ -20,6 +21,7 @@ const StorybookBurst = (
       peakSeparation={peakSeparation}
       flatteryFactor={flatteryFactor}
       huggingStyle={huggingStyle}
+      curvedDips={curvedDips}
     >
       <div
         className="flex items-center justify-center bg-amber-400 text-2xl italic"
