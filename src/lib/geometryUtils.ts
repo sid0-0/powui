@@ -1,11 +1,10 @@
 const resolvePointsFromLine = (
-  points: number[][],
+  points: { x: number; y: number }[],
   height: number,
   width: number
 ) => {
   const resolvedPoints = points.map((point) => {
-    const x = point[0];
-    const y = point[1];
+    const { x, y } = point;
     if (x <= width) {
       return { x, y };
     } else if (x <= width + height) {
@@ -35,8 +34,18 @@ export const getRectangularPoints = (args: {
   while (currentX < 2 * (width + height)) {
     currentX = currentX + (0.5 + Math.random()) * peakSeparation;
 
-    pickPoints.push([currentX, Math.random() * heightVariance]);
+    pickPoints.push({ x: currentX, y: Math.random() * heightVariance });
   }
+
+  const distanceBetweenFirstAndLast = Math.sqrt(
+    Math.pow(pickPoints[0].x - pickPoints[pickPoints.length - 1].x, 2) +
+      Math.pow(pickPoints[0].y - pickPoints[pickPoints.length - 1].y, 2)
+  );
+
+  if (distanceBetweenFirstAndLast < 0.4 * peakSeparation) {
+    pickPoints.splice(pickPoints.length - 1, 1);
+  }
+
   return resolvePointsFromLine(pickPoints, height, width);
 };
 
@@ -48,10 +57,11 @@ export const getEllipticalPoints = (args: {
 }) => {
   const { height, width, peakSeparation, heightVariance } = args;
 
-  const theta = (2 * peakSeparation) / (width + height);
+  const r = (width + height) / 4;
+  const theta = peakSeparation / r;
   const a = width / 2;
   const b = height / 2;
-  let peaksCounts = Math.ceil((2 * Math.PI) / theta);
+  const peaksCounts = Math.ceil((2 * Math.PI) / theta);
 
   const pickPoints = Array(peaksCounts)
     .fill(null)
@@ -65,6 +75,15 @@ export const getEllipticalPoints = (args: {
         b * Math.sin(theta * index) +
         (Math.random() - 0.5) * heightVariance,
     }));
+
+  const distanceBetweenFirstAndLast = Math.sqrt(
+    Math.pow(pickPoints[0].x - pickPoints[pickPoints.length - 1].x, 2) +
+      Math.pow(pickPoints[0].y - pickPoints[pickPoints.length - 1].y, 2)
+  );
+
+  if (distanceBetweenFirstAndLast < 0.4 * peakSeparation) {
+    pickPoints.splice(pickPoints.length - 1, 1);
+  }
 
   return pickPoints;
 };
