@@ -10,7 +10,7 @@ const StorybookBurst = (
   return (
     <BurstWrapper {...rest}>
       <div
-        className="flex items-center justify-center bg-amber-400 text-2xl italic"
+        className="flex items-center justify-center text-2xl italic spotty-bg-[#eab308]"
         style={{ height, width }}
       >
         POW!
