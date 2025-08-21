@@ -1,6 +1,7 @@
 import { getEllipticalPoints, getRectangularPoints } from "@/lib/geometryUtils";
+import { cn } from "@/lib/utils";
 import type React from "react";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 const HEIGHT_VARIANCE = 15;
 const FLATTERY_FACTOR = 2;
@@ -94,6 +95,13 @@ type TBurstWrapperProps = {
   huggingStyle?: "elliptical" | "rectangular";
   // curvedDips determines if the dips between peaks are curved or not
   curvedDips?: boolean;
+  // borders determines the appearance of the borders around the burst
+  borders?: {
+    scale?: number;
+    color?: CSSStyleDeclaration["backgroundColor"];
+  }[];
+  // containerClassName is a class name to apply to the container div
+  containerClassName?: string;
 };
 
 const BurstWrapper = (
@@ -107,12 +115,11 @@ const BurstWrapper = (
     flatteryFactor = FLATTERY_FACTOR,
     huggingStyle = "elliptical",
     curvedDips = false,
+    borders = [],
+    containerClassName,
   } = props;
 
   const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
-  const loadRef = useCallback((node: HTMLDivElement | null) => {
-    setContainerRef(node);
-  }, []);
 
   const { height = 0, width = 0 } = containerRef?.getBoundingClientRect() ?? {};
 
@@ -128,11 +135,42 @@ const BurstWrapper = (
       huggingStyle,
       curvedDips,
     });
-  }, [height, width, heightVariance, peakSeparation, flatteryFactor]);
+  }, [
+    height,
+    width,
+    heightVariance,
+    peakSeparation,
+    flatteryFactor,
+    huggingStyle,
+    curvedDips,
+  ]);
+
+  const borderDivs = useMemo(() => {
+    if (!borders) return null;
+    return borders
+      .slice()
+      .reverse()
+      .map((config, index) => (
+        <div
+          className="absolute scale-110 inset-0 bg-red-700"
+          style={{
+            clipPath: `path("${svgPath.path}")`,
+            backgroundColor: config?.color ?? "black",
+            scale: config?.scale ?? (borders.length - 1 - index + 11) / 10,
+          }}
+        />
+      ));
+  }, [borders, svgPath.path]);
 
   return (
-    <div ref={loadRef} style={{ clipPath: `path("${svgPath.path}")` }}>
-      {children}
+    <div className={cn("relative", containerClassName)}>
+      {borderDivs}
+      <div
+        ref={setContainerRef}
+        style={{ clipPath: `path("${svgPath.path}")` }}
+      >
+        {children}
+      </div>
     </div>
   );
 };

@@ -6,23 +6,9 @@ const StorybookBurst = (
     width?: number;
   } & TBurstWrapperProps
 ) => {
-  const {
-    height = 240,
-    width = 240,
-    heightVariance,
-    peakSeparation,
-    flatteryFactor,
-    huggingStyle = "elliptical",
-    curvedDips = false,
-  } = props;
+  const { height = 240, width = 240, ...rest } = props;
   return (
-    <BurstWrapper
-      heightVariance={heightVariance}
-      peakSeparation={peakSeparation}
-      flatteryFactor={flatteryFactor}
-      huggingStyle={huggingStyle}
-      curvedDips={curvedDips}
-    >
+    <BurstWrapper {...rest}>
       <div
         className="flex items-center justify-center bg-amber-400 text-2xl italic"
         style={{ height, width }}
