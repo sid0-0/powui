@@ -24,7 +24,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Circular: Story = {
   args: {
     min: 0,
     max: 100,
@@ -33,7 +33,22 @@ export const Default: Story = {
   },
   parameters: {
     controls: {
-      exclude: ['defaultValue'],
+      exclude: ["defaultValue", "shape"],
+    },
+  },
+};
+
+export const Rectangular: Story = {
+  args: {
+    min: 0,
+    max: 100,
+    step: 1,
+    defaultValue: [50],
+    shape: "rectangular",
+  },
+  parameters: {
+    controls: {
+      exclude: ["defaultValue", "shape"],
     },
   },
 };
