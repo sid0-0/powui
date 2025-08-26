@@ -65,12 +65,26 @@ function Slider({
           key={index}
           className={cn(
             "border-primary bg-background ring-ring/50 block shrink-0 border shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
-            shape === "circular" && "rounded-full size-4",
-            shape === "rectangular" && "h-4 w-6 rounded-xs",
-            "active:scale-200 active:cursor-grabbing cursor-grab scale-125",
+            shape === "circular" && "rounded-full size-4 active:scale-200 ",
+            shape === "rectangular" &&
+              "h-4 w-6 rounded-xs flex items-center justify-center active:scale-150 ",
+            "active:cursor-grabbing cursor-grab scale-125",
             thumbClassName
           )}
-        />
+        >
+          <div
+            className={cn(
+              "rounded-[inherit] h-4/5 w-full",
+              "flex gap-[3px] items-stretch justify-center"
+            )}
+          >
+            {shape === "rectangular" && Array(3)
+              .fill(null)
+              .map((_, index) => (
+                <div key={index} className="w-0.5 bg-zinc-800" />
+              ))}
+          </div>
+        </SliderPrimitive.Thumb>
       ))}
     </SliderPrimitive.Root>
   );
