@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 
 export type SliderProps = React.ComponentProps<typeof SliderPrimitive.Root> & {
   thumbClassName?: string;
+  shape?: "circular" | "rectangular";
 };
 
 function Slider({
@@ -14,6 +15,7 @@ function Slider({
   min = 0,
   max = 100,
   thumbClassName,
+  shape = "circular",
   ...props
 }: SliderProps) {
   const _values = React.useMemo(
@@ -62,7 +64,8 @@ function Slider({
           data-slot="slider-thumb"
           key={index}
           className={cn(
-            "border-primary bg-background ring-ring/50 block size-4 shrink-0 rounded-full border shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
+            "border-primary bg-background ring-ring/50 block size-4 shrink-0 border shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
+            shape === "circular" && "rounded-full",
             "active:scale-200 active:cursor-grabbing cursor-grab scale-125",
             thumbClassName
           )}
