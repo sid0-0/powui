@@ -64,8 +64,9 @@ function Slider({
           data-slot="slider-thumb"
           key={index}
           className={cn(
-            "border-primary bg-background ring-ring/50 block size-4 shrink-0 border shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
-            shape === "circular" && "rounded-full",
+            "border-primary bg-background ring-ring/50 block shrink-0 border shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
+            shape === "circular" && "rounded-full size-4",
+            shape === "rectangular" && "h-4 w-6 rounded-xs",
             "active:scale-200 active:cursor-grabbing cursor-grab scale-125",
             thumbClassName
           )}
