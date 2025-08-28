@@ -26,15 +26,15 @@ export const SVGFilterDefs = () => (
         <feOffset dx="-1" dy="1" result="redChannel" />
 
         <feComponentTransfer in="SourceGraphic">
-          <feFuncR type="table" tableValues="0 0" />
+          <feFuncR type="table" tableValues="0" />
           <feFuncG type="identity" />
-          <feFuncB type="table" tableValues="0 0" />
+          <feFuncB type="table" tableValues="0" />
         </feComponentTransfer>
         <feOffset dx="1" dy="-1" result="greenChannel" />
 
         <feComponentTransfer in="SourceGraphic">
-          <feFuncR type="table" tableValues="0 0" />
-          <feFuncG type="table" tableValues="0 0" />
+          <feFuncR type="table" tableValues="0" />
+          <feFuncG type="table" tableValues="0" />
           <feFuncB type="identity" />
         </feComponentTransfer>
 
