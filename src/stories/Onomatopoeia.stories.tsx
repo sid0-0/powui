@@ -5,7 +5,9 @@ import { StorybookOnomatopoeia } from "./Onomatopoeia";
 const meta = {
   title: "Example/Onomatopoeia",
   component: StorybookOnomatopoeia,
-  parameters: {},
+  parameters: {
+    layout: "centered",
+  },
   tags: ["autodocs"],
   argTypes: {},
 } satisfies Meta<typeof StorybookOnomatopoeia>;
