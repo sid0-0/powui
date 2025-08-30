@@ -1,6 +1,6 @@
-View Storybook of all components: [Storybook](https://68b33f12384a75f2c732fa44-nmdwtvjaas.chromatic.com/)
+View Storybook of all components: [Storybook](https://68b33f12384a75f2c732fa44-sgepohaizo.chromatic.com/)
 
-# 🎨 Comic UI — Comic-Inspired React Component Library
+# 🎨 Pow UI — Comic-Inspired React Component Library
 
 **Comic UI** is a work-in-progress component library built with **React + TypeScript**, inspired by classic comic books.  
 It’s all about playful UIs: speech bubbles, action panels, halftone textures, and bold borders.
