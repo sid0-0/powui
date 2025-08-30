@@ -1,5 +1,4 @@
 import type { StorybookConfig } from "@storybook/react-vite";
-import base_html from "../src/base.ts";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -14,9 +13,5 @@ const config: StorybookConfig = {
     name: "@storybook/react-vite",
     options: {},
   },
-  previewBody: (body) => `
-  ${base_html}
-  ${body}
-  `,
 };
 export default config;
