@@ -110,6 +110,10 @@ button {
   background-position: 0 0, 0.25rem 0.25rem;
 }
 
+@utility clip-path-ellipse {
+  clip-path: ellipse();
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

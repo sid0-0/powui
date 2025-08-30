@@ -1,0 +1,42 @@
+.comicArrow {
+  position: absolute;
+  bottom: 0;
+  height: 0;
+  width: 0;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-top: 30px solid black;
+  &:before {
+    content: "";
+    display: block;
+    translate: -50% calc(-100% - 10px);
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-top: 30px solid white;
+  }
+}
+
+.bub {
+  fill: #ffffff;
+  stroke: black;
+  stroke-width: 1.5;
+}
+
+@keyframes bounceScale {
+  0% {
+    scale: 0;
+  }
+  70% {
+    scale: 1.2;
+  }
+  80% {
+    scale: 1.2;
+  }
+  100% {
+    scale: 1;
+  }
+}
+
+.bounceMount {
+  animation: bounceScale 0.2s ease-in-out;
+}
