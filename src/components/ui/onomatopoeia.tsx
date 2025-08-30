@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import { createPortal } from "react-dom";
 
 export const Onomatopoeia = (props: { text: string }) => {
@@ -16,7 +23,7 @@ export const Onomatopoeia = (props: { text: string }) => {
   }, []);
   return (
     <div
-      className="filter-[url(#displacementFilter)] font-[Walter_Turncoat] transition duration-100"
+      className="filter-[url(#displacementFilter)] font-[Walter_Turncoat] transition duration-100 text-2xl"
       ref={elemRef}
     >
       {text}
@@ -24,33 +31,59 @@ export const Onomatopoeia = (props: { text: string }) => {
   );
 };
 
-export const useEventOnomatopoeia = (props: { text: string }) => {
-  const { text } = props;
+type TEvaluateContainerStyleArgs = {
+  x: number;
+  y: number;
+  duration?: number;
+  addRandomness?: boolean;
+};
+
+const evaluateContainerStyle = ({
+  x,
+  y,
+  duration = 500,
+  addRandomness = true,
+}: TEvaluateContainerStyleArgs) => {
+  const evaluatedContainerStyle: CSSProperties = {
+    position: "absolute" as const,
+    left: x,
+    top: y,
+    transition: `transform ${duration}ms`,
+  };
+  if (addRandomness) {
+    const radius = 20;
+    const minimumDistance = 10;
+    const translateX =
+      (Math.random() > 0.5 ? 1 : -1) *
+      (minimumDistance + Math.random() * radius);
+    const translateY =
+      (Math.random() > 0.5 ? 1 : -1) *
+      (minimumDistance + Math.random() * radius);
+
+    evaluatedContainerStyle.translate = `calc(-50% + ${translateX}px) calc(-50% + ${translateY}px)`;
+    evaluatedContainerStyle.rotate = `${(Math.random() - 0.5) * 100}deg`;
+  }
+  return evaluatedContainerStyle;
+};
+
+export const useEventOnomatopoeia = (props: {
+  text: string;
+  containerStyle?: CSSProperties;
+}) => {
+  const { text, containerStyle = {} } = props;
   const [portalElements, setPortalElements] = useState<Record<string, any>>({});
   const trigger = useCallback(
-    (args: { x: number; y: number; duration?: number }) => {
-      const { x, y, duration = 500 } = args;
+    (args: TEvaluateContainerStyleArgs) => {
+      const { x, y, duration = 500  } = args;
       if (!x || !y) return;
-      const radius = 20;
-      const minimumDistance = 10;
-      const translateX =
-        (Math.random() > 0.5 ? 1 : -1) *
-        (minimumDistance + Math.random() * radius);
-      const translateY =
-        (Math.random() > 0.5 ? 1 : -1) *
-        (minimumDistance + Math.random() * radius);
+      const evaluatedContainerStyle = evaluateContainerStyle(args);
       const id = window.crypto.randomUUID();
       setPortalElements((current) => ({
         ...current,
         [id]: createPortal(
           <div
             className="select-none pointer-events-none absolute text-xl"
-            style={{
-              left: x,
-              top: y,
-              rotate: `${(Math.random() - 0.5) * 90}deg`,
-              translate: `calc(-50% + ${translateX}px) calc(-50% + ${translateY}px)`,
-            }}
+            style={evaluatedContainerStyle}
           >
             <Onomatopoeia text={text} />
           </div>,
@@ -65,7 +98,7 @@ export const useEventOnomatopoeia = (props: { text: string }) => {
         });
       }, duration);
     },
-    []
+    [containerStyle]
   );
 
   const renderedPortalElements = useMemo(
