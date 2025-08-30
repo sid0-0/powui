@@ -1,71 +1,56 @@
 View Storybook of all components: [Storybook](https://68b33f12384a75f2c732fa44-nmdwtvjaas.chromatic.com/)
 
-# React + TypeScript + Vite
+# 🎨 Comic UI — Comic-Inspired React Component Library
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Comic UI** is a work-in-progress component library built with **React + TypeScript**, inspired by classic comic books.  
+It’s all about playful UIs: speech bubbles, action panels, halftone textures, and bold borders.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features (WIP)
 
-## Expanding the ESLint configuration
+- 🗯️ Comic-inspired components: speech bubbles, panels, captions
+- ⚡ Built with **React + TypeScript + Tailwind**
+- 📚 Storybook docs for live preview and testing
+- 🛠️ Lightweight, modular, and accessible
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Getting Started (Local Development)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+This project is not yet published on npm.  
+You can try it out by cloning the repo:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/your-username/comic-ui.git
+cd comic-ui
+npm install
+npm run storybook
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Then open Storybook at [http://localhost:5174](http://localhost:5174).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📚 Components (so far)
+
+- `Burst` — comic-burst for those onomatopoeia effects (“BANG!”, “POW!”, “ZAP!”)
+- `Button` — comic style button with dotted background and click animations
+- `Checkbox` — funky hand drawn looking checkbox
+- `SpiderSense` — draw attention to a certain element in page
+- _(More coming soon)_
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] Package for npm
+- [ ] Customizable themes (colors, fonts, halftone patterns)
+- [ ] Add `Onomatopoeia`, `CalendarPicker`, Comic style filters, `Slider`, `Tooltip` and more
+- [ ] Build docs site
+
+---
+
+## 🤝 Contributing
+
+Ideas and feedback are welcome! Open an issue or suggest new comic-inspired components.
