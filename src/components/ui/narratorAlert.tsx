@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 const alertVariants = cva(
   cn(
     "relative w-full grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current",
-    "border-black p-2 border-2 filter-[url(#displacementFilter)] spotty-bg-[#eab308]"
+    "border-black p-2 border-4 filter-[url(#displacementFilter)] spotty-bg-[#eab308]",
+    "shadow-[10px_10px_0_rgba(0,0,0)]"
   ),
   {
     variants: {
