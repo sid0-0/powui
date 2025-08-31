@@ -1,10 +1,13 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 const alertVariants = cva(
-  "relative w-full rounded-lg border px-4 py-3 text-sm grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current",
+  cn(
+    "relative w-full grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current",
+    "border-black p-2 border-2 filter-[url(#displacementFilter)] spotty-bg-[#eab308]"
+  ),
   {
     variants: {
       variant: {
@@ -17,7 +20,7 @@ const alertVariants = cva(
       variant: "default",
     },
   }
-)
+);
 
 function NarratorAlert({
   className,
@@ -31,10 +34,13 @@ function NarratorAlert({
       className={cn(alertVariants({ variant }), className)}
       {...props}
     />
-  )
+  );
 }
 
-function NarratorAlertTitle({ className, ...props }: React.ComponentProps<"div">) {
+function NarratorAlertTitle({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="alert-title"
@@ -44,7 +50,7 @@ function NarratorAlertTitle({ className, ...props }: React.ComponentProps<"div">
       )}
       {...props}
     />
-  )
+  );
 }
 
 function NarratorAlertDescription({
@@ -60,7 +66,7 @@ function NarratorAlertDescription({
       )}
       {...props}
     />
-  )
+  );
 }
 
-export { NarratorAlert, NarratorAlertTitle, NarratorAlertDescription }
+export { NarratorAlert, NarratorAlertTitle, NarratorAlertDescription };

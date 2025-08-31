@@ -9,7 +9,7 @@ export const StorybookNarratorAlert = () => {
     <NarratorAlert>
       <NarratorAlertTitle>Bat Signal has been activated</NarratorAlertTitle>
       <NarratorAlertDescription>
-        Weather is cloudy so it's not visible but sure is up
+        Weather is cloudy so it's not visible but it sure is up
       </NarratorAlertDescription>
     </NarratorAlert>
   );
