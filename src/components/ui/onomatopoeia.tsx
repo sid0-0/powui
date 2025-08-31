@@ -34,14 +34,64 @@ export const Onomatopoeia = (props: { text: string }) => {
 type TEvaluateContainerStyleArgs = {
   x: number;
   y: number;
-  duration?: number;
+  duration: number;
   addRandomness?: boolean;
+};
+
+const ClickBurst = () => {
+  const lineLength = 20;
+
+  const allPoints = Array.from({ length: 8 }).map((_, i) => {
+    const angle = (i * 45 * Math.PI) / 180;
+    return {
+      x1: lineLength,
+      y1: lineLength,
+      x2: lineLength + Math.cos(angle) * lineLength,
+      y2: lineLength + Math.sin(angle) * lineLength,
+    };
+  });
+
+  const svg = (
+    <svg
+      height={lineLength * 2}
+      width={lineLength * 2}
+      viewBox={`0 0 ${lineLength * 2} ${lineLength * 2}`}
+      xmlns="http://www.w3.org/2000/svg"
+      className="-translate-1/2"
+      aria-hidden="false"
+      role="img"
+    >
+      {allPoints.map((point, index) => (
+        <line
+          key={index}
+          className="line"
+          style={{
+            stroke: "black",
+            strokeWidth: 2,
+            strokeLinecap: "round",
+            strokeDasharray: lineLength / 2,
+            strokeDashoffset: lineLength / 2,
+            opacity: 0.95,
+            transformBox:
+              "fill-box" /* allow transform-origin to work inside SVG */,
+            transformOrigin: "50% 50%" /* center of SVG */,
+          }}
+          x1={point.x1}
+          y1={point.y1}
+          x2={point.x2}
+          y2={point.y2}
+        ></line>
+      ))}
+    </svg>
+  );
+
+  return svg;
 };
 
 const evaluateContainerStyle = ({
   x,
   y,
-  duration = 500,
+  duration,
   addRandomness = true,
 }: TEvaluateContainerStyleArgs) => {
   const evaluatedContainerStyle: CSSProperties = {
@@ -74,13 +124,22 @@ export const useEventOnomatopoeia = (props: {
   const [portalElements, setPortalElements] = useState<Record<string, any>>({});
   const trigger = useCallback(
     (args: TEvaluateContainerStyleArgs) => {
-      const { x, y, duration = 500  } = args;
+      const { x, y, duration = 200 } = args;
       if (!x || !y) return;
       const evaluatedContainerStyle = evaluateContainerStyle(args);
       const id = window.crypto.randomUUID();
-      setPortalElements((current) => ({
-        ...current,
-        [id]: createPortal(
+
+      const items = [
+        createPortal(
+          <div
+            className="select-none pointer-events-none absolute text-xl"
+            style={evaluateContainerStyle({ ...args, addRandomness: false })}
+          >
+            <ClickBurst key="burst" />
+          </div>,
+          document.body
+        ),
+        createPortal(
           <div
             className="select-none pointer-events-none absolute text-xl"
             style={evaluatedContainerStyle}
@@ -89,11 +148,24 @@ export const useEventOnomatopoeia = (props: {
           </div>,
           document.body
         ),
+      ];
+
+      setPortalElements((current) => ({
+        ...current,
+        ...items.reduce(
+          (acc, item, index) => ({
+            ...acc,
+            [`${id}_${index}`]: item,
+          }),
+          {}
+        ),
       }));
       setTimeout(() => {
         setPortalElements((current) => {
           const newState = { ...current };
-          delete newState[id];
+          items.forEach((_, index) => {
+            delete newState[`${id}_${index}`];
+          });
           return newState;
         });
       }, duration);
