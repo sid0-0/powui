@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Walter+Turncoat&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -98,6 +98,16 @@ button {
     ),
     --value([color]);
   background-size: 0.15rem 0.15rem;
+}
+
+@utility spotty-bg-lg-* {
+  background: radial-gradient(
+      circle at center,
+      rgba(0, 0, 0, 0.3) 0.05rem,
+      --value([color]) 0
+    ),
+    --value([color]);
+  background-size: 0.2rem 0.2rem;
 }
 
 @utility spotty-bg-diagonal-* {
