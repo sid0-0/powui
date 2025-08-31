@@ -57,14 +57,13 @@ const ClickBurst = () => {
       width={lineLength * 2}
       viewBox={`0 0 ${lineLength * 2} ${lineLength * 2}`}
       xmlns="http://www.w3.org/2000/svg"
-      className="-translate-1/2"
+      className="-translate-1/2 filter-[url(#displacementFilter)]"
       aria-hidden="false"
       role="img"
     >
       {allPoints.map((point, index) => (
         <line
           key={index}
-          className="line"
           style={{
             stroke: "black",
             strokeWidth: 2,
@@ -110,8 +109,17 @@ const evaluateContainerStyle = ({
       (Math.random() > 0.5 ? 1 : -1) *
       (minimumDistance + Math.random() * radius);
 
+    const angle = Math.atan(translateY / translateX);
+    const rotationAngleNotAllowed = (180 * angle) / Math.PI;
+
+    let rotationAngle = (Math.random() - 0.5) * 100;
+
+    if (Math.abs(rotationAngle - rotationAngleNotAllowed) < 20) {
+      rotationAngle = rotationAngle + 20;
+    }
+
     evaluatedContainerStyle.translate = `calc(-50% + ${translateX}px) calc(-50% + ${translateY}px)`;
-    evaluatedContainerStyle.rotate = `${(Math.random() - 0.5) * 100}deg`;
+    evaluatedContainerStyle.rotate = `${rotationAngle}deg`;
   }
   return evaluatedContainerStyle;
 };
