@@ -1,41 +1,13 @@
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type CSSProperties,
-} from "react";
+import { cn } from "@/lib/utils";
+import { useCallback, useMemo, useState, type CSSProperties } from "react";
 import { createPortal } from "react-dom";
-
-export const Onomatopoeia = (props: { text: string }) => {
-  const { text } = props;
-  const elemRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Animation logic here
-    setTimeout(() => {
-      // add on mount style changes here
-    }, 0);
-    setTimeout(() => {
-      // add on unmount style changes here
-    }, 400);
-  }, []);
-  return (
-    <div
-      className="filter-[url(#displacementFilter)] font-[Walter_Turncoat] transition duration-100 text-2xl"
-      ref={elemRef}
-    >
-      {text}
-    </div>
-  );
-};
 
 type TEvaluateContainerStyleArgs = {
   x: number;
   y: number;
-  duration: number;
+  duration?: number;
   addRandomness?: boolean;
+  displayElement?: React.ReactNode;
 };
 
 const ClickBurst = () => {
@@ -125,37 +97,50 @@ const evaluateContainerStyle = ({
 };
 
 export const useEventOnomatopoeia = (props: {
-  text: string;
   containerStyle?: CSSProperties;
+  showClickBurst?: boolean;
+  displayElement?: React.ReactNode;
 }) => {
-  const { text, containerStyle = {} } = props;
+  const { containerStyle = {}, showClickBurst = false, displayElement } = props;
   const [portalElements, setPortalElements] = useState<Record<string, any>>({});
   const trigger = useCallback(
     (args: TEvaluateContainerStyleArgs) => {
-      const { x, y, duration = 200 } = args;
+      const {
+        x,
+        y,
+        duration = 200,
+        displayElement: triggerDisplayElement,
+      } = args;
       if (!x || !y) return;
       const evaluatedContainerStyle = evaluateContainerStyle(args);
       const id = window.crypto.randomUUID();
 
+      const finalDisplayElement = triggerDisplayElement ?? displayElement;
+
       const items = [
-        createPortal(
-          <div
-            className="select-none pointer-events-none absolute text-xl"
-            style={evaluateContainerStyle({ ...args, addRandomness: false })}
-          >
-            <ClickBurst key="burst" />
-          </div>,
-          document.body
-        ),
-        createPortal(
-          <div
-            className="select-none pointer-events-none absolute text-xl"
-            style={evaluatedContainerStyle}
-          >
-            <Onomatopoeia text={text} />
-          </div>,
-          document.body
-        ),
+        showClickBurst &&
+          createPortal(
+            <div
+              className="select-none pointer-events-none absolute text-xl"
+              style={evaluateContainerStyle({ ...args, addRandomness: false })}
+            >
+              <ClickBurst key="burst" />
+            </div>,
+            document.body
+          ),
+        finalDisplayElement &&
+          createPortal(
+            <div
+              className={cn(
+                "select-none pointer-events-none absolute text-xl",
+                "filter-[url(#displacementFilter)]"
+              )}
+              style={evaluatedContainerStyle}
+            >
+              {finalDisplayElement}
+            </div>,
+            document.body
+          ),
       ];
 
       setPortalElements((current) => ({
@@ -178,7 +163,7 @@ export const useEventOnomatopoeia = (props: {
         });
       }, duration);
     },
-    [containerStyle]
+    [containerStyle, displayElement]
   );
 
   const renderedPortalElements = useMemo(
