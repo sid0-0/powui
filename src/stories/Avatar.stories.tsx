@@ -25,3 +25,10 @@ export const Fallback: Story = {
   },
 };
 
+export const Floating: Story = {
+  args: {
+    src: "public/green_lantern_transparent.png",
+    fallback: "Green Lantern",
+    floating: true,
+  },
+};
