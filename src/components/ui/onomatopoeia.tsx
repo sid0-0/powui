@@ -118,16 +118,6 @@ export const useEventOnomatopoeia = (props: {
       const finalDisplayElement = triggerDisplayElement ?? displayElement;
 
       const items = [
-        showClickBurst &&
-          createPortal(
-            <div
-              className="select-none pointer-events-none absolute text-xl"
-              style={evaluateContainerStyle({ ...args, addRandomness: false })}
-            >
-              <ClickBurst key="burst" />
-            </div>,
-            document.body
-          ),
         finalDisplayElement &&
           createPortal(
             <div
@@ -138,6 +128,16 @@ export const useEventOnomatopoeia = (props: {
               style={evaluatedContainerStyle}
             >
               {finalDisplayElement}
+            </div>,
+            document.body
+          ),
+        showClickBurst &&
+          createPortal(
+            <div
+              className="select-none pointer-events-none absolute text-xl"
+              style={evaluateContainerStyle({ ...args, addRandomness: false })}
+            >
+              <ClickBurst key="burst" />
             </div>,
             document.body
           ),

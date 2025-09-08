@@ -151,7 +151,6 @@ const BurstWrapper = (props: PropsWithChildren<TBurstWrapperProps>) => {
 
   const borderDivs = useMemo(() => {
     if (!borders) return null;
-    console.log(pathId);
     return borders
       .slice()
       .reverse()
