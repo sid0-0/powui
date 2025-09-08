@@ -1,7 +1,6 @@
 import { getEllipticalPoints, getRectangularPoints } from "@/lib/geometryUtils";
 import { cn } from "@/lib/utils";
-import type React from "react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type PropsWithChildren } from "react";
 
 const HEIGHT_VARIANCE = 15;
 const FLATTERY_FACTOR = 2;
@@ -16,7 +15,7 @@ const generateSVGPathBAM = (args: {
   const { points, height, width, flatteryFactor } = args;
   const path = [...points, points[0]].reduce((acc, point, index) => {
     if (index === 0) {
-      return `M ${point.x} ${point.y}`;
+      return `M ${point.x / width} ${point.y / height}`;
     } else {
       const previousPoint = points[index - 1];
       const referencePoint = {
@@ -27,10 +26,16 @@ const generateSVGPathBAM = (args: {
           (height / 2 + flatteryFactor * ((point.y + previousPoint.y) / 2)) /
           (1 + flatteryFactor),
       };
+      const relativePoints = {
+        refX: referencePoint.x / width,
+        refY: referencePoint.y / height,
+        x: point.x / width,
+        y: point.y / height,
+      };
       if (args.curvedDips) {
-        return `${acc} Q ${referencePoint.x} ${referencePoint.y}, ${point.x} ${point.y}`;
+        return `${acc} Q ${relativePoints.refX} ${relativePoints.refY}, ${relativePoints.x} ${relativePoints.y}`;
       }
-      return `${acc} L ${referencePoint.x} ${referencePoint.y} L ${point.x} ${point.y}`;
+      return `${acc} L ${relativePoints.refX} ${relativePoints.refY} L ${relativePoints.x} ${relativePoints.y}`;
     }
   }, "");
 
@@ -104,11 +109,7 @@ type TBurstWrapperProps = {
   containerClassName?: string;
 };
 
-const BurstWrapper = (
-  props: TBurstWrapperProps & {
-    children: React.ReactNode;
-  }
-) => {
+const BurstWrapper = (props: PropsWithChildren<TBurstWrapperProps>) => {
   const {
     children,
     heightVariance = HEIGHT_VARIANCE,
@@ -145,6 +146,9 @@ const BurstWrapper = (
     curvedDips,
   ]);
 
+  const id = window.crypto.randomUUID();
+  const pathId = `path_${id}`;
+
   const borderDivs = useMemo(() => {
     if (!borders) return null;
     return borders
@@ -152,22 +156,31 @@ const BurstWrapper = (
       .reverse()
       .map((config, index) => (
         <div
-          className="absolute scale-110 inset-0 bg-red-700"
+          key={index}
+          className={cn("absolute scale-110 inset-0")}
           style={{
-            clipPath: `path("${svgPath.path}")`,
-            backgroundColor: config?.color ?? "black",
+            clipPath: `url(#${pathId})`,
+            background: config?.color ?? "black",
             scale: config?.scale ?? (borders.length - 1 - index + 11) / 10,
           }}
         />
       ));
-  }, [borders, svgPath.path]);
+  }, [borders, pathId]);
 
   return (
     <div className={cn("relative", containerClassName)}>
+      <svg className="absolute" height={0} width={0}>
+        <defs>
+          <clipPath id={pathId} clipPathUnits="objectBoundingBox">
+            <path d={svgPath.path} />
+          </clipPath>
+        </defs>
+      </svg>
       {borderDivs}
       <div
         ref={setContainerRef}
-        style={{ clipPath: `path("${svgPath.path}")` }}
+        className="spotty-bg-[#eab308]"
+        style={{ clipPath: `url(#${pathId})` }}
       >
         {children}
       </div>
