@@ -15,7 +15,7 @@ const generateSVGPathBAM = (args: {
   const { points, height, width, flatteryFactor } = args;
   const path = [...points, points[0]].reduce((acc, point, index) => {
     if (index === 0) {
-      return `M ${point.x} ${point.y}`;
+      return `M ${point.x / width} ${point.y / height}`;
     } else {
       const previousPoint = points[index - 1];
       const referencePoint = {
