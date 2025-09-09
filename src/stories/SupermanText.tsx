@@ -7,6 +7,7 @@ export const StorybookSupermanText = () => {
       dy={-15}
       className="text-yellow-300 font-extrabold text-7xl"
       color="darkred"
+      borderThickness={2}
     >
       SUPERMAN
     </SupermanText>
