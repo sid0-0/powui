@@ -1,4 +1,5 @@
 import { BurstWrapper, type TBurstWrapperProps } from "@/components/ui/burst";
+import { SupermanText } from "@/components/ui/supermanText";
 
 const StorybookBurst = (
   props: {
@@ -12,12 +13,15 @@ const StorybookBurst = (
       <BurstWrapper {...rest}>
         <div style={{ height, width }}></div>
       </BurstWrapper>
-      <div
+      <SupermanText
         className="absolute top-0 flex items-center justify-center text-8xl italic font-extrabold text-red-700"
-        style={{ height, width, textShadow: '1px 1px red, 3px 3px red, 5px 5px red' }}
+        style={{ height, width }}
+        dx={5}
+        dy={5}
+        color="red"
       >
         POW!
-      </div>
+      </SupermanText>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { StorybookOnomatopoeia } from "./Onomatopoeia";
 import { BurstWrapper } from "@/components/ui/burst";
+import { SupermanText } from "@/components/ui/supermanText";
 
 const meta = {
   title: "Example/Onomatopoeia",
@@ -34,14 +35,14 @@ export const PowClickBurst: Story = {
         <BurstWrapper>
           <div style={{ height: 100, width: 100 }} />
         </BurstWrapper>
-        <div
+        <SupermanText
           className="absolute top-0 size-full flex items-center justify-center text-4xl italic font-extrabold text-red-700"
-          style={{
-            textShadow: "1px 1px red, 3px 3px red, 5px 5px red",
-          }}
+          dx={5}
+          dy={5}
+          color="red"
         >
           POW!
-        </div>
+        </SupermanText>
       </div>
     ),
   },
