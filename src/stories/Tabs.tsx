@@ -8,10 +8,10 @@ export const StorybookTabs = (props: {
 }) => {
   const { tabs } = props;
   return (
-    <Tabs className="w-1/2 mx-auto" defaultValue={tabs[0].title}>
+    <Tabs className="w-3/4 mx-auto filter-[url(#displacementFilter)]" defaultValue={tabs[0].title}>
       <TabsList>
         {tabs.map((x) => (
-          <TabsTrigger key={x.title} value={x.title}>
+          <TabsTrigger key={x.title} value={x.title} className="spotty-bg-[#eab308]">
             {x.title}
           </TabsTrigger>
         ))}
