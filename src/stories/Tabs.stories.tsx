@@ -29,7 +29,7 @@ const CharacterContent = ({
   symbol: string;
   alignment: string;
 }) => (
-  <div className="space-y-2 min-h-[300px] p-4 spotty-bg-[#eab308]">
+  <div className="space-y-2 min-h-80 p-4 spotty-bg-[#eab308]">
     <p>
       <strong>Real Name:</strong> {real_name}
     </p>

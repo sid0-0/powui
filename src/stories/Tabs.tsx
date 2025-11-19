@@ -11,7 +11,7 @@ export const StorybookTabs = (props: {
     <Tabs className="w-3/4 mx-auto filter-[url(#displacementFilter)]" defaultValue={tabs[0].title}>
       <TabsList>
         {tabs.map((x) => (
-          <TabsTrigger key={x.title} value={x.title} className="spotty-bg-[#eab308] text-2xl">
+          <TabsTrigger key={x.title} value={x.title} className="spotty-bg-[#eab308] font-bold">
             {x.title}
           </TabsTrigger>
         ))}
