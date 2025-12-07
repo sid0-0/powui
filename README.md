@@ -1,4 +1,4 @@
-View Storybook of all components: [Storybook](https://68b33f12384a75f2c732fa44-sgepohaizo.chromatic.com/)
+View Storybook of all components: [![Storybook](https://img.shields.io/badge/Storybook-Online-blue)](https://68b33f12384a75f2c732fa44-sgepohaizo.chromatic.com/)
 
 # 🎨 Pow UI — Comic-Inspired React Component Library
 
