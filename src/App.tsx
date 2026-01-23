@@ -5,6 +5,7 @@ function App() {
   return (
     <>
       <Button>hello</Button>
+      <div className="size-10 bg-dot [--dot-color:theme(colors.slate.800)] [--dot-size:0.2rem]"></div>
     </>
   );
 }
