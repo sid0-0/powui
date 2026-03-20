@@ -5,13 +5,22 @@ export const StorybookTabs = (props: {
     title: string;
     content: React.ReactNode;
   }[];
+  orientation?: "horizontal" | "vertical";
 }) => {
-  const { tabs } = props;
+  const { tabs, orientation } = props;
   return (
-    <Tabs className="w-3/4 mx-auto filter-[url(#displacementFilter)]" defaultValue={tabs[0].title}>
+    <Tabs
+      className="w-3/4 mx-auto filter-[url(#displacementFilter)]"
+      defaultValue={tabs[0].title}
+      orientation={orientation || "horizontal"}
+    >
       <TabsList>
         {tabs.map((x) => (
-          <TabsTrigger key={x.title} value={x.title} className="spotty-bg-[#eab308] font-bold">
+          <TabsTrigger
+            key={x.title}
+            value={x.title}
+            className="spotty-bg-[#eab308] font-bold"
+          >
             {x.title}
           </TabsTrigger>
         ))}

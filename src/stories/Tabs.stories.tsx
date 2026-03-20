@@ -135,3 +135,13 @@ export const Base: Story = {
     })),
   },
 };
+
+export const Vertical: Story = {
+  args: {
+    tabs: data.map((char) => ({
+      title: char.name,
+      content: <CharacterContent {...char} />,
+    })),
+    orientation: "vertical",
+  },
+};
