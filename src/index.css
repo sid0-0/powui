@@ -90,18 +90,23 @@ button {
   }
 }
 
+/* Ensure all spotty utility combinations are included in the CSS output
+   even when used via dynamic class names (e.g. template literals in stories) */
+@source inline("{spotty-dot,spotty-spacing}-{xs,sm,md,lg,xl}");
+@source inline("spotty-opacity-{10,20,30,40,50,60,70,80,90}");
+
 /* spotty-dot-* — controls the dot radius */
 @utility spotty-dot-xs {
-  --spotty-dot: 0.01rem;
+  --spotty-dot: 0.005rem;
 }
 @utility spotty-dot-sm {
-  --spotty-dot: 0.02rem;
+  --spotty-dot: 0.01rem;
 }
 @utility spotty-dot-md {
-  --spotty-dot: 0.05rem;
+  --spotty-dot: 0.02rem;
 }
 @utility spotty-dot-lg {
-  --spotty-dot: 0.08rem;
+  --spotty-dot: 0.05rem;
 }
 @utility spotty-dot-xl {
   --spotty-dot: 0.12rem;
@@ -109,16 +114,16 @@ button {
 
 /* spotty-spacing-* — controls the tile/grid size */
 @utility spotty-spacing-xs {
-  --spotty-spacing: 0.1rem;
+  --spotty-spacing: 0.075rem;
 }
 @utility spotty-spacing-sm {
-  --spotty-spacing: 0.15rem;
+  --spotty-spacing: 0.1rem;
 }
 @utility spotty-spacing-md {
-  --spotty-spacing: 0.2rem;
+  --spotty-spacing: 0.15rem;
 }
 @utility spotty-spacing-lg {
-  --spotty-spacing: 0.35rem;
+  --spotty-spacing: 0.2rem;
 }
 @utility spotty-spacing-xl {
   --spotty-spacing: 0.5rem;
@@ -162,17 +167,6 @@ button {
     ),
     --value([color]);
   background-size: var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
-}
-
-/* spotty-bg-lg-* — coarser preset (equivalent to spotty-dot-md spotty-spacing-md) */
-@utility spotty-bg-lg-* {
-  background: radial-gradient(
-      circle at center,
-      rgba(0, 0, 0, var(--spotty-opacity, 0.3)) var(--spotty-dot, 0.05rem),
-      --value([color]) 0
-    ),
-    --value([color]);
-  background-size: var(--spotty-spacing, 0.2rem) var(--spotty-spacing, 0.2rem);
 }
 
 /* spotty-bg-diagonal-* — offset Ben-Day dot grid */

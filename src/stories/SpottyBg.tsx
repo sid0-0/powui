@@ -5,7 +5,7 @@ const OPACITIES = [10, 20, 30, 40, 50, 60, 70, 80, 90] as const;
 type DotSize = (typeof DOT_SIZES)[number];
 type Spacing = (typeof SPACINGS)[number];
 type Opacity = (typeof OPACITIES)[number];
-type Variant = "standard" | "lg" | "diagonal";
+type Variant = "standard" | "diagonal";
 
 export interface SpottyBgProps {
   color?: string;
@@ -28,9 +28,7 @@ export const StorybookSpottyBg = ({
   const bgClass =
     variant === "standard"
       ? `spotty-bg-[${color}]`
-      : variant === "lg"
-        ? `spotty-bg-lg-[${color}]`
-        : `spotty-bg-diagonal-[${color}]`;
+      : `spotty-bg-diagonal-[${color}]`;
 
   const classes = [dotClass, spacingClass, opacityClass, bgClass].join(" ");
 
@@ -70,9 +68,7 @@ export const StorybookSpottyBgMatrix = ({
                 const bgClass =
                   variant === "standard"
                     ? `spotty-bg-[${color}]`
-                    : variant === "lg"
-                      ? `spotty-bg-lg-[${color}]`
-                      : `spotty-bg-diagonal-[${color}]`;
+                    : `spotty-bg-diagonal-[${color}]`;
                 return (
                   <td key={sp} className="p-1">
                     <div
@@ -119,13 +115,11 @@ export const StorybookSpottyBgVariants = ({
   const shared = `spotty-dot-${dotSize} spotty-spacing-${spacing} spotty-opacity-${opacity}`;
   return (
     <div className="flex gap-8 p-6 justify-center">
-      {(["standard", "lg", "diagonal"] as Variant[]).map((v) => {
+      {(["standard", "diagonal"] as Variant[]).map((v) => {
         const bgClass =
           v === "standard"
             ? `spotty-bg-[${color}]`
-            : v === "lg"
-              ? `spotty-bg-lg-[${color}]`
-              : `spotty-bg-diagonal-[${color}]`;
+            : `spotty-bg-diagonal-[${color}]`;
         return (
           <div key={v} className="flex flex-col items-center gap-2">
             <div className={`w-28 h-28 border-4 border-black ${shared} ${bgClass}`} />

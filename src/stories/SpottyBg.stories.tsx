@@ -35,7 +35,7 @@ const meta = {
     },
     variant: {
       control: { type: "select" },
-      options: ["standard", "lg", "diagonal"],
+      options: ["standard", "diagonal"],
       description: "Pattern variant",
     },
   },
