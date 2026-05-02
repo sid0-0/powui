@@ -20,7 +20,7 @@ export const StorybookButton = ({
 }: ButtonProps) => {
   const toRender = typeof label === "string" ? label.toUpperCase() : label;
   return (
-    <Button size={size} {...props}>
+    <Button size={size} className="spotty-bg-[#eab308] hover:spotty-bg-[#ca8a04]" {...props}>
       {toRender}
     </Button>
   );
