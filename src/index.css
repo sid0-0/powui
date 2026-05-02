@@ -171,19 +171,19 @@ button {
 
 /* spotty-bg-diagonal-* — offset Ben-Day dot grid */
 @utility spotty-bg-diagonal-* {
+  background-color: --value([color]);
   background-image: radial-gradient(
       circle at center,
-      rgba(0, 0, 0, var(--spotty-opacity, 1)) var(--spotty-dot, 0.05rem),
+      black var(--spotty-dot, 0.02rem),
       transparent 0
     ),
     radial-gradient(
       circle at center,
-      rgba(0, 0, 0, var(--spotty-opacity, 1)) var(--spotty-dot, 0.05rem),
-      --value([color]) 0
+      black var(--spotty-dot, 0.02rem),
+      transparent 0
     );
-  background-size: var(--spotty-spacing, 0.5rem) var(--spotty-spacing, 0.5rem);
-  background-position: 0 0,
-    calc(var(--spotty-spacing, 0.5rem) / 2) calc(var(--spotty-spacing, 0.5rem) / 2);
+  background-size: calc(var(--spotty-spacing, 0.15rem) * 2) calc(var(--spotty-spacing, 0.15rem) * 2);
+  background-position: 0 0, var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
 }
 
 @utility clip-path-ellipse {
