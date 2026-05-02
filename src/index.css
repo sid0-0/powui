@@ -90,25 +90,106 @@ button {
   }
 }
 
+/* spotty-dot-* — controls the dot radius */
+@utility spotty-dot-xs {
+  --spotty-dot: 0.01rem;
+}
+@utility spotty-dot-sm {
+  --spotty-dot: 0.02rem;
+}
+@utility spotty-dot-md {
+  --spotty-dot: 0.05rem;
+}
+@utility spotty-dot-lg {
+  --spotty-dot: 0.08rem;
+}
+@utility spotty-dot-xl {
+  --spotty-dot: 0.12rem;
+}
+
+/* spotty-spacing-* — controls the tile/grid size */
+@utility spotty-spacing-xs {
+  --spotty-spacing: 0.1rem;
+}
+@utility spotty-spacing-sm {
+  --spotty-spacing: 0.15rem;
+}
+@utility spotty-spacing-md {
+  --spotty-spacing: 0.2rem;
+}
+@utility spotty-spacing-lg {
+  --spotty-spacing: 0.35rem;
+}
+@utility spotty-spacing-xl {
+  --spotty-spacing: 0.5rem;
+}
+
+/* spotty-opacity-* — controls the dot overlay opacity (10–90) */
+@utility spotty-opacity-10 {
+  --spotty-opacity: 0.1;
+}
+@utility spotty-opacity-20 {
+  --spotty-opacity: 0.2;
+}
+@utility spotty-opacity-30 {
+  --spotty-opacity: 0.3;
+}
+@utility spotty-opacity-40 {
+  --spotty-opacity: 0.4;
+}
+@utility spotty-opacity-50 {
+  --spotty-opacity: 0.5;
+}
+@utility spotty-opacity-60 {
+  --spotty-opacity: 0.6;
+}
+@utility spotty-opacity-70 {
+  --spotty-opacity: 0.7;
+}
+@utility spotty-opacity-80 {
+  --spotty-opacity: 0.8;
+}
+@utility spotty-opacity-90 {
+  --spotty-opacity: 0.9;
+}
+
+/* spotty-bg-* — renders the stipple pattern using the configured variables */
 @utility spotty-bg-* {
   background: radial-gradient(
       circle at center,
-      rgba(0, 0, 0, 0.3) 0.02rem,
+      rgba(0, 0, 0, var(--spotty-opacity, 0.3)) var(--spotty-dot, 0.02rem),
       --value([color]) 0
     ),
     --value([color]);
-  background-size: 0.15rem 0.15rem;
+  background-size: var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
 }
 
+/* spotty-bg-lg-* — coarser preset (equivalent to spotty-dot-md spotty-spacing-md) */
+@utility spotty-bg-lg-* {
+  background: radial-gradient(
+      circle at center,
+      rgba(0, 0, 0, var(--spotty-opacity, 0.3)) var(--spotty-dot, 0.05rem),
+      --value([color]) 0
+    ),
+    --value([color]);
+  background-size: var(--spotty-spacing, 0.2rem) var(--spotty-spacing, 0.2rem);
+}
+
+/* spotty-bg-diagonal-* — offset Ben-Day dot grid */
 @utility spotty-bg-diagonal-* {
   background-image: radial-gradient(
       circle at center,
-      rgba(0, 0, 0) 0.05rem,
+      rgba(0, 0, 0, var(--spotty-opacity, 1)) var(--spotty-dot, 0.05rem),
       transparent 0
     ),
-    radial-gradient(circle at center, rgba(0, 0, 0) 0.05rem, --value([color]) 0);
-  background-size: 0.5rem 0.5rem;
-  background-position: 0 0, 0.25rem 0.25rem;
+    radial-gradient(
+      circle at center,
+      rgba(0, 0, 0, var(--spotty-opacity, 1)) var(--spotty-dot, 0.05rem),
+      --value([color]) 0
+    );
+  background-size: var(--spotty-spacing, 0.5rem) var(--spotty-spacing, 0.5rem);
+  background-position: 0 0,
+    calc(var(--spotty-spacing, 0.5rem) / 2) calc(var(--spotty-spacing, 0.5rem) / 2);
 }
 
 @utility clip-path-ellipse {
