@@ -96,7 +96,7 @@ export const Variants: Story = {
     color: "#eab308",
     dotSize: "md",
     spacing: "lg",
-    opacity: 30,
+    opacity: 90,
   },
   parameters: {
     controls: {

@@ -72,7 +72,7 @@ export const StorybookSpottyBgMatrix = ({
                 return (
                   <td key={sp} className="p-1">
                     <div
-                      className={`w-16 h-16 border-2 border-black spotty-dot-${dot} spotty-spacing-${sp} ${bgClass}`}
+                      className={`w-16 h-16 border-2 border-black spotty-dot-${dot} spotty-spacing-${sp} spotty-opacity-90 ${bgClass}`}
                     />
                   </td>
                 );
@@ -110,7 +110,7 @@ export const StorybookSpottyBgVariants = ({
   color = "#eab308",
   dotSize = "md",
   spacing = "lg",
-  opacity = 30,
+  opacity = 90,
 }: Omit<SpottyBgProps, "variant">) => {
   const shared = `spotty-dot-${dotSize} spotty-spacing-${spacing} spotty-opacity-${opacity}`;
   return (
