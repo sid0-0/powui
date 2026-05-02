@@ -107,6 +107,8 @@ type TBurstWrapperProps = {
   }[];
   // containerClassName is a class name to apply to the container div
   containerClassName?: string;
+  // className is applied to the inner clipped content div
+  className?: string;
 };
 
 const BurstWrapper = (props: PropsWithChildren<TBurstWrapperProps>) => {
@@ -118,6 +120,7 @@ const BurstWrapper = (props: PropsWithChildren<TBurstWrapperProps>) => {
     curvedDips = false,
     borders = [],
     containerClassName,
+    className,
   } = props;
 
   const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
@@ -179,7 +182,7 @@ const BurstWrapper = (props: PropsWithChildren<TBurstWrapperProps>) => {
       {borderDivs}
       <div
         ref={setContainerRef}
-        className="spotty-bg-[#eab308]"
+        className={className}
         style={{ clipPath: `url(#${pathId})` }}
       >
         {children}

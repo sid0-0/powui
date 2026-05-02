@@ -74,7 +74,6 @@ function Slider({
           data-slot="slider-range"
           className={cn(
             "bg-amber-400 absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full",
-            "spotty-bg-[#eab308]",
             rangeClassName
           )}
         />
