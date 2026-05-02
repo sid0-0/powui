@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Slider } from "@/components/ui/slider";
 import { SpiderSenseWrapper } from "@/components/ui/spiderSenseWrapper";
 import { useRef, useState } from "react";
 
@@ -17,14 +18,12 @@ export const StorybookSpiderSense = (props: {
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full p-4">
-      <input
-        type="range"
-        min="1"
-        max="300"
-        value={size}
-        className="slider w-52"
-        onChange={(e) => {
-          setSize(Number(e.target.value));
+      <Slider
+        className="w-52"
+        min={1}
+        max={300}
+        onValueChange={([value]) => {
+          setSize(value);
         }}
       />
       <br />
