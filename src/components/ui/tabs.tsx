@@ -66,14 +66,14 @@ function TabsTrigger({
           ? cn(
               "w-full whitespace-normal",
               // Active state: pop right toward content, open right border
-              "data-[state=active]:translate-x-[6.25%] data-[state=active]:translate-y-[6.25%] data-[state=active]:first:translate-y-[12.5%] data-[state=active]:last:translate-y-[-12.5%] data-[state=active]:z-10 data-[state=active]:scale-125 data-[state=active]:border-4 data-[state=active]:border-r-0 dark:data-[state=active]:text-foreground dark:data-[state=active]:border-input data-[state=active]:brightness-100",
+              "data-[state=active]:translate-x-[6.25%] data-[state=active]:translate-y-[6.25%] data-[state=active]:first:translate-y-[12.5%] data-[state=active]:last:translate-y-[-12.5%] data-[state=active]:z-10 data-[state=active]:scale-125 data-[state=active]:border-4 data-[state=active]:border-r-0 dark:data-[state=active]:text-foreground dark:data-[state=active]:border-input data-[state=active]:brightness-100 data-[state=active]:[--spotty-spacing:0.12rem]",
               // Base: stacked borders — all items share top/side borders, last adds bottom
               "border-t-4 last:border-b-4 border-x-4 border-black bg-white brightness-60 hover:brightness-80",
             )
           : cn(
               "h-[calc(100%-1px)]",
               // Active state: pop up, open bottom border
-              "data-[state=active]:last:translate-x-[-12.5%] data-[state=active]:first:translate-x-[12.5%] data-[state=active]:translate-x-[6.25%] data-[state=active]:translate-y-[-6.25%] data-[state=active]:z-10 data-[state=active]:scale-125 data-[state=active]:border-4 data-[state=active]:border-b-0 dark:data-[state=active]:text-foreground dark:data-[state=active]:border-input data-[state=active]:brightness-100",
+              "data-[state=active]:last:translate-x-[-12.5%] data-[state=active]:first:translate-x-[12.5%] data-[state=active]:translate-x-[6.25%] data-[state=active]:translate-y-[-6.25%] data-[state=active]:z-10 data-[state=active]:scale-125 data-[state=active]:border-4 data-[state=active]:border-b-0 dark:data-[state=active]:text-foreground dark:data-[state=active]:border-input data-[state=active]:brightness-100 data-[state=active]:[--spotty-spacing:0.12rem]",
               // Base: side-by-side borders — all share top/bottom borders, last adds right
               "border-l-4 last:border-r-4 border-y-4 border-black bg-white brightness-60 hover:brightness-80",
             ),
