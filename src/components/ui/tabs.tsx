@@ -92,11 +92,11 @@ function TabsContent({
   return (
     <TabsPrimitive.Content
       data-slot="tabs-content"
-      className={cn(
-        "outline-none border-4 border-black",
-        orientation === "vertical" ? "border-l-0" : "border-t-0",
-        className,
-      )}
+        className={cn(
+          "outline-none border-4 border-black",
+          orientation === "vertical" ? "border-l-0 flex-1 min-w-0" : "border-t-0",
+          className,
+        )}
       {...props}
     />
   );
