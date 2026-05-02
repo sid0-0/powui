@@ -8,7 +8,7 @@ const variants = [
         "Narrator Box",
         "Something happened, and the narrator felt the need to mention it."
       ),
-    bg: "#eab308",
+    bg: "#f59e0b",
   },
   {
     label: "POW! (Success)",
@@ -17,7 +17,8 @@ const variants = [
         "Mission Accomplished!",
         "The hero saved the day. Again. Obviously."
       ),
-    bg: "#bbf7d0",
+    bg: "#16a34a",
+    color: "white",
   },
   {
     label: "ZAP! (Error)",
@@ -26,7 +27,8 @@ const variants = [
         "Villain Escaped!",
         "He slipped through the sewers. Classic."
       ),
-    bg: "#fecaca",
+    bg: "#dc2626",
+    color: "white",
   },
   {
     label: "UH-OH! (Warning)",
@@ -35,7 +37,8 @@ const variants = [
         "Incoming Danger",
         "Radar is picking up something. Could be nothing. Probably isn't."
       ),
-    bg: "#fed7aa",
+    bg: "#ea580c",
+    color: "white",
   },
   {
     label: "HMM... (Info)",
@@ -44,7 +47,8 @@ const variants = [
         "Did You Know?",
         "Bats are the only mammals capable of sustained flight."
       ),
-    bg: "#bfdbfe",
+    bg: "#2563eb",
+    color: "white",
   },
 ] as const;
 
@@ -67,6 +71,7 @@ export const StorybookSonner = () => {
             padding: "8px 16px",
             border: "3px solid black",
             background: v.bg,
+          color: "color" in v ? v.color : "black",
             fontFamily: "'Bangers', cursive",
             fontSize: "16px",
             letterSpacing: "0.06em",

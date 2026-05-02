@@ -13,13 +13,13 @@ export type ComicToastVariant =
 
 const variantTokens: Record<
   ComicToastVariant,
-  { badge: string; bg: string; rotate: string }
+  { badge: string; bg: string; rotate: string; badgeBg: string }
 > = {
-  default: { badge: "HEY!", bg: "#eab308", rotate: "-3deg" },
-  success: { badge: "POW!", bg: "#bbf7d0", rotate: "3deg" },
-  error: { badge: "ZAP!", bg: "#fecaca", rotate: "-4deg" },
-  warning: { badge: "UH-OH!", bg: "#fed7aa", rotate: "2deg" },
-  info: { badge: "HMM...", bg: "#bfdbfe", rotate: "-2deg" },
+  default: { badge: "HEY!",   bg: "#f59e0b", rotate: "-3deg", badgeBg: "#fcd34d" },
+  success: { badge: "POW!",   bg: "#16a34a", rotate: "3deg",  badgeBg: "#4ade80" },
+  error:   { badge: "ZAP!",   bg: "#dc2626", rotate: "-4deg", badgeBg: "#f87171" },
+  warning: { badge: "UH-OH!", bg: "#ea580c", rotate: "2deg",  badgeBg: "#fb923c" },
+  info:    { badge: "HMM...", bg: "#2563eb", rotate: "-2deg", badgeBg: "#60a5fa" },
 };
 
 // ─── Comic toast JSX ─────────────────────────────────────────────────────────
@@ -35,7 +35,9 @@ export function ComicToast({
   description,
   variant = "default",
 }: ComicToastProps) {
-  const { badge, bg, rotate } = variantTokens[variant];
+  const { badge, bg, rotate, badgeBg } = variantTokens[variant];
+  const isDark = ["success", "error", "warning", "info"].includes(variant);
+  const textColor = isDark ? "white" : "black";
 
   return (
     <Filters.Displacement scale={2} frequency={0.65}>
@@ -45,7 +47,7 @@ export function ComicToast({
           padding: "20px 12px 12px",
           border: "4px solid black",
           boxShadow: "10px 10px 0 rgba(0,0,0,1)",
-          backgroundImage: `radial-gradient(circle, rgba(0,0,0,0.35) 1.2px, transparent 1.2px)`,
+          backgroundImage: `radial-gradient(circle, rgba(0,0,0,0.25) 1.2px, transparent 1.2px)`,
           backgroundSize: "8px 8px",
           backgroundColor: bg,
           width: "100%",
@@ -59,7 +61,7 @@ export function ComicToast({
             position: "absolute",
             top: "-14px",
             right: "10px",
-            backgroundColor: bg,
+            backgroundColor: badgeBg,
             border: "3px solid black",
             borderRadius: "4px",
             padding: "1px 8px",
@@ -83,22 +85,27 @@ export function ComicToast({
             fontFamily: "'Bangers', cursive",
             fontSize: "20px",
             letterSpacing: "0.05em",
-            color: "black",
+            color: textColor,
             lineHeight: 1.2,
-            marginBottom: description ? "4px" : 0,
+            marginBottom: description ? "6px" : 0,
+            textShadow: isDark ? "1px 1px 0 rgba(0,0,0,0.4)" : "none",
           }}
         >
           {title}
         </div>
 
-        {/* Description */}
+        {/* Description — solid pill for legibility over halftone */}
         {description && (
           <div
             style={{
+              display: "inline-block",
+              backgroundColor: "rgba(255,255,255,0.92)",
+              border: "2px solid black",
+              borderRadius: "3px",
+              padding: "3px 8px",
               fontFamily: "'Walter Turncoat', cursive",
               fontSize: "13px",
               color: "black",
-              opacity: 0.85,
               lineHeight: 1.4,
             }}
           >
