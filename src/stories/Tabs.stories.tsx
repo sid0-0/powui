@@ -17,6 +17,7 @@ const meta = {
     },
     tabWidth: { control: { type: "text" } },
     tabHeight: { control: { type: "text" } },
+    activeTabClassName: { control: { type: "text" } },
   },
 };
 
@@ -212,8 +213,11 @@ const SyncTabs = () => {
         value={activeTab}
         onValueChange={setActiveTab}
         tabsPlacement={placement}
+        activeTabClassName="data-[state=active]:[--spotty-spacing:0.12rem]"
         className="w-full filter-[url(#displacementFilter)]"
-        tabWidth={placement === "left" || placement === "right" ? "80px" : "120px"}
+        tabWidth={
+          placement === "left" || placement === "right" ? "80px" : "120px"
+        }
       >
         <TabsList>
           {syncData.map((item) => (

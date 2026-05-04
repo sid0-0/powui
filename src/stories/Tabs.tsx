@@ -8,8 +8,15 @@ export const StorybookTabs = (props: {
   tabsPlacement?: "top" | "bottom" | "left" | "right";
   tabWidth?: string;
   tabHeight?: string;
+  activeTabClassName?: string;
 }) => {
-  const { tabs, tabsPlacement = "top", tabWidth, tabHeight } = props;
+  const {
+    tabs,
+    tabsPlacement = "top",
+    tabWidth,
+    tabHeight,
+    activeTabClassName = "data-[state=active]:[--spotty-spacing:0.12rem]",
+  } = props;
   return (
     <Tabs
       className="w-3/4 mx-auto filter-[url(#displacementFilter)]"
@@ -17,6 +24,7 @@ export const StorybookTabs = (props: {
       tabsPlacement={tabsPlacement}
       tabWidth={tabWidth}
       tabHeight={tabHeight}
+      activeTabClassName={activeTabClassName}
     >
       <TabsList>
         {tabs.map((x) => (
