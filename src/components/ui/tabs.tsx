@@ -43,11 +43,12 @@ function Tabs({
       <TabsPrimitive.Root
         data-slot="tabs"
         orientation={orientation}
-        style={
-          orientation === "vertical"
-            ? { [tabsPlacement === "left" ? "paddingLeft" : "paddingRight"]: `calc(${tabWidth} * 0.125)`, ...style }
-            : style
-        }
+        style={{
+          ...(orientation === "vertical" ? {
+            [tabsPlacement === "left" ? "paddingLeft" : "paddingRight"]: `calc(${tabWidth} * 0.25)`
+          } : {}),
+          ...style
+        }}
         className={cn(tabsVariants({ tabsPlacement }), className)}
         {...props}
       />
@@ -58,8 +59,8 @@ function Tabs({
 const tabsListVariants = cva("text-muted-foreground no-scrollbar", {
   variants: {
     tabsPlacement: {
-      top: "inline-flex items-center max-w-full overflow-auto pt-2",
-      bottom: "inline-flex items-center max-w-full overflow-auto pb-2",
+      top: "inline-flex items-stretch max-w-full overflow-auto",
+      bottom: "inline-flex items-stretch max-w-full overflow-auto",
       left: "flex flex-col items-stretch",
       right: "flex flex-col items-stretch",
     },
@@ -74,8 +75,17 @@ function TabsList({
   style,
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.List>) {
-  const { tabsPlacement, tabWidth, orientation } = React.useContext(TabsContext);
-  const listStyle = orientation === "vertical" ? { width: tabWidth, ...style } : style;
+  const { tabsPlacement, tabWidth, orientation, tabHeight } = React.useContext(TabsContext);
+  
+  const listStyle: React.CSSProperties = { ...style };
+  if (orientation === "vertical") {
+    listStyle.width = tabWidth;
+  } else {
+    // Bleed padding for horizontal: max(8px fallback, 25% of height)
+    const paddingValue = `max(8px, calc(${tabHeight || '2rem'} * 0.25))`;
+    if (tabsPlacement === "top") listStyle.paddingTop = paddingValue;
+    if (tabsPlacement === "bottom") listStyle.paddingBottom = paddingValue;
+  }
   
   return (
     <TabsPrimitive.List
@@ -93,12 +103,12 @@ const tabsTriggerVariants = cva(
     variants: {
       tabsPlacement: {
         top: [
-          "h-[calc(100%-1px)] border-l-4 last:border-r-4 border-y-4",
-          "data-[state=active]:last:translate-x-[-12.5%] data-[state=active]:first:translate-x-[12.5%] data-[state=active]:translate-x-[6.25%] data-[state=active]:translate-y-[-6.25%] data-[state=active]:z-10 data-[state=active]:scale-125 data-[state=active]:border-4 data-[state=active]:border-b-0 dark:data-[state=active]:text-foreground dark:data-[state=active]:border-input data-[state=active]:brightness-100 data-[state=active]:[--spotty-spacing:0.12rem]",
+          "border-l-4 last:border-r-4 border-y-4",
+          "data-[state=active]:last:translate-x-[-12.5%] data-[state=active]:first:translate-x-[12.5%] data-[state=active]:translate-x-[6.25%] data-[state=active]:translate-y-[-12.5%] data-[state=active]:z-10 data-[state=active]:scale-125 data-[state=active]:border-4 data-[state=active]:border-b-0 dark:data-[state=active]:text-foreground dark:data-[state=active]:border-input data-[state=active]:brightness-100 data-[state=active]:[--spotty-spacing:0.12rem]",
         ],
         bottom: [
-          "h-[calc(100%-1px)] border-l-4 last:border-r-4 border-y-4",
-          "data-[state=active]:last:translate-x-[-12.5%] data-[state=active]:first:translate-x-[12.5%] data-[state=active]:translate-x-[6.25%] data-[state=active]:translate-y-[6.25%] data-[state=active]:z-10 data-[state=active]:scale-125 data-[state=active]:border-4 data-[state=active]:border-t-0 dark:data-[state=active]:text-foreground dark:data-[state=active]:border-input data-[state=active]:brightness-100 data-[state=active]:[--spotty-spacing:0.12rem]",
+          "border-l-4 last:border-r-4 border-y-4",
+          "data-[state=active]:last:translate-x-[-12.5%] data-[state=active]:first:translate-x-[12.5%] data-[state=active]:translate-x-[6.25%] data-[state=active]:translate-y-[12.5%] data-[state=active]:z-10 data-[state=active]:scale-125 data-[state=active]:border-4 data-[state=active]:border-t-0 dark:data-[state=active]:text-foreground dark:data-[state=active]:border-input data-[state=active]:brightness-100 data-[state=active]:[--spotty-spacing:0.12rem]",
         ],
         left: [
           "w-full whitespace-normal border-t-4 last:border-b-4 border-x-4",
