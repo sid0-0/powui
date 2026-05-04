@@ -1,5 +1,10 @@
 import * as React from "react";
-import { Toaster as Sonner, toast, type ToasterProps } from "sonner";
+import {
+  Toaster as Sonner,
+  toast,
+  type ExternalToast,
+  type ToasterProps,
+} from "sonner";
 import { Filters } from "@/components/ui/filters";
 
 // ─── Design tokens per variant ───────────────────────────────────────────────
@@ -15,11 +20,21 @@ const variantTokens: Record<
   ComicToastVariant,
   { badge: string; bg: string; rotate: string; badgeBg: string }
 > = {
-  default: { badge: "HEY!",   bg: "#f59e0b", rotate: "-3deg", badgeBg: "#fcd34d" },
-  success: { badge: "POW!",   bg: "#16a34a", rotate: "3deg",  badgeBg: "#4ade80" },
-  error:   { badge: "ZAP!",   bg: "#dc2626", rotate: "-4deg", badgeBg: "#f87171" },
-  warning: { badge: "UH-OH!", bg: "#ea580c", rotate: "2deg",  badgeBg: "#fb923c" },
-  info:    { badge: "HMM...", bg: "#2563eb", rotate: "-2deg", badgeBg: "#60a5fa" },
+  default: {
+    badge: "HEY!",
+    bg: "#f59e0b",
+    rotate: "-3deg",
+    badgeBg: "#fcd34d",
+  },
+  success: { badge: "POW!", bg: "#16a34a", rotate: "3deg", badgeBg: "#4ade80" },
+  error: { badge: "ZAP!", bg: "#dc2626", rotate: "-4deg", badgeBg: "#f87171" },
+  warning: {
+    badge: "UH-OH!",
+    bg: "#ea580c",
+    rotate: "2deg",
+    badgeBg: "#fb923c",
+  },
+  info: { badge: "HMM...", bg: "#2563eb", rotate: "-2deg", badgeBg: "#60a5fa" },
 };
 
 // ─── Comic toast JSX ─────────────────────────────────────────────────────────
@@ -122,24 +137,44 @@ export function ComicToast({
 function fireComicToast(
   variant: ComicToastVariant,
   title: React.ReactNode,
-  description?: React.ReactNode
+  description?: React.ReactNode,
+  data?: ExternalToast,
 ) {
-  toast.custom(() => (
-    <ComicToast title={title} description={description} variant={variant} />
-  ));
+  toast.custom(
+    () => (
+      <ComicToast title={title} description={description} variant={variant} />
+    ),
+    data,
+  );
 }
 
-export const comicToast = {
-  default: (title: React.ReactNode, description?: React.ReactNode) =>
-    fireComicToast("default", title, description),
-  success: (title: React.ReactNode, description?: React.ReactNode) =>
-    fireComicToast("success", title, description),
-  error: (title: React.ReactNode, description?: React.ReactNode) =>
-    fireComicToast("error", title, description),
-  warning: (title: React.ReactNode, description?: React.ReactNode) =>
-    fireComicToast("warning", title, description),
-  info: (title: React.ReactNode, description?: React.ReactNode) =>
-    fireComicToast("info", title, description),
+type TComicToastFunc = (
+  title: React.ReactNode,
+  description?: React.ReactNode,
+  data?: ExternalToast,
+) => void;
+
+const comicToastCurry =
+  (variant: ComicToastVariant) =>
+  (
+    title: React.ReactNode,
+    description?: React.ReactNode,
+    data?: ExternalToast,
+  ) =>
+    fireComicToast(variant, title, description, data);
+
+export const comicToast: {
+  default: TComicToastFunc;
+  success: TComicToastFunc;
+  error: TComicToastFunc;
+  warning: TComicToastFunc;
+  info: TComicToastFunc;
+} = {
+  default: comicToastCurry("default"),
+  success: comicToastCurry("success"),
+  error: comicToastCurry("error"),
+  warning: comicToastCurry("warning"),
+  info: comicToastCurry("info"),
 };
 
 // ─── Toaster (place once in app root) ────────────────────────────────────────
