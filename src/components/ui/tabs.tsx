@@ -27,25 +27,24 @@ const tabsVariants = cva("flex", {
 
 function Tabs({
   className,
-  orientation,
   tabsPlacement = "top",
   tabWidth = "120px",
   tabHeight,
   style,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Root> & 
+}: Omit<React.ComponentProps<typeof TabsPrimitive.Root>, "orientation"> & 
   VariantProps<typeof tabsVariants> & {
   tabWidth?: string;
   tabHeight?: string;
 }) {
-  const resolvedOrientation = tabsPlacement === "left" || tabsPlacement === "right" ? "vertical" : orientation ?? "horizontal";
+  const orientation = tabsPlacement === "left" || tabsPlacement === "right" ? "vertical" : "horizontal";
   return (
-    <TabsContext.Provider value={{ orientation: resolvedOrientation, tabsPlacement, tabWidth, tabHeight }}>
+    <TabsContext.Provider value={{ orientation, tabsPlacement, tabWidth, tabHeight }}>
       <TabsPrimitive.Root
         data-slot="tabs"
-        orientation={resolvedOrientation}
+        orientation={orientation}
         style={
-          resolvedOrientation === "vertical"
+          orientation === "vertical"
             ? { [tabsPlacement === "left" ? "paddingLeft" : "paddingRight"]: `calc(${tabWidth} * 0.125)`, ...style }
             : style
         }
