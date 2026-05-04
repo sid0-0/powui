@@ -190,7 +190,6 @@ const TooltipContainer = ({
         className={cn(
           "relative bg-white border-4 border-black text-black font-comic rounded-2xl px-4 py-3 shadow-[4px_4px_0px_black]",
           styles.bounceMount,
-          "filter-[url(#displacementFilter)]",
           className
         )}
         sideOffset={adjustedSideOffset}
@@ -206,7 +205,6 @@ const TooltipContainer = ({
                 "rotate-90 top-1/2 -translate-y-1/2 right-full -translate-x-1/2",
               side === "left" &&
                 "-rotate-90 top-1/2 -translate-y-1/2 left-full translate-x-1/2",
-              "filter-[url(#displacementFilter)]",
               styles.comicArrow,
               arrowClassName
             )}

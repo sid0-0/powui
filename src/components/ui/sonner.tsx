@@ -6,6 +6,7 @@ import {
   type ToasterProps,
 } from "sonner";
 import { Filters } from "@/components/ui/filters";
+import { cn } from "@/lib/utils";
 
 // ─── Design tokens per variant ───────────────────────────────────────────────
 
@@ -16,7 +17,7 @@ export type ComicToastVariant =
   | "warning"
   | "info";
 
-const variantTokens: Record<
+export const variantTokens: Record<
   ComicToastVariant,
   { badge: string; bg: string; rotate: string; badgeBg: string }
 > = {
@@ -43,12 +44,14 @@ interface ComicToastProps {
   title: React.ReactNode;
   description?: React.ReactNode;
   variant?: ComicToastVariant;
+  containerClassName?: string;
 }
 
 export function ComicToast({
   title,
   description,
   variant = "default",
+  containerClassName,
 }: ComicToastProps) {
   const { badge, bg, rotate, badgeBg } = variantTokens[variant];
   const isDark = ["success", "error", "warning", "info"].includes(variant);
@@ -58,16 +61,14 @@ export function ComicToast({
     <Filters.Displacement scale={2} frequency={0.65}>
       <div
         style={{
-          position: "relative",
-          padding: "20px 12px 12px",
-          border: "4px solid black",
-          boxShadow: "10px 10px 0 rgba(0,0,0,1)",
           backgroundImage: `radial-gradient(circle, rgba(0,0,0,0.25) 1.2px, transparent 1.2px)`,
           backgroundSize: "8px 8px",
           backgroundColor: bg,
-          width: "100%",
-          boxSizing: "border-box",
         }}
+        className={cn(
+          "relative w-full px-3 pb-3 pt-5 border-4 border-black box-border shadow-[10px_10px_0_rgba(0,0,0,1)]",
+          containerClassName,
+        )}
       >
         {/* Exclamation badge — top-right corner */}
         <span
@@ -138,11 +139,16 @@ function fireComicToast(
   variant: ComicToastVariant,
   title: React.ReactNode,
   description?: React.ReactNode,
-  data?: ExternalToast,
+  data?: ExternalToast & { containerClassName?: string },
 ) {
   toast.custom(
     () => (
-      <ComicToast title={title} description={description} variant={variant} />
+      <ComicToast
+        title={title}
+        description={description}
+        variant={variant}
+        containerClassName={data?.containerClassName}
+      />
     ),
     data,
   );
@@ -151,7 +157,9 @@ function fireComicToast(
 type TComicToastFunc = (
   title: React.ReactNode,
   description?: React.ReactNode,
-  data?: ExternalToast,
+  data?: ExternalToast & {
+    containerClassName?: string;
+  },
 ) => void;
 
 const comicToastCurry =
@@ -159,7 +167,7 @@ const comicToastCurry =
   (
     title: React.ReactNode,
     description?: React.ReactNode,
-    data?: ExternalToast,
+    data?: ExternalToast & { containerClassName?: string },
   ) =>
     fireComicToast(variant, title, description, data);
 

@@ -29,7 +29,7 @@ const ClickBurst = () => {
       width={lineLength * 2}
       viewBox={`0 0 ${lineLength * 2} ${lineLength * 2}`}
       xmlns="http://www.w3.org/2000/svg"
-      className="-translate-1/2 filter-[url(#displacementFilter)]"
+      className="-translate-1/2"
       aria-hidden="false"
       role="img"
     >
@@ -122,8 +122,7 @@ export const useEventOnomatopoeia = (props: {
           createPortal(
             <div
               className={cn(
-                "select-none pointer-events-none absolute text-xl",
-                "filter-[url(#displacementFilter)]"
+                "select-none pointer-events-none absolute text-xl"
               )}
               style={evaluatedContainerStyle}
             >

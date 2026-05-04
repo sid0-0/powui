@@ -1,5 +1,5 @@
 import { Checkbox } from "@/components/ui/checkbox";
-import { cn } from "@/lib/utils";
+import { Filters } from "@/components/ui/filters";
 import { useMemo, useState } from "react";
 
 const CHECKLIST = [
@@ -37,13 +37,15 @@ export const StorybookCheckbox = () => {
           />
         );
       }),
-    [checkedItems]
+    [checkedItems],
   );
   return (
-    <div className="bg-orange-300 p-12">
-      <h2>Superhero To-Do List:</h2>
-      <br />
-      <div className="flex flex-col items-baseline">{checkboxList}</div>
-    </div>
+    <Filters.Displacement>
+      <div className="bg-orange-300 p-12">
+        <h2>Superhero To-Do List:</h2>
+        <br />
+        <div className="flex flex-col items-baseline">{checkboxList}</div>
+      </div>
+    </Filters.Displacement>
   );
 };

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import type { StoryObj } from "@storybook/react-vite";
 import { StorybookTabs } from "./Tabs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Filters } from "@/components/ui/filters";
 
 const meta = {
   title: "Example/Tabs",
@@ -17,6 +18,7 @@ const meta = {
     },
     tabWidth: { control: { type: "text" } },
     tabHeight: { control: { type: "text" } },
+    activeTabClassName: { control: { type: "text" } },
   },
 };
 
@@ -207,34 +209,38 @@ const SyncTabs = () => {
 
   const renderTabs = (placement: "top" | "bottom" | "left" | "right") => (
     <div className="flex flex-col gap-2 w-64">
-      <h3 className="text-sm font-black uppercase tracking-tighter">{placement}</h3>
-      <Tabs
-        value={activeTab}
-        onValueChange={setActiveTab}
-        tabsPlacement={placement}
-        className="w-full filter-[url(#displacementFilter)]"
-        tabWidth={placement === "left" || placement === "right" ? "80px" : "120px"}
-      >
-        <TabsList>
+      <h3 className="text-sm font-black uppercase tracking-tighter">
+        {placement}
+      </h3>
+      <Filters.Displacement>
+        <Tabs
+          value={activeTab}
+          onValueChange={setActiveTab}
+          tabsPlacement={placement}
+          activeTabClassName="data-[state=active]:[--spotty-spacing:0.12rem]"
+          className="w-full"
+          tabWidth={
+            placement === "left" || placement === "right" ? "80px" : "120px"
+          }
+        >
+          <TabsList>
+            {syncData.map((item) => (
+              <TabsTrigger
+                key={item.id}
+                value={item.id}
+                className="spotty-bg-[#eab308] font-black text-xs"
+              >
+                {item.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
           {syncData.map((item) => (
-            <TabsTrigger
-              key={item.id}
-              value={item.id}
-              className="spotty-bg-[#eab308] font-black text-xs"
-            >
-              {item.label}
-            </TabsTrigger>
+            <TabsContent key={item.id} value={item.id}>
+              <ComicFact fact={item.fact} />
+            </TabsContent>
           ))}
-        </TabsList>
-        {syncData.map((item) => (
-          <TabsContent
-            key={item.id}
-            value={item.id}
-          >
-            <ComicFact fact={item.fact} />
-          </TabsContent>
-        ))}
-      </Tabs>
+        </Tabs>
+      </Filters.Displacement>
     </div>
   );
 

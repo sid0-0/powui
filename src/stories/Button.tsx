@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { Filters } from "@/components/ui/filters";
+
 export interface ButtonProps {
   /** Is this the principal call to action on the page? */
   primary?: boolean;
@@ -20,8 +22,14 @@ export const StorybookButton = ({
 }: ButtonProps) => {
   const toRender = typeof label === "string" ? label.toUpperCase() : label;
   return (
-    <Button size={size} className="spotty-bg-[#eab308] hover:spotty-bg-[#ca8a04]" {...props}>
-      {toRender}
-    </Button>
+    <Filters.Displacement>
+      <Button
+        size={size}
+        className="spotty-bg-[#eab308] hover:spotty-bg-[#ca8a04]"
+        {...props}
+      >
+        {toRender}
+      </Button>
+    </Filters.Displacement>
   );
 };

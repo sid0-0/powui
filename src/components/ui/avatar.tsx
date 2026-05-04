@@ -13,7 +13,6 @@ function Avatar({
       className={cn(
         "relative flex size-8 shrink-0 overflow-hidden rounded-full",
         "border-4 border-solid border-black",
-        "filter-[url(#displacementFilter)]",
         "shadow-[-6px_6px_0_rgba(0,0,0)]",
         className
       )}

@@ -1,5 +1,4 @@
 import type { Preview } from "@storybook/react-vite";
-import { SVGFilterDefs } from "../src/components/ui/svgFilterDefs";
 import "../src/index.css";
 
 const preview: Preview = {
@@ -22,7 +21,6 @@ const preview: Preview = {
     (Story) => {
       return (
         <>
-          <SVGFilterDefs />
           <Story />
         </>
       );
