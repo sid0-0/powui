@@ -34,11 +34,18 @@ Then open Storybook at [http://localhost:5174](http://localhost:5174).
 
 ## 📚 Components (so far)
 
+- `Avatar` — comic-style user avatars
 - `Burst` — comic-burst for those onomatopoeia effects (“BANG!”, “POW!”, “ZAP!”)
 - `Button` — comic style button with dotted background and click animations
 - `Checkbox` — funky hand drawn looking checkbox
+- `Cloud` — speech bubbles and thought clouds
+- `Filters` — comic-inspired image filters
+- `Onomatopoeia` — dynamic action text overlays
+- `Slider` — playful range input with comic aesthetics
+- `Sonner` — comic-style notifications
 - `SpiderSense` — draw attention to a certain element in page
-- _(More coming soon)_
+- `Tabs` — tabbed navigation with bold borders
+- `Tooltip` — popup hints with speech bubble styling
 
 ---
 
@@ -46,7 +53,7 @@ Then open Storybook at [http://localhost:5174](http://localhost:5174).
 
 - [ ] Package for npm
 - [ ] Customizable themes (colors, fonts, halftone patterns)
-- [ ] Add `Onomatopoeia`, `CalendarPicker`, Comic style filters, `Slider`, `Tooltip` and more
+- [ ] Add `CalendarPicker` and more
 - [ ] Build docs site
 
 ---
