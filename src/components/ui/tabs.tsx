@@ -14,6 +14,7 @@ function Tabs({
   orientation = "horizontal",
   tabWidth = "120px",
   tabHeight,
+  style,
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.Root> & {
   tabWidth?: string;
@@ -25,6 +26,11 @@ function Tabs({
       <TabsPrimitive.Root
         data-slot="tabs"
         orientation={resolvedOrientation}
+        style={
+          resolvedOrientation === "vertical"
+            ? { paddingLeft: `calc(${tabWidth} * 0.125)`, ...style }
+            : style
+        }
         className={cn(
           "flex",
           resolvedOrientation === "vertical" ? "flex-row items-stretch" : "flex-col",
@@ -46,7 +52,7 @@ function TabsList({
   // scale-125 bleeds 12.5% of the trigger width to the left, so we pad by that amount
   const listStyle =
     orientation === "vertical"
-      ? { width: `calc(${tabWidth} * 1.125)`, paddingLeft: `calc(${tabWidth} * 0.125)`, ...style }
+      ? { width: tabWidth, ...style }
       : style;
   return (
     <TabsPrimitive.List
@@ -55,7 +61,7 @@ function TabsList({
       className={cn(
         "text-muted-foreground no-scrollbar",
         orientation === "vertical"
-          ? "flex flex-col items-stretch overflow-y-auto overflow-x-visible"
+          ? "flex flex-col items-stretch"
           : "inline-flex items-center max-w-full overflow-auto pt-2",
         className,
       )}
