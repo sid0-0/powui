@@ -5,22 +5,29 @@ import { cn } from "@/lib/utils";
 
 const TabsContext = React.createContext<{
   orientation: "horizontal" | "vertical";
-}>({ orientation: "horizontal" });
+  tabWidth: string;
+  tabHeight: string | undefined;
+}>({ orientation: "horizontal", tabWidth: "120px", tabHeight: undefined });
 
 function Tabs({
   className,
   orientation = "horizontal",
+  tabWidth = "120px",
+  tabHeight,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Root>) {
+}: React.ComponentProps<typeof TabsPrimitive.Root> & {
+  tabWidth?: string;
+  tabHeight?: string;
+}) {
   const resolvedOrientation = orientation ?? "horizontal";
   return (
-    <TabsContext.Provider value={{ orientation: resolvedOrientation }}>
+    <TabsContext.Provider value={{ orientation: resolvedOrientation, tabWidth, tabHeight }}>
       <TabsPrimitive.Root
         data-slot="tabs"
         orientation={resolvedOrientation}
         className={cn(
           "flex",
-          resolvedOrientation === "vertical" ? "flex-row" : "flex-col",
+          resolvedOrientation === "vertical" ? "flex-row items-stretch" : "flex-col",
           className,
         )}
         {...props}
@@ -31,16 +38,24 @@ function Tabs({
 
 function TabsList({
   className,
+  style,
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.List>) {
-  const { orientation } = React.useContext(TabsContext);
+  const { orientation, tabWidth } = React.useContext(TabsContext);
+  // In vertical mode, the list width = tabWidth + left overflow room for scale-125
+  // scale-125 bleeds 12.5% of the trigger width to the left, so we pad by that amount
+  const listStyle =
+    orientation === "vertical"
+      ? { width: `calc(${tabWidth} * 1.125)`, paddingLeft: `calc(${tabWidth} * 0.125)`, ...style }
+      : style;
   return (
     <TabsPrimitive.List
       data-slot="tabs-list"
+      style={listStyle}
       className={cn(
         "text-muted-foreground no-scrollbar",
         orientation === "vertical"
-          ? "inline-flex flex-col items-stretch min-w-[8rem] w-fit overflow-auto pl-10"
+          ? "flex flex-col items-stretch overflow-y-auto overflow-x-visible"
           : "inline-flex items-center max-w-full overflow-auto pt-2",
         className,
       )}
@@ -51,15 +66,21 @@ function TabsList({
 
 function TabsTrigger({
   className,
+  style,
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
-  const { orientation } = React.useContext(TabsContext);
+  const { orientation, tabHeight } = React.useContext(TabsContext);
   return (
     <TabsPrimitive.Trigger
       onClick={(e) => {
         (e.target as HTMLElement).scrollIntoView();
       }}
       data-slot="tabs-trigger"
+      style={
+        orientation === "horizontal" && tabHeight
+          ? { height: tabHeight, ...style }
+          : style
+      }
       className={cn(
         "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex flex-1 items-center justify-center gap-1.5 px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         orientation === "vertical"
@@ -94,7 +115,7 @@ function TabsContent({
       data-slot="tabs-content"
         className={cn(
           "outline-none border-4 border-black",
-          orientation === "vertical" ? "border-l-0 flex-1 min-w-0" : "border-t-0",
+          orientation === "vertical" ? "border-l-0 flex-1 min-w-0 self-stretch flex flex-col [&>*]:flex-1" : "border-t-0",
           className,
         )}
       {...props}

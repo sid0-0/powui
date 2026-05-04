@@ -8,6 +8,14 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  argTypes: {
+    orientation: {
+      control: { type: "select" },
+      options: ["horizontal", "vertical"],
+    },
+    tabWidth: { control: { type: "text" } },
+    tabHeight: { control: { type: "text" } },
+  },
 };
 
 export default meta;

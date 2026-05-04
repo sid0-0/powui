@@ -6,13 +6,17 @@ export const StorybookTabs = (props: {
     content: React.ReactNode;
   }[];
   orientation?: "horizontal" | "vertical";
+  tabWidth?: string;
+  tabHeight?: string;
 }) => {
-  const { tabs, orientation } = props;
+  const { tabs, orientation, tabWidth, tabHeight } = props;
   return (
     <Tabs
       className="w-3/4 mx-auto filter-[url(#displacementFilter)]"
       defaultValue={tabs[0].title}
       orientation={orientation || "horizontal"}
+      tabWidth={tabWidth}
+      tabHeight={tabHeight}
     >
       <TabsList>
         {tabs.map((x) => (
