@@ -1,5 +1,7 @@
+import React, { useState } from "react";
 import type { StoryObj } from "@storybook/react-vite";
 import { StorybookTabs } from "./Tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const meta = {
   title: "Example/Tabs",
@@ -135,16 +137,27 @@ const data = [
   },
 ];
 
-export const Base: Story = {
+export const Top: Story = {
   args: {
     tabs: data.map((char) => ({
       title: char.name,
       content: <CharacterContent {...char} />,
     })),
+    tabsPlacement: "top",
   },
 };
 
-export const Vertical: Story = {
+export const Bottom: Story = {
+  args: {
+    tabs: data.map((char) => ({
+      title: char.name,
+      content: <CharacterContent {...char} />,
+    })),
+    tabsPlacement: "bottom",
+  },
+};
+
+export const Left: Story = {
   args: {
     tabs: data.map((char) => ({
       title: char.name,
@@ -152,4 +165,89 @@ export const Vertical: Story = {
     })),
     tabsPlacement: "left",
   },
+};
+
+export const Right: Story = {
+  args: {
+    tabs: data.map((char) => ({
+      title: char.name,
+      content: <CharacterContent {...char} />,
+    })),
+    tabsPlacement: "right",
+  },
+};
+
+export const FixedDimensions: Story = {
+  args: {
+    tabs: data.map((char) => ({
+      title: char.name,
+      content: <CharacterContent {...char} />,
+    })),
+    tabsPlacement: "top",
+    tabWidth: "150px",
+    tabHeight: "60px",
+  },
+};
+
+const ComicFact = ({ fact }: { fact: string }) => (
+  <div className="p-4 spotty-bg-[#eab308] min-h-24 flex items-center justify-center text-center">
+    <p className="font-bold text-sm italic">"{fact}"</p>
+  </div>
+);
+
+const syncData = [
+  { id: "pow", label: "POW!", fact: "The sound of a direct hit!" },
+  { id: "bam", label: "BAM!", fact: "A powerful impact occurs." },
+  { id: "zap", label: "ZAP!", fact: "Energy discharge detected." },
+  { id: "wham", label: "WHAM!", fact: "A heavy object strikes." },
+];
+
+const SyncTabs = () => {
+  const [activeTab, setActiveTab] = useState(syncData[0].id);
+
+  const renderTabs = (placement: "top" | "bottom" | "left" | "right") => (
+    <div className="flex flex-col gap-2 w-64">
+      <h3 className="text-sm font-black uppercase tracking-tighter">{placement}</h3>
+      <Tabs
+        value={activeTab}
+        onValueChange={setActiveTab}
+        tabsPlacement={placement}
+        className="w-full filter-[url(#displacementFilter)]"
+        tabWidth={placement === "left" || placement === "right" ? "80px" : "120px"}
+      >
+        <TabsList>
+          {syncData.map((item) => (
+            <TabsTrigger
+              key={item.id}
+              value={item.id}
+              className="spotty-bg-[#eab308] font-black text-xs"
+            >
+              {item.label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        {syncData.map((item) => (
+          <TabsContent
+            key={item.id}
+            value={item.id}
+          >
+            <ComicFact fact={item.fact} />
+          </TabsContent>
+        ))}
+      </Tabs>
+    </div>
+  );
+
+  return (
+    <div className="grid grid-cols-2 gap-8 p-4">
+      {renderTabs("top")}
+      {renderTabs("bottom")}
+      {renderTabs("left")}
+      {renderTabs("right")}
+    </div>
+  );
+};
+
+export const SynchronizedPlacements: StoryObj = {
+  render: () => <SyncTabs />,
 };
