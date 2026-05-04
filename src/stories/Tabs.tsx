@@ -19,7 +19,7 @@ export const StorybookTabs = (props: {
     activeTabClassName = "data-[state=active]:[--spotty-spacing:0.12rem]",
   } = props;
   return (
-    <Filters.Displacement containerClassName="w-3/4 mx-auto">
+    <Filters.Displacement frequency={0.05} containerClassName="w-3/4 mx-auto">
       <Tabs
         defaultValue={tabs[0].title}
         tabsPlacement={tabsPlacement}
