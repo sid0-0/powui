@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
+import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
@@ -10,6 +11,20 @@ const TabsContext = React.createContext<{
   tabHeight: string | undefined;
 }>({ orientation: "horizontal", tabsPlacement: "top", tabWidth: "120px", tabHeight: undefined });
 
+const tabsVariants = cva("flex", {
+  variants: {
+    tabsPlacement: {
+      top: "flex-col",
+      bottom: "flex-col-reverse",
+      left: "flex-row items-stretch",
+      right: "flex-row-reverse items-stretch",
+    },
+  },
+  defaultVariants: {
+    tabsPlacement: "top",
+  },
+});
+
 function Tabs({
   className,
   orientation,
@@ -18,8 +33,8 @@ function Tabs({
   tabHeight,
   style,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Root> & {
-  tabsPlacement?: "top" | "bottom" | "left" | "right";
+}: React.ComponentProps<typeof TabsPrimitive.Root> & 
+  VariantProps<typeof tabsVariants> & {
   tabWidth?: string;
   tabHeight?: string;
 }) {
@@ -34,46 +49,73 @@ function Tabs({
             ? { [tabsPlacement === "left" ? "paddingLeft" : "paddingRight"]: `calc(${tabWidth} * 0.125)`, ...style }
             : style
         }
-        className={cn(
-          "flex",
-          tabsPlacement === "top" && "flex-col",
-          tabsPlacement === "bottom" && "flex-col-reverse",
-          tabsPlacement === "left" && "flex-row items-stretch",
-          tabsPlacement === "right" && "flex-row-reverse items-stretch",
-          className,
-        )}
+        className={cn(tabsVariants({ tabsPlacement }), className)}
         {...props}
       />
     </TabsContext.Provider>
   );
 }
 
+const tabsListVariants = cva("text-muted-foreground no-scrollbar", {
+  variants: {
+    tabsPlacement: {
+      top: "inline-flex items-center max-w-full overflow-auto pt-2",
+      bottom: "inline-flex items-center max-w-full overflow-auto pb-2",
+      left: "flex flex-col items-stretch",
+      right: "flex flex-col items-stretch",
+    },
+  },
+  defaultVariants: {
+    tabsPlacement: "top",
+  },
+});
+
 function TabsList({
   className,
   style,
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.List>) {
-  const { orientation, tabsPlacement, tabWidth } = React.useContext(TabsContext);
-  // In vertical mode, the list width = tabWidth + overflow room for scale-125
-  const listStyle =
-    orientation === "vertical"
-      ? { width: tabWidth, ...style }
-      : style;
+  const { tabsPlacement, tabWidth, orientation } = React.useContext(TabsContext);
+  const listStyle = orientation === "vertical" ? { width: tabWidth, ...style } : style;
+  
   return (
     <TabsPrimitive.List
       data-slot="tabs-list"
       style={listStyle}
-      className={cn(
-        "text-muted-foreground no-scrollbar",
-        orientation === "vertical"
-          ? "flex flex-col items-stretch"
-          : cn("inline-flex items-center max-w-full overflow-auto", tabsPlacement === "top" ? "pt-2" : "pb-2"),
-        className,
-      )}
+      className={cn(tabsListVariants({ tabsPlacement }), className)}
       {...props}
     />
   );
 }
+
+const tabsTriggerVariants = cva(
+  "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex flex-1 items-center justify-center gap-1.5 px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow,transform] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 border-black bg-white brightness-60 hover:brightness-80",
+  {
+    variants: {
+      tabsPlacement: {
+        top: [
+          "h-[calc(100%-1px)] border-l-4 last:border-r-4 border-y-4",
+          "data-[state=active]:last:translate-x-[-12.5%] data-[state=active]:first:translate-x-[12.5%] data-[state=active]:translate-x-[6.25%] data-[state=active]:translate-y-[-6.25%] data-[state=active]:z-10 data-[state=active]:scale-125 data-[state=active]:border-4 data-[state=active]:border-b-0 dark:data-[state=active]:text-foreground dark:data-[state=active]:border-input data-[state=active]:brightness-100 data-[state=active]:[--spotty-spacing:0.12rem]",
+        ],
+        bottom: [
+          "h-[calc(100%-1px)] border-l-4 last:border-r-4 border-y-4",
+          "data-[state=active]:last:translate-x-[-12.5%] data-[state=active]:first:translate-x-[12.5%] data-[state=active]:translate-x-[6.25%] data-[state=active]:translate-y-[6.25%] data-[state=active]:z-10 data-[state=active]:scale-125 data-[state=active]:border-4 data-[state=active]:border-t-0 dark:data-[state=active]:text-foreground dark:data-[state=active]:border-input data-[state=active]:brightness-100 data-[state=active]:[--spotty-spacing:0.12rem]",
+        ],
+        left: [
+          "w-full whitespace-normal border-t-4 last:border-b-4 border-x-4",
+          "data-[state=active]:translate-y-[6.25%] data-[state=active]:first:translate-y-[12.5%] data-[state=active]:last:translate-y-[-12.5%] data-[state=active]:z-10 data-[state=active]:scale-125 data-[state=active]:border-4 data-[state=active]:border-r-0 dark:data-[state=active]:text-foreground dark:data-[state=active]:border-input data-[state=active]:brightness-100 data-[state=active]:[--spotty-spacing:0.12rem] data-[state=active]:-translate-x-[12.5%]",
+        ],
+        right: [
+          "w-full whitespace-normal border-t-4 last:border-b-4 border-x-4",
+          "data-[state=active]:translate-y-[6.25%] data-[state=active]:first:translate-y-[12.5%] data-[state=active]:last:translate-y-[-12.5%] data-[state=active]:z-10 data-[state=active]:scale-125 data-[state=active]:border-4 data-[state=active]:border-l-0 dark:data-[state=active]:text-foreground dark:data-[state=active]:border-input data-[state=active]:brightness-100 data-[state=active]:[--spotty-spacing:0.12rem] data-[state=active]:translate-x-[12.5%]",
+        ],
+      },
+    },
+    defaultVariants: {
+      tabsPlacement: "top",
+    },
+  }
+);
 
 function TabsTrigger({
   className,
@@ -92,47 +134,35 @@ function TabsTrigger({
           ? { height: tabHeight, ...style }
           : style
       }
-      className={cn(
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex flex-1 items-center justify-center gap-1.5 px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        orientation === "vertical"
-          ? cn(
-              "w-full whitespace-normal",
-              // Active state: pop toward content, open inner border
-              "data-[state=active]:translate-y-[6.25%] data-[state=active]:first:translate-y-[12.5%] data-[state=active]:last:translate-y-[-12.5%] data-[state=active]:z-10 data-[state=active]:scale-125 data-[state=active]:border-4 dark:data-[state=active]:text-foreground dark:data-[state=active]:border-input data-[state=active]:brightness-100 data-[state=active]:[--spotty-spacing:0.12rem]",
-              tabsPlacement === "left" ? "data-[state=active]:-translate-x-[12.5%] data-[state=active]:border-r-0" : "data-[state=active]:translate-x-[12.5%] data-[state=active]:border-l-0",
-              // Base: stacked borders — all items share top/side borders, last adds bottom
-              "border-t-4 last:border-b-4 border-x-4 border-black bg-white brightness-60 hover:brightness-80",
-            )
-          : cn(
-              "h-[calc(100%-1px)]",
-              // Active state: pop toward content, open inner border
-              "data-[state=active]:last:translate-x-[-12.5%] data-[state=active]:first:translate-x-[12.5%] data-[state=active]:translate-x-[6.25%] data-[state=active]:z-10 data-[state=active]:scale-125 data-[state=active]:border-4 dark:data-[state=active]:text-foreground dark:data-[state=active]:border-input data-[state=active]:brightness-100 data-[state=active]:[--spotty-spacing:0.12rem]",
-              tabsPlacement === "top" ? "data-[state=active]:translate-y-[-6.25%] data-[state=active]:border-b-0" : "data-[state=active]:translate-y-[6.25%] data-[state=active]:border-t-0",
-              // Base: side-by-side borders — all share top/bottom borders, last adds right
-              "border-l-4 last:border-r-4 border-y-4 border-black bg-white brightness-60 hover:brightness-80",
-            ),
-        className,
-      )}
+      className={cn(tabsTriggerVariants({ tabsPlacement }), className)}
       {...props}
     />
   );
 }
 
+const tabsContentVariants = cva("outline-none border-4 border-black", {
+  variants: {
+    tabsPlacement: {
+      top: "border-t-0",
+      bottom: "border-b-0",
+      left: "border-l-0 flex-1 min-w-0 self-stretch flex flex-col [&>*]:flex-1",
+      right: "border-r-0 flex-1 min-w-0 self-stretch flex flex-col [&>*]:flex-1",
+    },
+  },
+  defaultVariants: {
+    tabsPlacement: "top",
+  },
+});
+
 function TabsContent({
   className,
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.Content>) {
-  const { orientation, tabsPlacement } = React.useContext(TabsContext);
+  const { tabsPlacement } = React.useContext(TabsContext);
   return (
     <TabsPrimitive.Content
       data-slot="tabs-content"
-        className={cn(
-          "outline-none border-4 border-black",
-          orientation === "vertical" 
-            ? cn("flex-1 min-w-0 self-stretch flex flex-col [&>*]:flex-1", tabsPlacement === "left" ? "border-l-0" : "border-r-0") 
-            : cn(tabsPlacement === "top" ? "border-t-0" : "border-b-0"),
-          className,
-        )}
+      className={cn(tabsContentVariants({ tabsPlacement }), className)}
       {...props}
     />
   );
