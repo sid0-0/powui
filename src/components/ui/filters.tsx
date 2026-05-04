@@ -49,7 +49,7 @@ const Displacement = (
     scale = 2,
     className = "",
     containerClassName = "",
-    frequency = 0.5,
+    frequency = 0.1,
     children,
   } = props;
   return (

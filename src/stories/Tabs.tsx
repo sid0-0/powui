@@ -1,4 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Filters } from "@/components/ui/filters";
 
 export const StorybookTabs = (props: {
   tabs: {
@@ -18,30 +19,31 @@ export const StorybookTabs = (props: {
     activeTabClassName = "data-[state=active]:[--spotty-spacing:0.12rem]",
   } = props;
   return (
-    <Tabs
-      className="w-3/4 mx-auto filter-[url(#displacementFilter)]"
-      defaultValue={tabs[0].title}
-      tabsPlacement={tabsPlacement}
-      tabWidth={tabWidth}
-      tabHeight={tabHeight}
-      activeTabClassName={activeTabClassName}
-    >
-      <TabsList>
+    <Filters.Displacement containerClassName="w-3/4 mx-auto">
+      <Tabs
+        defaultValue={tabs[0].title}
+        tabsPlacement={tabsPlacement}
+        tabWidth={tabWidth}
+        tabHeight={tabHeight}
+        activeTabClassName={activeTabClassName}
+      >
+        <TabsList>
+          {tabs.map((x) => (
+            <TabsTrigger
+              key={x.title}
+              value={x.title}
+              className="spotty-bg-[#eab308] font-bold"
+            >
+              {x.title}
+            </TabsTrigger>
+          ))}
+        </TabsList>
         {tabs.map((x) => (
-          <TabsTrigger
-            key={x.title}
-            value={x.title}
-            className="spotty-bg-[#eab308] font-bold"
-          >
-            {x.title}
-          </TabsTrigger>
+          <TabsContent key={x.title} value={x.title} className="font-semibold">
+            {x.content}
+          </TabsContent>
         ))}
-      </TabsList>
-      {tabs.map((x) => (
-        <TabsContent key={x.title} value={x.title} className="font-semibold">
-          {x.content}
-        </TabsContent>
-      ))}
-    </Tabs>
+      </Tabs>
+    </Filters.Displacement>
   );
 };

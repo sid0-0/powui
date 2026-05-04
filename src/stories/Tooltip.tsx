@@ -1,4 +1,5 @@
 import { Tooltip } from "@/components/ui/tooltip";
+import { Filters } from "@/components/ui/filters";
 
 export const StorybookTooltip = ({
   type = "normal",
@@ -14,7 +15,11 @@ export const StorybookTooltip = ({
       triggerContent={
         <img width={400} src="secret_share.png" className="rounded-full" />
       }
-      content={<div className="text-4xl">Clark Kent is SUPERMAN!!</div>}
+      content={
+        <Filters.Displacement frequency={0.5}>
+          <div className="text-4xl">Clark Kent is SUPERMAN!!</div>
+        </Filters.Displacement>
+      }
       sideOffset={-120}
       type={type}
       bubblePath={bubblePath}

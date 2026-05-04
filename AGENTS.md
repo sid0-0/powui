@@ -134,7 +134,7 @@ The project uses the shadcn/ui `new-york` style preset. When adding new shadcn/u
 
 ## SVG Filter Architecture (Critical)
 
-Several components depend on SVG filter effects defined globally: `filter-[url(#displacementFilter)]`, `filter-[url(#chromaAberFilter)]`, `filter-[url(#posterize)]`. These IDs must exist in the DOM at render time or the classes silently have no effect.
+Several components depend on SVG filter effects defined globally. These should be applied using the `<Filters.*>` wrappers from `@/components/ui/filters` (e.g., `<Filters.Displacement>`, `<Filters.ChromaAberr>`, `<Filters.Posterize>`).
 
 **`src/components/ui/svgFilterDefs.tsx`** exports a `SVGFilterDefs` component that renders these three SVG filter definitions into a hidden `<svg>` element.
 
