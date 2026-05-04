@@ -9,9 +9,9 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
-    orientation: {
+    tabsPlacement: {
       control: { type: "select" },
-      options: ["horizontal", "vertical"],
+      options: ["top", "bottom", "left", "right"],
     },
     tabWidth: { control: { type: "text" } },
     tabHeight: { control: { type: "text" } },
@@ -150,6 +150,6 @@ export const Vertical: Story = {
       title: char.name,
       content: <CharacterContent {...char} />,
     })),
-    orientation: "vertical",
+    tabsPlacement: "left",
   },
 };
