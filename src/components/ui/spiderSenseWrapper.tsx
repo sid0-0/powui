@@ -77,9 +77,17 @@ const SpiderSenseWrapper = (
     color?: string;
     trigger?: "hover" | "click" | "mount" | "manual";
     getManualTrigger?: (trigger: () => void) => void;
-  }>
+    containerClassName?: string;
+  }>,
 ) => {
-  const { children, color, shape, trigger = "hover", getManualTrigger } = props;
+  const {
+    children,
+    color,
+    shape,
+    trigger = "hover",
+    getManualTrigger,
+    containerClassName,
+  } = props;
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -102,9 +110,9 @@ const SpiderSenseWrapper = (
     const burst = new mojs.Burst({
       left: itemDim.left + itemSize.x / 2,
       top: itemDim.top + itemSize.y / 2,
-      radiusX: itemSize.x / 1.2,
-      radiusY: itemSize.y / 1.2,
-      count: Math.max(4, (Math.PI * averageRadius) / 20),
+      radiusX: itemSize.x,
+      radiusY: itemSize.y,
+      count: Math.max(4, (Math.PI * averageRadius) / 15),
 
       children: {
         shape: chosenShape,
@@ -118,7 +126,7 @@ const SpiderSenseWrapper = (
         stroke: chosenColor,
         strokeDasharray: "100%",
         strokeDashoffset: { "-100%": "100%" },
-        strokeWidth: averageRadius / 20,
+        strokeWidth: averageRadius / 30,
         duration: 500,
         easing: "quad.out",
         isShowEnd: false,
@@ -146,6 +154,7 @@ const SpiderSenseWrapper = (
       ref={registerRef}
       onMouseOver={trigger === "hover" ? shootLines : () => {}}
       onClick={trigger === "click" ? shootLines : () => {}}
+      className={containerClassName}
     >
       {children}
     </div>
