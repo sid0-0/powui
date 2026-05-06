@@ -1,0 +1,216 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "powui",
+  "homepage": "https://powui.com",
+  "items": [
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "files": [
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "geometry-utils",
+      "type": "registry:lib",
+      "files": [
+        {
+          "path": "src/lib/geometryUtils.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "general-utils",
+      "type": "registry:lib",
+      "files": [
+        {
+          "path": "src/utils/general.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-avatar"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/avatar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "burst",
+      "type": "registry:ui",
+      "registryDependencies": [
+        "utils",
+        "geometry-utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/burst.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "classnames"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-checkbox"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "cloud",
+      "type": "registry:ui",
+      "registryDependencies": [
+        "utils",
+        "geometry-utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/cloud.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "filters",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "src/components/ui/filters.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "onomatopoeia",
+      "type": "registry:ui",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/onomatopoeia.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-slider"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/slider.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "dependencies": [
+        "sonner",
+        "next-themes"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/sonner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "spider-sense-wrapper",
+      "type": "registry:ui",
+      "dependencies": [
+        "@mojs/core"
+      ],
+      "registryDependencies": [
+        "general-utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/spiderSenseWrapper.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-tabs"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/tabs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-tooltip"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}
