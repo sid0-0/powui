@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm build:registry && next build",
     "start": "npx serve@latest ./build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "build:registry": "npx shadcn@latest build",
     "storybook": "storybook dev -p 5174",
     "build-storybook": "storybook build",
     "chromatic": "chromatic --exit-zero-on-changes"

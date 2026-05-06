@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox",
+  "dependencies": [
+    "@radix-ui/react-checkbox"
+  ],
+  "registryDependencies": [
+    "utils",
+    "theme"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/checkbox.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\";\nimport { CheckIcon } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\nfunction Checkbox({\n  className,\n  containerClassName,\n  labelClassName,\n  label,\n  ...props\n}: React.ComponentProps<typeof CheckboxPrimitive.Root> & {\n  className?: string;\n  containerClassName?: string;\n  labelClassName?: string;\n  label?: React.ReactNode;\n}) {\n  const { checked } = props;\n  return (\n    <div\n      className={cn(\n        \"flex items-center justify-center\",\n        containerClassName\n      )}\n    >\n      <CheckboxPrimitive.Root\n        data-slot=\"checkbox\"\n        className={cn(\n          \"peer dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-md border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50\",\n          className\n        )}\n        {...props}\n      >\n        <CheckboxPrimitive.Indicator\n          data-slot=\"checkbox-indicator\"\n          className=\"flex items-center justify-center text-current transition-none relative\"\n        >\n          <CheckIcon className=\"size-10 absolute -translate-y-1\" />\n        </CheckboxPrimitive.Indicator>\n      </CheckboxPrimitive.Root>\n      {label && (\n        <span className={cn(labelClassName, \"ml-2\", checked && \"line-through\")}>\n          {label}\n        </span>\n      )}\n    </div>\n  );\n}\n\nexport { Checkbox };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

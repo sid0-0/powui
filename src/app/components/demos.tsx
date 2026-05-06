@@ -54,6 +54,8 @@ export type ComponentDemo = {
   group: DemoGroup;
   description: string;
   demo: React.ReactNode;
+  // Optional override for the shadcn registry item name when it differs from `id`.
+  registryName?: string;
 };
 
 // ─── Individual Demo Components ───────────────────────────────────────────────
@@ -1075,6 +1077,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "SVG feTurbulence + feDisplacementMap filter for a wavy, organic distortion effect.",
     demo: <DisplacementDemo />,
+    registryName: "filters",
   },
   {
     id: "chromaaberr",
@@ -1083,6 +1086,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "RGB channel separation for a retro chromatic aberration effect — like a busted CRT.",
     demo: <ChromaAberrDemo />,
+    registryName: "filters",
   },
   {
     id: "posterize",
@@ -1091,6 +1095,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Reduces the color palette to a fixed number of buckets, creating a flat screen-print look.",
     demo: <PosterizeDemo />,
+    registryName: "filters",
   },
   {
     id: "spidersense",
@@ -1099,6 +1104,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Burst animation lines from an element using mojs. Supports hover, click, or manual trigger.",
     demo: <SpiderSenseDemo />,
+    registryName: "spider-sense-wrapper",
   },
   {
     id: "tooltip",
@@ -1115,6 +1121,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Comic-book halftone toast notifications in five variants — each with a signature badge word.",
     demo: <ToastDemo />,
+    registryName: "sonner",
   },
   {
     id: "skeleton",
@@ -1139,6 +1146,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Stippled dot backgrounds with configurable dot size, spacing, and opacity. Two variants: standard grid and offset Ben-Day.",
     demo: <SpottyBgDemo />,
+    registryName: "theme",
   },
   {
     id: "hatchedbg",
@@ -1147,5 +1155,6 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Repeating-line backgrounds with configurable thickness, spacing, opacity, and angle. Four variants: diagonal, horizontal, vertical, and cross-hatch.",
     demo: <HatchedBgDemo />,
+    registryName: "theme",
   },
 ];

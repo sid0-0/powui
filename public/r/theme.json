@@ -1,0 +1,222 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "theme",
+  "cssVars": {
+    "light": {
+      "radius": "0.625rem",
+      "background": "oklch(1 0 0)",
+      "foreground": "oklch(0.145 0 0)",
+      "card": "oklch(1 0 0)",
+      "card-foreground": "oklch(0.145 0 0)",
+      "popover": "oklch(1 0 0)",
+      "popover-foreground": "oklch(0.145 0 0)",
+      "primary": "oklch(0.798 0.169 81.6)",
+      "primary-foreground": "oklch(0.145 0 0)",
+      "secondary": "oklch(0.97 0 0)",
+      "secondary-foreground": "oklch(0.205 0 0)",
+      "muted": "oklch(0.97 0 0)",
+      "muted-foreground": "oklch(0.556 0 0)",
+      "accent": "oklch(0.911 0.09 89.7)",
+      "accent-foreground": "oklch(0.145 0 0)",
+      "destructive": "oklch(0.577 0.245 27.325)",
+      "border": "oklch(0.922 0 0)",
+      "input": "oklch(0.922 0 0)",
+      "ring": "oklch(0.708 0 0)",
+      "toast-default-bg": "#f59e0b",
+      "toast-default-badge-bg": "#fcd34d",
+      "toast-success-bg": "#16a34a",
+      "toast-success-badge-bg": "#4ade80",
+      "toast-error-bg": "#dc2626",
+      "toast-error-badge-bg": "#f87171",
+      "toast-warning-bg": "#ea580c",
+      "toast-warning-badge-bg": "#fb923c",
+      "toast-info-bg": "#2563eb",
+      "toast-info-badge-bg": "#60a5fa",
+      "sidebar": "oklch(0.985 0 0)",
+      "sidebar-foreground": "oklch(0.145 0 0)",
+      "sidebar-primary": "oklch(0.205 0 0)",
+      "sidebar-primary-foreground": "oklch(0.985 0 0)",
+      "sidebar-accent": "oklch(0.97 0 0)",
+      "sidebar-accent-foreground": "oklch(0.205 0 0)",
+      "sidebar-border": "oklch(0.922 0 0)",
+      "sidebar-ring": "oklch(0.708 0 0)"
+    },
+    "dark": {
+      "background": "oklch(0.155 0.012 70)",
+      "foreground": "oklch(0.96 0.008 70)",
+      "card": "oklch(0.21 0.015 70)",
+      "card-foreground": "oklch(0.96 0.008 70)",
+      "popover": "oklch(0.21 0.015 70)",
+      "popover-foreground": "oklch(0.96 0.008 70)",
+      "primary": "oklch(0.75 0.15 81.6)",
+      "primary-foreground": "oklch(0.145 0 0)",
+      "secondary": "oklch(0.27 0.012 70)",
+      "secondary-foreground": "oklch(0.96 0.008 70)",
+      "muted": "oklch(0.27 0.012 70)",
+      "muted-foreground": "oklch(0.72 0.01 70)",
+      "accent": "oklch(0.55 0.14 60)",
+      "accent-foreground": "oklch(0.96 0.008 70)",
+      "destructive": "oklch(0.704 0.191 22.216)",
+      "border": "oklch(0.4 0.02 70 / 22%)",
+      "input": "oklch(1 0 0 / 15%)",
+      "ring": "oklch(0.556 0 0)",
+      "toast-default-bg": "oklch(0.5 0.12 60)",
+      "toast-default-badge-bg": "oklch(0.7 0.1 80)",
+      "toast-success-bg": "oklch(0.48 0.13 142)",
+      "toast-success-badge-bg": "oklch(0.7 0.12 142)",
+      "toast-error-bg": "oklch(0.5 0.16 27)",
+      "toast-error-badge-bg": "oklch(0.7 0.13 27)",
+      "toast-warning-bg": "oklch(0.55 0.15 50)",
+      "toast-warning-badge-bg": "oklch(0.72 0.12 50)",
+      "toast-info-bg": "oklch(0.48 0.14 245)",
+      "toast-info-badge-bg": "oklch(0.68 0.12 245)",
+      "sidebar": "oklch(0.21 0.015 70)",
+      "sidebar-foreground": "oklch(0.96 0.008 70)",
+      "sidebar-primary": "oklch(0.75 0.15 81.6)",
+      "sidebar-primary-foreground": "oklch(0.145 0 0)",
+      "sidebar-accent": "oklch(0.27 0.012 70)",
+      "sidebar-accent-foreground": "oklch(0.96 0.008 70)",
+      "sidebar-border": "oklch(0.4 0.02 70 / 22%)",
+      "sidebar-ring": "oklch(0.556 0 0)"
+    }
+  },
+  "css": {
+    "@import": [
+      "url('https://fonts.googleapis.com/css2?family=Walter+Turncoat&display=swap')",
+      "url('https://fonts.googleapis.com/css2?family=Bangers&display=swap')",
+      "tw-animate-css"
+    ],
+    "@utility spotty-dot-xs": {
+      "--spotty-dot": "0.005rem"
+    },
+    "@utility spotty-dot-sm": {
+      "--spotty-dot": "0.01rem"
+    },
+    "@utility spotty-dot-md": {
+      "--spotty-dot": "0.02rem"
+    },
+    "@utility spotty-dot-lg": {
+      "--spotty-dot": "0.05rem"
+    },
+    "@utility spotty-dot-xl": {
+      "--spotty-dot": "0.12rem"
+    },
+    "@utility spotty-dot-*": {
+      "--spotty-dot": "--value([length])"
+    },
+    "@utility spotty-spacing-xs": {
+      "--spotty-spacing": "0.075rem"
+    },
+    "@utility spotty-spacing-sm": {
+      "--spotty-spacing": "0.1rem"
+    },
+    "@utility spotty-spacing-md": {
+      "--spotty-spacing": "0.15rem"
+    },
+    "@utility spotty-spacing-lg": {
+      "--spotty-spacing": "0.2rem"
+    },
+    "@utility spotty-spacing-xl": {
+      "--spotty-spacing": "0.5rem"
+    },
+    "@utility spotty-spacing-*": {
+      "--spotty-spacing": "--value([length])"
+    },
+    "@utility spotty-opacity-*": {
+      "--spotty-opacity": "calc(--value(integer) * 0.01)"
+    },
+    "@utility spotty-bg-*": {
+      "background-color": "--value([color], --color-*)",
+      "background-image": "radial-gradient(circle at center, rgba(0, 0, 0, var(--spotty-opacity, 0.3)) var(--spotty-dot, 0.02rem), transparent 0)",
+      "background-size": "var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem)"
+    },
+    "@utility spotty-bg-diagonal-*": {
+      "background-color": "--value([color], --color-*)",
+      "background-image": "radial-gradient(circle at center, black var(--spotty-dot, 0.02rem), transparent 0), radial-gradient(circle at center, black var(--spotty-dot, 0.02rem), transparent 0)",
+      "background-size": "calc(var(--spotty-spacing, 0.15rem) * 2) calc(var(--spotty-spacing, 0.15rem) * 2)",
+      "background-position": "0 0, var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem)"
+    },
+    "@utility hatched-thickness-xs": {
+      "--hatched-thickness": "1px"
+    },
+    "@utility hatched-thickness-sm": {
+      "--hatched-thickness": "2px"
+    },
+    "@utility hatched-thickness-md": {
+      "--hatched-thickness": "3px"
+    },
+    "@utility hatched-thickness-lg": {
+      "--hatched-thickness": "5px"
+    },
+    "@utility hatched-thickness-xl": {
+      "--hatched-thickness": "8px"
+    },
+    "@utility hatched-thickness-*": {
+      "--hatched-thickness": "--value([length])"
+    },
+    "@utility hatched-spacing-xs": {
+      "--hatched-spacing": "3px"
+    },
+    "@utility hatched-spacing-sm": {
+      "--hatched-spacing": "7px"
+    },
+    "@utility hatched-spacing-md": {
+      "--hatched-spacing": "12px"
+    },
+    "@utility hatched-spacing-lg": {
+      "--hatched-spacing": "18px"
+    },
+    "@utility hatched-spacing-xl": {
+      "--hatched-spacing": "28px"
+    },
+    "@utility hatched-spacing-*": {
+      "--hatched-spacing": "--value([length])"
+    },
+    "@utility hatched-opacity-*": {
+      "--hatched-opacity": "calc(--value(integer) * 0.01)"
+    },
+    "@utility hatched-angle-*": {
+      "--hatched-angle": "calc(--value(integer) * 1deg)"
+    },
+    "@utility hatched-bg-*": {
+      "background-color": "--value([color], --color-*)",
+      "background-image": "repeating-linear-gradient(var(--hatched-angle, 45deg), transparent 0, transparent calc(var(--hatched-spacing, 8px) / 2), rgba(0, 0, 0, var(--hatched-opacity, 1)) calc(var(--hatched-spacing, 8px) / 2), rgba(0, 0, 0, var(--hatched-opacity, 1)) calc((var(--hatched-spacing, 8px) / 2) + var(--hatched-thickness, 2px)), transparent calc((var(--hatched-spacing, 8px) / 2) + var(--hatched-thickness, 2px)), transparent calc(var(--hatched-thickness, 2px) + var(--hatched-spacing, 8px)))"
+    },
+    "@utility hatched-bg-cross-*": {
+      "background-color": "--value([color], --color-*)",
+      "background-image": "repeating-linear-gradient(var(--hatched-angle, 45deg), rgba(0, 0, 0, var(--hatched-opacity, 1)) 0, rgba(0, 0, 0, var(--hatched-opacity, 1)) var(--hatched-thickness, 2px), transparent var(--hatched-thickness, 2px), transparent calc(var(--hatched-thickness, 2px) + var(--hatched-spacing, 8px))), repeating-linear-gradient(calc(var(--hatched-angle, 45deg) + 90deg), rgba(0, 0, 0, var(--hatched-opacity, 1)) 0, rgba(0, 0, 0, var(--hatched-opacity, 1)) var(--hatched-thickness, 2px), transparent var(--hatched-thickness, 2px), transparent calc(var(--hatched-thickness, 2px) + var(--hatched-spacing, 8px)))"
+    },
+    "@utility clip-path-ellipse": {
+      "clip-path": "ellipse()"
+    },
+    "@utility no-scrollbar": {
+      "scrollbar-width": "none",
+      "&::-webkit-scrollbar": {
+        "display": "none"
+      }
+    },
+    "@keyframes pow-skeleton": {
+      "0%": {
+        "background-color": "var(--primary)",
+        "transform": "scale(1)"
+      },
+      "50%": {
+        "background-color": "var(--accent)",
+        "transform": "scale(1.02)"
+      },
+      "100%": {
+        "background-color": "var(--primary)",
+        "transform": "scale(1)"
+      }
+    },
+    "@keyframes pow-skeleton-sweep": {
+      "0%": {
+        "transform": "translateX(-110%)"
+      },
+      "100%": {
+        "transform": "translateX(110%)"
+      }
+    }
+  },
+  "type": "registry:theme"
+}
