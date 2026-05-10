@@ -2,6 +2,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
+@source "!../build/**";
+@source "!../.next/**";
+@source "!../storybook-static/**";
 
 @custom-variant dark (&:is(.dark *));
 :root {

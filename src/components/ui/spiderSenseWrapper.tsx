@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Credits to Mike Quinn for the original snippet which inspired this whole project
  * https://codepen.io/mprquinn/pen/OmOMrR
