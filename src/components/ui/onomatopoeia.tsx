@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { useCallback, useMemo, useState, type CSSProperties } from "react";
 import { createPortal } from "react-dom";

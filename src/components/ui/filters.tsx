@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, type PropsWithChildren } from "react";
 
 let filterId = 1;

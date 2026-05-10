@@ -19,15 +19,15 @@ pnpm install         # install dependencies
 ### Development
 
 ```bash
-pnpm dev             # start Vite dev server
-pnpm storybook       # run Storybook on http://localhost:5174
-pnpm preview         # preview the production build
+pnpm dev             # start Next.js dev server (website/showcase)
+pnpm storybook       # run Storybook on http://localhost:5174 (component docs)
+pnpm start           # serve the static Next.js build locally
 ```
 
 ### Build & Lint
 
 ```bash
-pnpm build           # tsc -b && vite build (type-check + bundle)
+pnpm build           # next build — static export to build/
 pnpm lint            # eslint . (flat config, ESLint 9)
 ```
 
@@ -64,9 +64,12 @@ src/
   styles/            # CSS Modules for complex animations (tooltip.module.scss)
   utils/             # General-purpose helpers (general.ts)
   index.css          # Global CSS: Tailwind v4 config (@theme inline), custom @utility, CSS vars
-  App.tsx            # Vite scaffold entry — not part of the component library
-  main.tsx           # Vite scaffold entry — not part of the component library
+  app/               # Next.js App Router — website/showcase entry (not component library)
+  views/home/        # Landing page component tree (renamed from pages/ to avoid Next.js Pages Router conflict)
+  App.tsx            # Legacy Vite scaffold entry — not part of the component library
+  main.tsx           # Legacy Vite scaffold entry — not part of the component library
 .storybook/          # Storybook config, global decorators, vitest setup
+postcss.config.mjs   # PostCSS config for Tailwind v4 in Next.js
 .github/workflows/   # chromatic.yml — CI visual regression
 components.json      # shadcn/ui CLI config (style: "new-york", iconLibrary: "lucide")
 references/          # Design reference images and links (not shipped; for contributors)

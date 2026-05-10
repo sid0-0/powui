@@ -1,3 +1,5 @@
+"use client";
+
 import { Filters } from "@/components/ui/filters";
 import { Button } from "@/components/ui/button";
 import { useEventOnomatopoeia } from "@/components/ui/onomatopoeia";
@@ -31,7 +33,7 @@ const SectionCard = ({
   </div>
 );
 
-export const Home = () => {
+const Home = () => {
   const { domElement, trigger } = useEventOnomatopoeia({
     showClickBurst: true,
   });
@@ -39,7 +41,7 @@ export const Home = () => {
     <div
       className="relative min-h-screen selection:bg-amber-300 bg-transparent font-[Walter_Turncoat]"
       onClick={(event) => {
-        console.log(event)
+        console.log(event);
         trigger({
           x: event.pageX,
           y: event.pageY,
@@ -200,3 +202,5 @@ export const Home = () => {
     </div>
   );
 };
+
+export default Home;

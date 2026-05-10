@@ -1,3 +1,5 @@
+"use client";
+
 import { getEllipticalPoints, getRectangularPoints } from "@/lib/geometryUtils";
 import { cn } from "@/lib/utils";
 import { useMemo, useState, type PropsWithChildren } from "react";
