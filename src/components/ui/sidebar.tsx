@@ -431,7 +431,7 @@ function SidebarGroupLabel({
       data-slot="sidebar-group-label"
       data-sidebar="group-label"
       className={cn(
-        "border-4 border-black bg-white px-3 py-1 text-xs font-black uppercase tracking-widest brightness-50 flex shrink-0 items-center [&>svg]:size-4 [&>svg]:shrink-0",
+        "border-4 border-black bg-white px-3 py-1 text-xs font-black uppercase tracking-widest flex shrink-0 items-center [&>svg]:size-4 [&>svg]:shrink-0",
         "group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
         className,
       )}
