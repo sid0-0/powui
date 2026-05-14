@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import { PanelLeftIcon } from "lucide-react";
+import { ChevronRight, PanelLeftIcon } from "lucide-react";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
@@ -53,8 +53,18 @@ function useSidebar() {
   return context;
 }
 
+type SidebarActiveContextProps = {
+  activeValue: string;
+  setActiveValue: (value: string) => void;
+};
+
+const SidebarActiveContext =
+  React.createContext<SidebarActiveContextProps | null>(null);
+
 function SidebarProvider({
   defaultOpen = true,
+  defaultValue = "",
+  onValueChange,
   open: openProp,
   onOpenChange: setOpenProp,
   className,
@@ -63,11 +73,21 @@ function SidebarProvider({
   ...props
 }: React.ComponentProps<"div"> & {
   defaultOpen?: boolean;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }) {
   const isMobile = useIsMobile();
   const [openMobile, setOpenMobile] = React.useState(false);
+  const [activeValue, setActiveValue] = React.useState(defaultValue);
+  const handleSetActiveValue = React.useCallback(
+    (value: string) => {
+      setActiveValue(value);
+      onValueChange?.(value);
+    },
+    [onValueChange],
+  );
 
   // This is the internal state of the sidebar.
   // We use openProp and setOpenProp for control from outside the component.
@@ -128,25 +148,29 @@ function SidebarProvider({
 
   return (
     <SidebarContext.Provider value={contextValue}>
-      <TooltipProvider delayDuration={0}>
-        <div
-          data-slot="sidebar-wrapper"
-          style={
-            {
-              "--sidebar-width": SIDEBAR_WIDTH,
-              "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
-              ...style,
-            } as React.CSSProperties
-          }
-          className={cn(
-            "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full",
-            className,
-          )}
-          {...props}
-        >
-          {children}
-        </div>
-      </TooltipProvider>
+      <SidebarActiveContext.Provider
+        value={{ activeValue, setActiveValue: handleSetActiveValue }}
+      >
+        <TooltipProvider delayDuration={0}>
+          <div
+            data-slot="sidebar-wrapper"
+            style={
+              {
+                "--sidebar-width": SIDEBAR_WIDTH,
+                "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
+                ...style,
+              } as React.CSSProperties
+            }
+            className={cn(
+              "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full",
+              className,
+            )}
+            {...props}
+          >
+            {children}
+          </div>
+        </TooltipProvider>
+      </SidebarActiveContext.Provider>
     </SidebarContext.Provider>
   );
 }
@@ -464,17 +488,33 @@ function SidebarMenu({ className, ...props }: React.ComponentProps<"ul">) {
   );
 }
 
-function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
+type SidebarMenuItemContextProps = { open: boolean; toggle: () => void };
+const SidebarMenuItemContext =
+  React.createContext<SidebarMenuItemContextProps | null>(null);
+
+function SidebarMenuItem({
+  defaultOpen = true,
+  className,
+  children,
+  ...props
+}: React.ComponentProps<"li"> & { defaultOpen?: boolean }) {
+  const [open, setOpen] = React.useState(defaultOpen);
+  const toggle = React.useCallback(() => setOpen((o) => !o), []);
+
   return (
-    <li
-      data-slot="sidebar-menu-item"
-      data-sidebar="menu-item"
-      className={cn(
-        "group/menu-item relative [&:not(:first-child)]:-mt-[4px]",
-        className,
-      )}
-      {...props}
-    />
+    <SidebarMenuItemContext.Provider value={{ open, toggle }}>
+      <li
+        data-slot="sidebar-menu-item"
+        data-sidebar="menu-item"
+        className={cn(
+          "group/menu-item relative [&:not(:first-child)]:-mt-[4px]",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </li>
+    </SidebarMenuItemContext.Provider>
   );
 }
 
@@ -496,30 +536,69 @@ const sidebarMenuButtonVariants = cva(
 
 function SidebarMenuButton({
   asChild = false,
-  isActive = false,
+  isActive,
+  value,
+  showChevron = false,
   variant = "default",
   size = "default",
   tooltip,
   className,
+  onClick,
+  children,
   ...props
 }: React.ComponentProps<"button"> & {
   asChild?: boolean;
   isActive?: boolean;
+  value?: string;
+  showChevron?: boolean;
   tooltip?: string | React.ComponentProps<typeof TooltipContent>;
   variant?: "default";
 } & VariantProps<typeof sidebarMenuButtonVariants>) {
   const Comp = asChild ? Slot : "button";
   const { isMobile, state } = useSidebar();
+  const activeCtx = React.useContext(SidebarActiveContext);
+  const itemCtx = React.useContext(SidebarMenuItemContext);
+
+  const resolvedIsActive =
+    value && activeCtx ? activeCtx.activeValue === value : (isActive ?? false);
+
+  const handleClick = React.useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (value && activeCtx) activeCtx.setActiveValue(value);
+      onClick?.(e);
+    },
+    [value, activeCtx, onClick],
+  );
+
+  const handleChevronClick = React.useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      itemCtx?.toggle();
+    },
+    [itemCtx],
+  );
 
   const button = (
     <Comp
       data-slot="sidebar-menu-button"
       data-sidebar="menu-button"
       data-size={size}
-      data-active={isActive}
+      data-active={resolvedIsActive}
       className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
+      onClick={handleClick}
       {...props}
-    />
+    >
+      {children}
+      {showChevron && (
+        <ChevronRight
+          onClick={handleChevronClick}
+          className={cn(
+            "ml-auto size-4 shrink-0 transition-transform duration-200 cursor-pointer",
+            itemCtx?.open && "rotate-90",
+          )}
+        />
+      )}
+    </Comp>
   );
 
   if (!tooltip) {
@@ -638,7 +717,9 @@ function SidebarMenuSkeleton({
 }
 
 function SidebarMenuSub({ className, ...props }: React.ComponentProps<"ul">) {
-  return (
+  const itemCtx = React.useContext(SidebarMenuItemContext);
+
+  const list = (
     <ul
       data-slot="sidebar-menu-sub"
       data-sidebar="menu-sub"
@@ -649,6 +730,17 @@ function SidebarMenuSub({ className, ...props }: React.ComponentProps<"ul">) {
       )}
       {...props}
     />
+  );
+
+  if (!itemCtx) return list;
+
+  return (
+    <div
+      className="grid transition-[grid-template-rows] duration-200 ease-in-out"
+      style={{ gridTemplateRows: itemCtx.open ? "1fr" : "0fr" }}
+    >
+      <div className="overflow-hidden">{list}</div>
+    </div>
   );
 }
 
@@ -672,22 +764,39 @@ function SidebarMenuSubItem({
 function SidebarMenuSubButton({
   asChild = false,
   size = "md",
-  isActive = false,
+  isActive,
+  value,
   className,
+  onClick,
   ...props
 }: React.ComponentProps<"a"> & {
   asChild?: boolean;
   size?: "sm" | "md";
   isActive?: boolean;
+  value?: string;
+  onClick?: React.MouseEventHandler;
 }) {
   const Comp = asChild ? Slot : "a";
+  const activeCtx = React.useContext(SidebarActiveContext);
+
+  const resolvedIsActive =
+    value && activeCtx ? activeCtx.activeValue === value : (isActive ?? false);
+
+  const handleClick = React.useCallback(
+    (e: React.MouseEvent) => {
+      if (value && activeCtx) activeCtx.setActiveValue(value);
+      onClick?.(e);
+    },
+    [value, activeCtx, onClick],
+  );
 
   return (
     <Comp
       data-slot="sidebar-menu-sub-button"
       data-sidebar="menu-sub-button"
       data-size={size}
-      data-active={isActive}
+      data-active={resolvedIsActive}
+      onClick={handleClick}
       className={cn(
         "border-4 border-l-0 border-black bg-white brightness-60 hover:brightness-80 transition-[color,box-shadow,transform] w-full flex items-center gap-2 pl-3 pr-3 py-1 text-xs font-medium text-left spotty-bg-[#eab308] outline-none focus-visible:ring-[3px] focus-visible:border-ring focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span]:truncate [&>span]:flex-1 [&>span]:min-w-0 [&>svg]:size-3 [&>svg]:shrink-0",
         "data-[active=true]:brightness-100 data-[active=true]:scale-110 data-[active=true]:z-10 data-[active=true]:[--spotty-spacing:0.12rem]",
@@ -696,6 +805,25 @@ function SidebarMenuSubButton({
       )}
       {...props}
     />
+  );
+}
+
+function SidebarPanel({
+  value,
+  className,
+  children,
+  ...props
+}: React.ComponentProps<"div"> & { value: string }) {
+  const ctx = React.useContext(SidebarActiveContext);
+  if (!ctx || ctx.activeValue !== value) return null;
+  return (
+    <div
+      data-slot="sidebar-panel"
+      className={cn("size-full", className)}
+      {...props}
+    >
+      {children}
+    </div>
   );
 }
 
@@ -719,6 +847,7 @@ export {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  SidebarPanel,
   SidebarProvider,
   SidebarRail,
   SidebarSeparator,

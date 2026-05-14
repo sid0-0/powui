@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { Rocket, Sparkles, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Rocket, Sparkles } from "lucide-react";
 import { Filters } from "@/components/ui/filters";
 import {
   Sidebar,
@@ -17,6 +15,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  SidebarPanel,
   SidebarProvider,
 } from "@/components/ui/sidebar";
 
@@ -50,34 +49,12 @@ export const StorybookSidebar = (props: {
   const allItems: SubItem[] = groups.flatMap((g) =>
     g.items.flatMap((item) => [item, ...(item.subItems ?? [])]),
   );
-  const [activeItem, setActiveItem] = useState(allItems[0]?.id ?? "");
-  const activeContent = allItems.find((i) => i.id === activeItem)?.content;
-
-  const initialExpanded = new Set(
-    groups.flatMap((g) =>
-      g.items.filter((i) => i.subItems?.length).map((i) => i.id),
-    ),
-  );
-  const [expandedItems, setExpandedItems] =
-    useState<Set<string>>(initialExpanded);
-
-  const toggleExpand = (id: string) => {
-    setExpandedItems((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  };
 
   return (
     <div className="w-[700px] h-[430px]">
-      <Filters.Displacement
-        frequency={0.05}
-        containerClassName="h-full"
-        className="h-full"
-      >
+      <Filters.Displacement frequency={0.05} containerClassName="h-full" className="h-full">
         <SidebarProvider
+          defaultValue={allItems[0]?.id}
           style={{ "--sidebar-width": sidebarWidth } as React.CSSProperties}
           className="h-full min-h-0"
         >
@@ -86,9 +63,7 @@ export const StorybookSidebar = (props: {
               <div className="border-4 border-black bg-white spotty-bg-[#eab308] [--spotty-spacing:0.18rem] px-3 py-2 flex items-center gap-2">
                 <Rocket className="size-4 shrink-0" />
                 <span className="text-xs font-black uppercase tracking-widest leading-tight">
-                  Guardians
-                  <br />
-                  of the Galaxy
+                  Guardians<br />of the Galaxy
                 </span>
               </div>
             </SidebarHeader>
@@ -103,56 +78,25 @@ export const StorybookSidebar = (props: {
                       {group.items.map((item) => (
                         <SidebarMenuItem key={item.id}>
                           <SidebarMenuButton
-                            isActive={activeItem === item.id}
-                            onClick={() => {
-                              setActiveItem(item.id);
-                            }}
+                            value={item.id}
+                            showChevron={!!item.subItems?.length}
                           >
                             {item.icon}
                             <span>{item.label}</span>
-                            {item.subItems && item.subItems.length > 0 && (
-                              <ChevronRight
-                                className={cn(
-                                  "ml-auto size-4 shrink-0 transition-transform duration-200",
-                                  expandedItems.has(item.id) && "rotate-90",
-                                )}
-                                onClick={() => {
-                                  setActiveItem(item.id);
-                                  if (item.subItems?.length)
-                                    toggleExpand(item.id);
-                                }}
-                              />
-                            )}
                           </SidebarMenuButton>
                           {item.subItems && item.subItems.length > 0 && (
-                            <div
-                              className="grid transition-[grid-template-rows] duration-200 ease-in-out"
-                              style={{
-                                gridTemplateRows: expandedItems.has(item.id)
-                                  ? "1fr"
-                                  : "0fr",
-                              }}
-                            >
-                              <div className="overflow-hidden">
-                                <SidebarMenuSub>
-                                  {item.subItems.map((sub) => (
-                                    <SidebarMenuSubItem key={sub.id}>
-                                      <SidebarMenuSubButton
-                                        asChild
-                                        isActive={activeItem === sub.id}
-                                      >
-                                        <button
-                                          onClick={() => setActiveItem(sub.id)}
-                                        >
-                                          {sub.icon}
-                                          <span>{sub.label}</span>
-                                        </button>
-                                      </SidebarMenuSubButton>
-                                    </SidebarMenuSubItem>
-                                  ))}
-                                </SidebarMenuSub>
-                              </div>
-                            </div>
+                            <SidebarMenuSub>
+                              {item.subItems.map((sub) => (
+                                <SidebarMenuSubItem key={sub.id}>
+                                  <SidebarMenuSubButton asChild value={sub.id}>
+                                    <button>
+                                      {sub.icon}
+                                      <span>{sub.label}</span>
+                                    </button>
+                                  </SidebarMenuSubButton>
+                                </SidebarMenuSubItem>
+                              ))}
+                            </SidebarMenuSub>
                           )}
                         </SidebarMenuItem>
                       ))}
@@ -168,7 +112,13 @@ export const StorybookSidebar = (props: {
               </div>
             </SidebarFooter>
           </Sidebar>
-          <SidebarInset>{activeContent}</SidebarInset>
+          <SidebarInset>
+            {allItems.map((item) => (
+              <SidebarPanel key={item.id} value={item.id}>
+                {item.content}
+              </SidebarPanel>
+            ))}
+          </SidebarInset>
         </SidebarProvider>
       </Filters.Displacement>
     </div>
