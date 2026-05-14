@@ -216,4 +216,4 @@ const TooltipContainer = ({
   );
 };
 
-export { TooltipContainer as Tooltip };
+export { TooltipContainer as Tooltip, TooltipContent, TooltipProvider, TooltipTrigger };
