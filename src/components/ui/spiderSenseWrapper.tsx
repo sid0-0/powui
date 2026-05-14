@@ -7,7 +7,20 @@
 
 import { pickRandomFromArray } from "@/utils/general";
 import mojs from "@mojs/core";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
+
+function throttle<Args extends unknown[]>(
+  fn: (...args: Args) => void,
+  ms: number,
+): (...args: Args) => void {
+  let lastTime = 0;
+  return (...args: Args) => {
+    const now = Date.now();
+    if (now - lastTime < ms) return;
+    lastTime = now;
+    fn(...args);
+  };
+}
 
 export const COLORS_LIST = [
   {
@@ -108,17 +121,18 @@ const SpiderSenseWrapper = (
     const chosenShape = shape ?? pickRandomFromArray(["line", "zigzag"]);
 
     const averageRadius = (itemSize.x + itemSize.y) / 4;
+    const circumference = Math.PI * (itemSize.x + itemSize.y);
 
     const burst = new mojs.Burst({
-      left: itemDim.left + itemSize.x / 2,
-      top: itemDim.top + itemSize.y / 2,
-      radiusX: itemSize.x,
-      radiusY: itemSize.y,
-      count: Math.max(4, (Math.PI * averageRadius) / 15),
+      left: itemDim.left + itemSize.x / 2 + window.scrollX,
+      top: itemDim.top + itemSize.y / 2 + window.scrollY,
+      radiusX: itemSize.x + averageRadius / 5,
+      radiusY: itemSize.y + averageRadius / 5,
+      count: Math.max(4, circumference / 50),
 
       children: {
         shape: chosenShape,
-        radius: averageRadius / 4,
+        radius: averageRadius / 6,
         scale: {
           [windowWidth / (itemDim.width * 6)]:
             windowHeight / (itemDim.height * 6),
@@ -138,24 +152,32 @@ const SpiderSenseWrapper = (
     burst.play();
   }, [color, shape]);
 
-  useEffect(() => {
-    getManualTrigger?.(shootLines);
-  }, [getManualTrigger, shootLines]);
+  const throttledShootLines = useMemo(
+    () => throttle(shootLines, 400),
+    [shootLines],
+  );
 
-  const registerRef = useCallback((node: HTMLDivElement | null) => {
-    if (node) {
-      containerRef.current = node;
-      if (trigger === "mount") {
-        setTimeout(shootLines, 0);
+  useEffect(() => {
+    getManualTrigger?.(throttledShootLines);
+  }, [getManualTrigger, throttledShootLines]);
+
+  const registerRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (node) {
+        containerRef.current = node;
+        if (trigger === "mount") {
+          setTimeout(throttledShootLines, 0);
+        }
       }
-    }
-  }, []);
+    },
+    [throttledShootLines],
+  );
 
   return (
     <div
       ref={registerRef}
-      onMouseOver={trigger === "hover" ? shootLines : () => {}}
-      onClick={trigger === "click" ? shootLines : () => {}}
+      onMouseOver={trigger === "hover" ? throttledShootLines : () => {}}
+      onClick={trigger === "click" ? throttledShootLines : () => {}}
       className={containerClassName}
     >
       {children}

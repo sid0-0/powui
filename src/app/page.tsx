@@ -14,15 +14,16 @@ import { Tooltip } from "@/components/ui/tooltip";
 import { comicToast } from "@/components/ui/sonner";
 
 const BurstWrapper = dynamic(
-  () => import("@/components/ui/burst").then((m) => ({ default: m.BurstWrapper })),
-  { ssr: false }
+  () =>
+    import("@/components/ui/burst").then((m) => ({ default: m.BurstWrapper })),
+  { ssr: false },
 );
 const SpiderSenseWrapper = dynamic(
   () =>
     import("@/components/ui/spiderSenseWrapper").then((m) => ({
       default: m.SpiderSenseWrapper,
     })),
-  { ssr: false }
+  { ssr: false },
 );
 
 // ─── Comic Panel ─────────────────────────────────────────────────────────────
@@ -41,9 +42,13 @@ const ComicPanel = ({
       {String(number).padStart(2, "0")}
     </span>
     <div className="px-6 py-4 border-b-4 border-black spotty-dot-sm spotty-spacing-sm spotty-opacity-20 spotty-bg-[#eab308]">
-      <h3 className="font-[Bangers] text-2xl tracking-widest uppercase">{title}</h3>
+      <h3 className="font-[Bangers] text-2xl tracking-widest uppercase">
+        {title}
+      </h3>
     </div>
-    <div className="flex-1 flex items-center justify-center p-8">{children}</div>
+    <div className="flex-1 flex items-center justify-center p-8">
+      {children}
+    </div>
   </div>
 );
 
@@ -90,34 +95,31 @@ export default function Home() {
         {/* Tagline card */}
         <div className="mx-auto max-w-2xl bg-white border-4 border-black shadow-[-8px_8px_0_0_rgba(0,0,0,1)] overflow-hidden">
           <div className="spotty-dot-sm spotty-spacing-sm spotty-opacity-25 spotty-bg-[#eab308] px-6 py-2 border-b-4 border-black">
-            <span className="font-[Bangers] text-sm tracking-[0.3em] uppercase">The Comic UI Library</span>
+            <span className="font-[Bangers] text-sm tracking-[0.3em] uppercase">
+              The Comic UI Library
+            </span>
           </div>
           <div className="p-6">
             <p className="text-2xl md:text-3xl font-bold leading-tight">
               A punchy, comic-inspired UI library for interfaces that{" "}
               <SpiderSenseWrapper containerClassName="inline" trigger="hover">
-                <span className="text-amber-500 underline decoration-black underline-offset-4">
+                <span className="text-orange-400 underline decoration-black underline-offset-4">
                   POP!
                 </span>
               </SpiderSenseWrapper>
             </p>
             <p className="mt-4 text-lg text-gray-700 font-medium">
-              Pow UI brings the energy of golden-age comics to your web apps with bold
-              borders, expressive shapes, and tactile interactions.
+              Pow UI brings the energy of golden-age comics to your web apps
+              with bold borders, expressive shapes, and tactile interactions.
               <br />
               Built with React and Tailwind CSS.
             </p>
           </div>
         </div>
-
-        {/* CTA */}
-        <Button size="lg" asChild className="text-xl px-8 h-14 font-[Bangers] tracking-widest">
-          <Link href="/components">Explore Components →</Link>
-        </Button>
       </section>
 
       {/* ── Three Comic Panels ──────────────────────────────────────────── */}
-      <section className="border-y-4 border-black">
+      <section className="mt-52 border-y-4 border-black">
         <div className="grid grid-cols-1 md:grid-cols-3">
           {/* Panel 1 — Buttons */}
           <ComicPanel number={1} title="Buttons">
@@ -251,21 +253,35 @@ export default function Home() {
 
           <Tabs defaultValue="primitives" tabsPlacement="top">
             <TabsList className="w-full">
-              <TabsTrigger value="primitives" className="font-[Bangers] tracking-wider text-lg flex-1">
+              <TabsTrigger
+                value="primitives"
+                className="font-[Bangers] tracking-wider text-lg flex-1"
+              >
                 Primitives
               </TabsTrigger>
-              <TabsTrigger value="wrappers" className="font-[Bangers] tracking-wider text-lg flex-1">
+              <TabsTrigger
+                value="wrappers"
+                className="font-[Bangers] tracking-wider text-lg flex-1"
+              >
                 Wrappers
               </TabsTrigger>
-              <TabsTrigger value="feedback" className="font-[Bangers] tracking-wider text-lg flex-1">
+              <TabsTrigger
+                value="feedback"
+                className="font-[Bangers] tracking-wider text-lg flex-1"
+              >
                 Feedback
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="primitives" className="border-4 border-t-0 border-black bg-white p-8">
+            <TabsContent
+              value="primitives"
+              className="border-4 border-t-0 border-black bg-white p-8"
+            >
               <div className="flex flex-col gap-8">
                 <div>
-                  <h4 className="font-[Bangers] text-2xl mb-4 tracking-wide">Avatars</h4>
+                  <h4 className="font-[Bangers] text-2xl mb-4 tracking-wide">
+                    Avatars
+                  </h4>
                   <div className="flex gap-6 items-center flex-wrap">
                     <Avatar className="size-16">
                       <AvatarImage src="https://github.com/shadcn.png" />
@@ -276,21 +292,29 @@ export default function Home() {
                       <AvatarFallback>FL</AvatarFallback>
                     </Avatar>
                     <Avatar className="size-16 border-red-500">
-                      <AvatarFallback className="font-[Bangers] text-2xl">POW</AvatarFallback>
+                      <AvatarFallback className="font-[Bangers] text-2xl">
+                        POW
+                      </AvatarFallback>
                     </Avatar>
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-[Bangers] text-2xl mb-4 tracking-wide">Tooltips</h4>
+                  <h4 className="font-[Bangers] text-2xl mb-4 tracking-wide">
+                    Tooltips
+                  </h4>
                   <div className="flex gap-6 items-center flex-wrap">
                     <Tooltip
-                      triggerContent={<Button variant="secondary">Hover me (top)</Button>}
+                      triggerContent={
+                        <Button variant="secondary">Hover me (top)</Button>
+                      }
                       content="ZAP! That's a tooltip."
                       side="top"
                       type="normal"
                     />
                     <Tooltip
-                      triggerContent={<Button variant="secondary">Hover me (bubbles)</Button>}
+                      triggerContent={
+                        <Button variant="secondary">Hover me (bubbles)</Button>
+                      }
                       content="POW! Bubble tooltip!"
                       side="top"
                       type="bubbles"
@@ -301,10 +325,16 @@ export default function Home() {
               </div>
             </TabsContent>
 
-            <TabsContent value="wrappers" className="border-4 border-t-0 border-black bg-white p-8">
+            <TabsContent
+              value="wrappers"
+              className="border-4 border-t-0 border-black bg-white p-8"
+            >
               <div className="flex flex-wrap gap-12 items-center justify-center">
                 <BurstWrapper
-                  borders={[{ color: "black", scale: 1.1 }, { color: "#eab308", scale: 1.18 }]}
+                  borders={[
+                    { color: "black", scale: 1.1 },
+                    { color: "#eab308", scale: 1.18 },
+                  ]}
                   heightVariance={22}
                 >
                   <div className="bg-white px-10 py-6 text-center font-black text-2xl italic uppercase border-4 border-black">
@@ -319,7 +349,10 @@ export default function Home() {
               </div>
             </TabsContent>
 
-            <TabsContent value="feedback" className="border-4 border-t-0 border-black bg-white p-8">
+            <TabsContent
+              value="feedback"
+              className="border-4 border-t-0 border-black bg-white p-8"
+            >
               <div className="flex flex-col gap-6 items-center">
                 <p className="font-bold text-lg text-gray-700 text-center">
                   Click a button to fire a comic toast notification!
@@ -327,7 +360,10 @@ export default function Home() {
                 <div className="flex flex-wrap gap-4 justify-center">
                   <Button
                     onClick={() =>
-                      comicToast.default("HEY! Something happened.", "Here's the scoop.")
+                      comicToast.default(
+                        "HEY! Something happened.",
+                        "Here's the scoop.",
+                      )
                     }
                   >
                     Default Toast
@@ -335,7 +371,10 @@ export default function Home() {
                   <Button
                     variant="secondary"
                     onClick={() =>
-                      comicToast.success("POW! Mission complete!", "Everything worked out great.")
+                      comicToast.success(
+                        "POW! Mission complete!",
+                        "Everything worked out great.",
+                      )
                     }
                   >
                     Success Toast
@@ -343,7 +382,10 @@ export default function Home() {
                   <Button
                     variant="destructive"
                     onClick={() =>
-                      comicToast.error("ZAP! Something broke!", "Check the console, hero.")
+                      comicToast.error(
+                        "ZAP! Something broke!",
+                        "Check the console, hero.",
+                      )
                     }
                   >
                     Error Toast
@@ -351,7 +393,10 @@ export default function Home() {
                   <Button
                     variant="outline"
                     onClick={() =>
-                      comicToast.warning("UH-OH! Watch out!", "Proceed with caution.")
+                      comicToast.warning(
+                        "UH-OH! Watch out!",
+                        "Proceed with caution.",
+                      )
                     }
                   >
                     Warning Toast
@@ -359,7 +404,10 @@ export default function Home() {
                   <Button
                     variant="ghost"
                     onClick={() =>
-                      comicToast.info("HMM... Good to know.", "Just some info for you.")
+                      comicToast.info(
+                        "HMM... Good to know.",
+                        "Just some info for you.",
+                      )
                     }
                   >
                     Info Toast
@@ -372,15 +420,18 @@ export default function Home() {
       </section>
 
       {/* ── CTA Banner ──────────────────────────────────────────────────── */}
-      <section className="spotty-dot-sm spotty-spacing-sm spotty-opacity-20 spotty-bg-[#eab308]
-                          border-y-4 border-black py-16 px-6 flex flex-col items-center gap-8">
+      <section
+        className="spotty-dot-sm spotty-spacing-sm spotty-opacity-20 spotty-bg-[#eab308]
+                          border-y-4 border-black py-16 px-6 flex flex-col items-center gap-8"
+      >
         <Filters.Displacement scale={2} frequency={0.06}>
           <h2 className="font-[Bangers] text-6xl md:text-8xl text-black text-center tracking-widest">
             READY TO BUILD?
           </h2>
         </Filters.Displacement>
         <p className="text-black/70 text-xl text-center max-w-xl font-medium">
-          Explore all 18 components — buttons, shapes, filters, animations, toasts, sidebars, and more.
+          Explore all 18 components — buttons, shapes, filters, animations,
+          toasts, sidebars, and more.
         </p>
         <Button
           size="lg"
@@ -392,8 +443,10 @@ export default function Home() {
       </section>
 
       {/* ── Footer ──────────────────────────────────────────────────────── */}
-      <footer className="spotty-dot-sm spotty-spacing-sm spotty-opacity-20 spotty-bg-[#eab308]
-                         border-t-4 border-black px-8 py-16">
+      <footer
+        className="spotty-dot-sm spotty-spacing-sm spotty-opacity-20 spotty-bg-[#eab308]
+                         border-t-4 border-black px-8 py-16"
+      >
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
           <div className="flex flex-col gap-4">
             <Filters.Displacement scale={2} frequency={0.06}>
@@ -428,7 +481,8 @@ export default function Home() {
         </div>
         <div className="max-w-5xl mx-auto mt-12 pt-6 border-t-4 border-black">
           <p className="text-gray-600 text-sm font-medium">
-            Built with React, Next.js, Tailwind CSS, and a whole lot of comic energy.
+            Built with React, Next.js, Tailwind CSS, and a whole lot of comic
+            energy.
           </p>
         </div>
       </footer>
