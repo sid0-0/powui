@@ -1,40 +1,14 @@
 import type { Metadata } from "next";
 import "../index.css";
+import { NavBar } from "@/components/NavBar";
+import { GlobalBackground } from "@/components/GlobalBackground";
+import { GlobalClickEffect } from "@/components/GlobalClickEffect";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
-  title: "PowUI - A playful React component library",
+  title: "PowUI — Comic-book React components",
   description:
-    "PowUI is a punchy, comic-inspired UI library for interfaces that need to pack a visual punch. With bold colors, dynamic shapes, and fun animations, PowUI brings the energy and excitement of comic books to your web applications. Whether you're building a game, a creative portfolio, or just want to add some flair to your UI, PowUI has the components you need to make your interface pop.",
-};
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-const tabs = [
-  { title: "Home", path: "/" },
-  { title: "Components", path: "/components" },
-];
-
-export const Container = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <Tabs>
-      <TabsList>
-        {tabs.map((x) => (
-          <TabsTrigger
-            key={x.title}
-            value={x.title}
-            className="spotty-bg-[#eab308] font-bold"
-          >
-            {x.title}
-          </TabsTrigger>
-        ))}
-      </TabsList>
-      {tabs.map((x) => (
-        <TabsContent key={x.title} value={x.title} className="font-semibold">
-          {children}
-        </TabsContent>
-      ))}
-    </Tabs>
-  );
+    "PowUI is a punchy, comic-inspired UI library for interfaces that need to pack a visual punch. Bold colors, dynamic shapes, and fun animations — making the web more exciting, one punch at a time.",
 };
 
 export default function RootLayout({
@@ -45,9 +19,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div id="root">
-          <Container>{children}</Container>
+        {/* Fixed global background — client island so Filters object property works */}
+        <GlobalBackground />
+
+        <div id="root" className="flex flex-col">
+          <NavBar />
+          {children}
         </div>
+
+        <GlobalClickEffect />
+        <Toaster />
       </body>
     </html>
   );
