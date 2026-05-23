@@ -35,7 +35,7 @@ function DemoPanel({ demo }: { demo: ComponentDemo }) {
     <div className="flex flex-col">
       {/* Header */}
       <div
-        className="spotty-dot-sm spotty-spacing-sm spotty-opacity-25 spotty-bg-[#eab308]
+        className="spotty-dot-sm spotty-spacing-sm spotty-opacity-25 spotty-bg-[#F3B807]
                       px-8 pt-8 pb-6 border-b-4 border-black"
       >
         <Filters.Displacement scale={1.5} frequency={0.05}>
@@ -51,7 +51,7 @@ function DemoPanel({ demo }: { demo: ComponentDemo }) {
       {/* Demo Area */}
       <div className="flex-1 p-8 overflow-auto">
         <div
-          className="spotty-dot-sm spotty-spacing-sm spotty-opacity-20 spotty-bg-[#eab308]
+          className="spotty-dot-sm spotty-spacing-sm spotty-opacity-20 spotty-bg-[#F3B807]
                      border-4 border-black p-8 md:p-12
                      flex items-start justify-center min-h-[300px]"
         >
@@ -102,7 +102,7 @@ export default function ComponentsPage() {
             <Link
               href="/"
               className="flex items-center gap-2 px-4 py-3 border-b-4 border-black
-                       spotty-dot-sm spotty-spacing-sm spotty-opacity-30 spotty-bg-[#eab308]
+                       spotty-dot-sm spotty-spacing-sm spotty-opacity-30 spotty-bg-[#F3B807]
                        font-[Bangers] text-xl tracking-wide text-black no-underline
                        hover:opacity-80 transition-opacity"
             >
@@ -143,8 +143,8 @@ export default function ComponentsPage() {
         {/* Mobile top bar */}
         <div
           className="sticky top-0 z-10 flex items-center gap-3 px-4 py-3
-                     border-b-4 border-black bg-[#eab308]
-                     spotty-dot-xs spotty-spacing-xs spotty-opacity-20 spotty-bg-[#eab308]
+                     border-b-4 border-black bg-[#F3B807]
+                     spotty-dot-xs spotty-spacing-xs spotty-opacity-20 spotty-bg-[#F3B807]
                      md:hidden"
         >
           <SidebarTrigger />

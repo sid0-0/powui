@@ -16,7 +16,7 @@ export interface SpottyBgProps {
 }
 
 export const StorybookSpottyBg = ({
-  color = "#eab308",
+  color = "#F3B807",
   dotSize = "sm",
   spacing = "sm",
   opacity = 30,
@@ -44,7 +44,7 @@ export const StorybookSpottyBg = ({
 
 /** Shows a grid of all dot sizes vs spacing combinations for a given color */
 export const StorybookSpottyBgMatrix = ({
-  color = "#eab308",
+  color = "#F3B807",
   variant = "standard",
 }: Pick<SpottyBgProps, "color" | "variant">) => {
   return (
@@ -87,7 +87,7 @@ export const StorybookSpottyBgMatrix = ({
 
 /** Shows all opacity levels for a given dot/spacing/color */
 export const StorybookSpottyBgOpacity = ({
-  color = "#eab308",
+  color = "#F3B807",
   dotSize = "md",
   spacing = "md",
 }: Pick<SpottyBgProps, "color" | "dotSize" | "spacing">) => {
@@ -107,7 +107,7 @@ export const StorybookSpottyBgOpacity = ({
 
 /** Shows all three variants side by side */
 export const StorybookSpottyBgVariants = ({
-  color = "#eab308",
+  color = "#F3B807",
   dotSize = "md",
   spacing = "lg",
   opacity = 90,

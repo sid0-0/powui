@@ -41,7 +41,7 @@ export const StorybookSpiderSense = (props: {
       <br />
       {trigger === "manual" && (
         <Button
-          className="spotty-bg-[#eab308] hover:spotty-bg-[#ca8a04]"
+          className="spotty-bg-[#F3B807] hover:spotty-bg-[#ca8a04]"
           onClick={() => {
             triggerRef.current?.();
           }}

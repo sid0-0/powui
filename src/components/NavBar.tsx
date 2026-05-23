@@ -6,7 +6,7 @@ export function NavBar() {
   return (
     <nav
       className="sticky top-0 left-0 right-0 z-50 h-18 border-b-4 border-black
-                 spotty-dot-sm spotty-spacing-sm spotty-opacity-30 spotty-bg-[#eab308]
+                 spotty-dot-sm spotty-spacing-sm spotty-opacity-30 spotty-bg-[#FFE19B]
                  flex items-center justify-between pr-6"
     >
       <div className="bg-black px-8 justify-center flex items-center h-full">

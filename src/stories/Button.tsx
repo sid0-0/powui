@@ -25,7 +25,7 @@ export const StorybookButton = ({
     <Filters.Displacement>
       <Button
         size={size}
-        className="spotty-bg-[#eab308] hover:spotty-bg-[#ca8a04]"
+        className="spotty-bg-[#F3B807] hover:spotty-bg-[#ca8a04]"
         {...props}
       >
         {toRender}

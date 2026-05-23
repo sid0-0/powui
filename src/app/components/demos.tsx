@@ -72,7 +72,7 @@ function ButtonDemo() {
       <div>
         <h4 className="font-[Bangers] text-xl tracking-wide mb-3">With Filter</h4>
         <Filters.Displacement scale={4} frequency={0.25}>
-          <Button className="spotty-dot-sm spotty-spacing-sm spotty-bg-[#eab308] w-full h-12 text-lg font-[Bangers] tracking-widest">
+          <Button className="spotty-dot-sm spotty-spacing-sm spotty-bg-[#F3B807] w-full h-12 text-lg font-[Bangers] tracking-widest">
             DISPLACEMENT BUTTON
           </Button>
         </Filters.Displacement>
@@ -319,7 +319,7 @@ function BurstDemo() {
         <BurstWrapper
           heightVariance={variance[0]}
           peakSeparation={separation[0]}
-          borders={[{ color: "black", scale: 1.08 }, { color: "#eab308", scale: 1.16 }]}
+          borders={[{ color: "black", scale: 1.08 }, { color: "#F3B807", scale: 1.16 }]}
           curvedDips={false}
         >
           <div className="bg-white border-4 border-black px-10 py-6 text-center font-black text-2xl italic uppercase">
@@ -393,14 +393,14 @@ function DisplacementDemo() {
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
           <span className="font-[Bangers] text-lg tracking-wide text-center">Original</span>
-          <div className="bg-[#eab308] border-4 border-black p-6 text-center">
+          <div className="bg-[#F3B807] border-4 border-black p-6 text-center">
             <span className="font-[Bangers] text-4xl tracking-widest text-black">POW UI</span>
           </div>
         </div>
         <div className="flex flex-col gap-2">
           <span className="font-[Bangers] text-lg tracking-wide text-center">Displaced</span>
           <Filters.Displacement scale={scale[0]} frequency={freq[0]}>
-            <div className="bg-[#eab308] border-4 border-black p-6 text-center">
+            <div className="bg-[#F3B807] border-4 border-black p-6 text-center">
               <span className="font-[Bangers] text-4xl tracking-widest text-black">POW UI</span>
             </div>
           </Filters.Displacement>
@@ -668,7 +668,7 @@ function SkeletonDemo() {
           <p className="font-[Walter_Turncoat] font-bold text-lg">
             Making the web more exciting, one punch at a time! Built with React, Tailwind, and pure comic energy.
           </p>
-          <div className="border-4 border-black rounded-xl spotty-dot-sm spotty-spacing-sm spotty-opacity-20 spotty-bg-[#eab308] h-32 flex items-center justify-center">
+          <div className="border-4 border-black rounded-xl spotty-dot-sm spotty-spacing-sm spotty-opacity-20 spotty-bg-[#F3B807] h-32 flex items-center justify-center">
             <span className="font-[Bangers] text-3xl tracking-widest">Content loaded!</span>
           </div>
         </div>

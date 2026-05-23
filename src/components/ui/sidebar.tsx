@@ -519,7 +519,7 @@ function SidebarMenuItem({
 }
 
 const sidebarMenuButtonVariants = cva(
-  "peer/menu-button border-4 border-black bg-white brightness-60 hover:brightness-80 transition-[color,box-shadow,transform] w-full flex items-center gap-2 px-3 py-2 text-sm font-bold text-left spotty-bg-[#eab308] outline-none focus-visible:ring-[3px] focus-visible:border-ring focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span]:truncate [&>span]:flex-1 [&>span]:min-w-0 [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:brightness-100 data-[active=true]:scale-110 data-[active=true]:z-10 data-[active=true]:[--spotty-spacing:0.12rem] group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2!",
+  "peer/menu-button border-4 border-black bg-white brightness-60 hover:brightness-80 transition-[color,box-shadow,transform] w-full flex items-center gap-2 px-3 py-2 text-sm font-bold text-left spotty-bg-[#F3B807] outline-none focus-visible:ring-[3px] focus-visible:border-ring focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span]:truncate [&>span]:flex-1 [&>span]:min-w-0 [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:brightness-100 data-[active=true]:scale-110 data-[active=true]:z-10 data-[active=true]:[--spotty-spacing:0.12rem] group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2!",
   {
     variants: {
       size: {
@@ -798,7 +798,7 @@ function SidebarMenuSubButton({
       data-active={resolvedIsActive}
       onClick={handleClick}
       className={cn(
-        "border-4 border-l-0 border-black bg-white brightness-60 hover:brightness-80 transition-[color,box-shadow,transform] w-full flex items-center gap-2 pl-3 pr-3 py-1 text-xs font-medium text-left spotty-bg-[#eab308] outline-none focus-visible:ring-[3px] focus-visible:border-ring focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span]:truncate [&>span]:flex-1 [&>span]:min-w-0 [&>svg]:size-3 [&>svg]:shrink-0",
+        "border-4 border-l-0 border-black bg-white brightness-60 hover:brightness-80 transition-[color,box-shadow,transform] w-full flex items-center gap-2 pl-3 pr-3 py-1 text-xs font-medium text-left spotty-bg-[#F3B807] outline-none focus-visible:ring-[3px] focus-visible:border-ring focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span]:truncate [&>span]:flex-1 [&>span]:min-w-0 [&>svg]:size-3 [&>svg]:shrink-0",
         "data-[active=true]:brightness-100 data-[active=true]:scale-110 data-[active=true]:z-10 data-[active=true]:[--spotty-spacing:0.12rem]",
         "group-data-[collapsible=icon]:hidden",
         className,

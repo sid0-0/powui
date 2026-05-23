@@ -46,7 +46,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {
   args: {
-    color: "#eab308",
+    color: "#F3B807",
     dotSize: "sm",
     spacing: "sm",
     opacity: 30,
@@ -57,7 +57,7 @@ export const Playground: Story = {
 export const Matrix: Story = {
   render: (args) => <StorybookSpottyBgMatrix color={args.color} variant={args.variant} />,
   args: {
-    color: "#eab308",
+    color: "#F3B807",
     variant: "standard",
   },
   parameters: {
@@ -72,7 +72,7 @@ export const OpacityScale: Story = {
     <StorybookSpottyBgOpacity color={args.color} dotSize={args.dotSize} spacing={args.spacing} />
   ),
   args: {
-    color: "#eab308",
+    color: "#F3B807",
     dotSize: "md",
     spacing: "md",
   },
@@ -93,7 +93,7 @@ export const Variants: Story = {
     />
   ),
   args: {
-    color: "#eab308",
+    color: "#F3B807",
     dotSize: "md",
     spacing: "lg",
     opacity: 90,

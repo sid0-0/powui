@@ -9,7 +9,7 @@ const StorybookBurst = (
   const { height = 240, width = 240, ...rest } = props;
   return (
     <div className="relative -rotate-30">
-      <BurstWrapper className="spotty-bg-[#eab308]" {...rest}>
+      <BurstWrapper className="spotty-bg-[#F3B807]" {...rest}>
         <div style={{ height, width }}></div>
       </BurstWrapper>
       <div
