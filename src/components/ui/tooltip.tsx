@@ -190,7 +190,7 @@ const TooltipContainer = ({
       <TooltipContent
         side={side}
         className={cn(
-          "relative bg-white border-4 border-black text-black font-comic rounded-2xl px-4 py-3 shadow-[4px_4px_0px_black]",
+          "relative bg-popover border-4 border-foreground text-popover-foreground font-comic rounded-2xl px-4 py-3 shadow-[4px_4px_0px_var(--foreground)]",
           styles.bounceMount,
           className
         )}

@@ -10,7 +10,7 @@ export function GlobalBackground() {
       containerClassName="fixed inset-0 pointer-events-none"
       className="size-full"
     >
-      <div className="spotty-dot-lg spotty-spacing-xl spotty-bg-[#eab308] size-full" />
+      <div className="spotty-dot-lg spotty-spacing-xl spotty-bg-primary size-full" />
     </Filters.Displacement>
   );
 }

@@ -35,15 +35,15 @@ function DemoPanel({ demo }: { demo: ComponentDemo }) {
     <div className="flex flex-col">
       {/* Header */}
       <div
-        className="spotty-dot-sm spotty-spacing-sm spotty-opacity-25 spotty-bg-[#F3B807]
-                      px-8 pt-8 pb-6 border-b-4 border-black"
+        className="spotty-dot-sm spotty-spacing-sm spotty-opacity-25 spotty-bg-primary text-primary-foreground
+                      px-8 pt-8 pb-6 border-b-4 border-foreground"
       >
         <Filters.Displacement scale={1.5} frequency={0.05}>
           <h1 className="font-[Bangers] text-5xl tracking-widest">
             {demo.label}
           </h1>
         </Filters.Displacement>
-        <p className="mt-2 font-medium text-gray-600 text-lg max-w-2xl">
+        <p className="mt-2 font-medium text-primary-foreground/70 text-lg max-w-2xl">
           {demo.description}
         </p>
       </div>
@@ -51,8 +51,8 @@ function DemoPanel({ demo }: { demo: ComponentDemo }) {
       {/* Demo Area */}
       <div className="flex-1 p-8 overflow-auto">
         <div
-          className="spotty-dot-sm spotty-spacing-sm spotty-opacity-20 spotty-bg-[#F3B807]
-                     border-4 border-black p-8 md:p-12
+          className="spotty-dot-sm spotty-spacing-sm spotty-opacity-20 spotty-bg-primary text-primary-foreground
+                     border-4 border-foreground p-8 md:p-12
                      flex items-start justify-center min-h-[300px]"
         >
           <Filters.Displacement
@@ -61,7 +61,7 @@ function DemoPanel({ demo }: { demo: ComponentDemo }) {
             className="w-full max-w-2xl"
           >
             <div
-              className="bg-white border-4 border-black shadow-[-8px_8px_0_0_rgba(0,0,0,1)]
+              className="bg-card text-card-foreground border-4 border-foreground shadow-[-8px_8px_0_0_var(--foreground)]
                          p-8 w-full"
             >
               {demo.demo}
@@ -96,21 +96,21 @@ export default function ComponentsPage() {
     >
       <Filters.Displacement>
         {/* ── Sidebar ─────────────────────────────────────────────────── */}
-        <Sidebar collapsible="offcanvas" className="border-r-4 border-black">
+        <Sidebar collapsible="offcanvas" className="border-r-4 border-foreground">
           {/* Back link */}
           <SidebarHeader className="p-0">
             <Link
               href="/"
-              className="flex items-center gap-2 px-4 py-3 border-b-4 border-black
-                       spotty-dot-sm spotty-spacing-sm spotty-opacity-30 spotty-bg-[#F3B807]
-                       font-[Bangers] text-xl tracking-wide text-black no-underline
+              className="flex items-center gap-2 px-4 py-3 border-b-4 border-foreground
+                       spotty-dot-sm spotty-spacing-sm spotty-opacity-30 spotty-bg-primary
+                       font-[Bangers] text-xl tracking-wide text-primary-foreground no-underline
                        hover:opacity-80 transition-opacity"
             >
               ← POW UI
             </Link>
           </SidebarHeader>
 
-          <SidebarContent className="bg-white">
+          <SidebarContent className="bg-card">
             {GROUPS.map((group) => (
               <SidebarGroup key={group}>
                 <SidebarGroupLabel className="font-[Bangers] text-base tracking-widest uppercase px-3 py-2">
@@ -143,8 +143,8 @@ export default function ComponentsPage() {
         {/* Mobile top bar */}
         <div
           className="sticky top-0 z-10 flex items-center gap-3 px-4 py-3
-                     border-b-4 border-black bg-[#F3B807]
-                     spotty-dot-xs spotty-spacing-xs spotty-opacity-20 spotty-bg-[#F3B807]
+                     border-b-4 border-foreground bg-primary text-primary-foreground
+                     spotty-dot-xs spotty-spacing-xs spotty-opacity-20 spotty-bg-primary
                      md:hidden"
         >
           <SidebarTrigger />

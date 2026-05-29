@@ -26,14 +26,24 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.798 0.169 81.6);
+  --primary-foreground: oklch(0.145 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --accent: oklch(0.911 0.090 89.7);
+  --accent-foreground: oklch(0.145 0 0);
+  --toast-default-bg: #f59e0b;
+  --toast-default-badge-bg: #fcd34d;
+  --toast-success-bg: #16a34a;
+  --toast-success-badge-bg: #4ade80;
+  --toast-error-bg: #dc2626;
+  --toast-error-badge-bg: #f87171;
+  --toast-warning-bg: #ea580c;
+  --toast-warning-badge-bg: #fb923c;
+  --toast-info-bg: #2563eb;
+  --toast-info-badge-bg: #60a5fa;
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
@@ -174,6 +184,28 @@ button {
   background-position: 0 0, var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
 }
 
+@utility spotty-bg-primary {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0, 0, 0, var(--spotty-opacity, 0.3)) var(--spotty-dot, 0.02rem),
+      var(--primary) 0
+    ),
+    var(--primary);
+  background-size: var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
+}
+
+@utility spotty-bg-accent {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0, 0, 0, var(--spotty-opacity, 0.3)) var(--spotty-dot, 0.02rem),
+      var(--accent) 0
+    ),
+    var(--accent);
+  background-size: var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
+}
+
 @utility clip-path-ellipse {
   clip-path: ellipse();
 }
@@ -221,22 +253,22 @@ button {
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: oklch(0.155 0.012 70);
+  --foreground: oklch(0.96 0.008 70);
+  --card: oklch(0.21 0.015 70);
+  --card-foreground: oklch(0.96 0.008 70);
+  --popover: oklch(0.21 0.015 70);
+  --popover-foreground: oklch(0.96 0.008 70);
+  --primary: oklch(0.75 0.15 81.6);
+  --primary-foreground: oklch(0.145 0 0);
+  --secondary: oklch(0.27 0.012 70);
+  --secondary-foreground: oklch(0.96 0.008 70);
+  --muted: oklch(0.27 0.012 70);
+  --muted-foreground: oklch(0.72 0.01 70);
+  --accent: oklch(0.55 0.14 60);
+  --accent-foreground: oklch(0.96 0.008 70);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
+  --border: oklch(0.4 0.02 70 / 22%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
   --chart-1: oklch(0.488 0.243 264.376);
@@ -244,14 +276,24 @@ button {
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar: oklch(0.21 0.015 70);
+  --sidebar-foreground: oklch(0.96 0.008 70);
+  --sidebar-primary: oklch(0.75 0.15 81.6);
+  --sidebar-primary-foreground: oklch(0.145 0 0);
+  --sidebar-accent: oklch(0.27 0.012 70);
+  --sidebar-accent-foreground: oklch(0.96 0.008 70);
+  --sidebar-border: oklch(0.4 0.02 70 / 22%);
   --sidebar-ring: oklch(0.556 0 0);
+  --toast-default-bg: oklch(0.50 0.12 60);
+  --toast-default-badge-bg: oklch(0.70 0.10 80);
+  --toast-success-bg: oklch(0.48 0.13 142);
+  --toast-success-badge-bg: oklch(0.70 0.12 142);
+  --toast-error-bg: oklch(0.50 0.16 27);
+  --toast-error-badge-bg: oklch(0.70 0.13 27);
+  --toast-warning-bg: oklch(0.55 0.15 50);
+  --toast-warning-badge-bg: oklch(0.72 0.12 50);
+  --toast-info-bg: oklch(0.48 0.14 245);
+  --toast-info-badge-bg: oklch(0.68 0.12 245);
 }
 
 @layer base {

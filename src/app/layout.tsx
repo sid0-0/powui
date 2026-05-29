@@ -4,6 +4,7 @@ import { NavBar } from "@/components/NavBar";
 import { GlobalBackground } from "@/components/GlobalBackground";
 import { GlobalClickEffect } from "@/components/GlobalClickEffect";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/website/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "PowUI — Comic-book React components",
@@ -17,18 +18,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        {/* Fixed global background — client island so Filters object property works */}
-        <GlobalBackground />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {/* Fixed global background — client island so Filters object property works */}
+          <GlobalBackground />
 
-        <div id="root" className="flex flex-col">
-          <NavBar />
-          {children}
-        </div>
+          <div id="root" className="flex flex-col">
+            <NavBar />
+            {children}
+          </div>
 
-        <GlobalClickEffect />
-        <Toaster />
+          <GlobalClickEffect />
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

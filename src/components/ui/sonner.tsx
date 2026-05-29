@@ -25,19 +25,34 @@ export const variantTokens: Record<
 > = {
   default: {
     badge: "HEY!",
-    bg: "#f59e0b",
+    bg: "var(--toast-default-bg)",
     rotate: "-3deg",
-    badgeBg: "#fcd34d",
+    badgeBg: "var(--toast-default-badge-bg)",
   },
-  success: { badge: "POW!", bg: "#16a34a", rotate: "3deg", badgeBg: "#4ade80" },
-  error: { badge: "ZAP!", bg: "#dc2626", rotate: "-4deg", badgeBg: "#f87171" },
+  success: {
+    badge: "POW!",
+    bg: "var(--toast-success-bg)",
+    rotate: "3deg",
+    badgeBg: "var(--toast-success-badge-bg)",
+  },
+  error: {
+    badge: "ZAP!",
+    bg: "var(--toast-error-bg)",
+    rotate: "-4deg",
+    badgeBg: "var(--toast-error-badge-bg)",
+  },
   warning: {
     badge: "UH-OH!",
-    bg: "#ea580c",
+    bg: "var(--toast-warning-bg)",
     rotate: "2deg",
-    badgeBg: "#fb923c",
+    badgeBg: "var(--toast-warning-badge-bg)",
   },
-  info: { badge: "HMM...", bg: "#2563eb", rotate: "-2deg", badgeBg: "#60a5fa" },
+  info: {
+    badge: "HMM...",
+    bg: "var(--toast-info-bg)",
+    rotate: "-2deg",
+    badgeBg: "var(--toast-info-badge-bg)",
+  },
 };
 
 // ─── Comic toast JSX ─────────────────────────────────────────────────────────
@@ -57,7 +72,7 @@ export function ComicToast({
 }: ComicToastProps) {
   const { badge, bg, rotate, badgeBg } = variantTokens[variant];
   const isDark = ["success", "error", "warning", "info"].includes(variant);
-  const textColor = isDark ? "white" : "black";
+  const textColor = isDark ? "white" : "light-dark(black, white)";
 
   return (
     <Filters.Displacement scale={2} frequency={0.65}>
@@ -68,7 +83,7 @@ export function ComicToast({
           backgroundColor: bg,
         }}
         className={cn(
-          "relative w-full px-3 pb-3 pt-5 border-4 border-black box-border shadow-[10px_10px_0_rgba(0,0,0,1)]",
+          "relative w-full px-3 pb-3 pt-5 border-4 border-foreground box-border shadow-[10px_10px_0_var(--foreground)]",
           containerClassName,
         )}
       >
