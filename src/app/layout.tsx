@@ -24,7 +24,7 @@ export default function RootLayout({
           {/* Fixed global background — client island so Filters object property works */}
           <GlobalBackground />
 
-          <div id="root" className="flex flex-col">
+          <div id="root" className="flex flex-col h-screen">
             <NavBar />
             {children}
           </div>

@@ -19,13 +19,14 @@ const buttonVariants = cva(
   cx(
     "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
     "border-3 border-solid border-foreground text-foreground shadow-[-6px_6px_0_var(--foreground)] py-2 px-4",
+    // "transition-[translate,box-shadow] duration-[150ms] ease-linear",
     "transition-[translate,box-shadow] duration-[150ms] ease-[cubic-bezier(.67,1.5,.95,1.24)]",
     "font-[Walter_Turncoat]",
   ),
   {
     variants: {
       variant: {
-        default: "",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
         primary: "bg-primary text-primary-foreground hover:bg-primary/90",
         accent: "bg-accent text-accent-foreground hover:bg-accent/90",
         destructive:
@@ -35,7 +36,7 @@ const buttonVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 border-0 shadow-none",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {

@@ -30,7 +30,7 @@ export default function Home() {
       {/* ── Hero ────────────────────────────────────────────────────────── */}
       <section className="flex flex-col items-center px-6 gap-8">
         <Filters.Displacement scale={3} frequency={2}>
-          <Button className="bg-card w-80 h-32 text-7xl m-32">Pow UI</Button>
+          <Button className="bg-card text-foreground dark:text-white w-80 h-32 text-7xl m-32">Pow UI</Button>
         </Filters.Displacement>
 
         <div className="mx-auto max-w-2xl bg-card border-4 border-foreground shadow-[-8px_8px_0_0_var(--foreground)] overflow-hidden">
@@ -135,7 +135,7 @@ export default function Home() {
           <div className="flex flex-col gap-4">
             <Filters.Displacement scale={2} frequency={0.06}>
               <div className="border-4 border-foreground px-6 py-2 bg-card shadow-[-4px_4px_0_var(--foreground)] inline-block">
-                <span className="font-[Bangers] text-5xl tracking-widest text-foreground">
+                <span className="font-[Bangers] text-5xl tracking-widest text-foreground dark:text-white">
                   POW UI
                 </span>
               </div>

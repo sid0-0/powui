@@ -2,11 +2,15 @@
 
 import { useEffect, useRef, type PropsWithChildren } from "react";
 
-let filterId = 1;
+let filterId = 0;
 const useCreateFilterId = () => {
+  const mounted = useRef(false);
   const id = useRef(filterId);
-  useEffect(() => {
+  if (!mounted.current) {
     filterId += 1;
+  }
+  useEffect(() => {
+    mounted.current = true;
   }, []);
   return `pow-filter-${id.current}`;
 };
@@ -16,7 +20,7 @@ const SVGWithFilterDefs = (
     filterBody: React.ReactNode;
     className?: string;
     containerClassName?: string;
-  }>
+  }>,
 ) => {
   const {
     children,
@@ -45,7 +49,7 @@ const Displacement = (
     frequency?: number;
     className?: string;
     containerClassName?: string;
-  }>
+  }>,
 ) => {
   const {
     scale = 2,
@@ -86,7 +90,7 @@ const ChromaAberr = (
     offset?: number;
     className?: string;
     containerClassName?: string;
-  }>
+  }>,
 ) => {
   const {
     offset = 0.7,
@@ -137,7 +141,7 @@ const Posterize = (
     className?: string;
     containerClassName?: string;
     buckets?: number;
-  }>
+  }>,
 ) => {
   const {
     buckets = 5,
@@ -147,7 +151,7 @@ const Posterize = (
   } = props;
   const range = Array.from(
     { length: buckets },
-    (_, idx) => idx / (buckets - 1)
+    (_, idx) => idx / (buckets - 1),
   ).join(" ");
 
   return (

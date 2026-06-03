@@ -25,6 +25,7 @@ const GROUPS: DemoGroup[] = [
   "Primitives",
   "Layout",
   "Visual Effects",
+  "Filters",
   "Feedback",
 ];
 
@@ -32,7 +33,7 @@ const GROUPS: DemoGroup[] = [
 
 function DemoPanel({ demo }: { demo: ComponentDemo }) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-full overflow-y-auto">
       {/* Header */}
       <div
         className="spotty-dot-sm spotty-spacing-sm spotty-opacity-25 spotty-bg-primary text-primary-foreground
@@ -49,16 +50,12 @@ function DemoPanel({ demo }: { demo: ComponentDemo }) {
       </div>
 
       {/* Demo Area */}
-      <div className="flex-1 p-8 overflow-auto">
-        <div
-          className="spotty-dot-sm spotty-spacing-sm spotty-opacity-20 spotty-bg-primary text-primary-foreground
-                     border-4 border-foreground p-8 md:p-12
-                     flex items-start justify-center min-h-[300px]"
-        >
+      <div className="flex-1 min-h-fit p-8">
+        <div className="bg-primary text-primary-foreground border-4 border-foreground p-8 md:p-12 flex items-start justify-center h-full min-h-fit">
           <Filters.Displacement
             scale={1.5}
             frequency={0.05}
-            className="w-full max-w-2xl"
+            containerClassName="w-full max-w-2xl"
           >
             <div
               className="bg-card text-card-foreground border-4 border-foreground shadow-[-8px_8px_0_0_var(--foreground)]
@@ -92,24 +89,14 @@ export default function ComponentsPage() {
           history.replaceState(null, "", `#${v}`);
         }
       }}
-      className="min-h-[calc(100vh-3.5rem)] bg-transparent"
+      className="flex-grow-1 min-h-0 bg-transparent overflow-hidden"
     >
-      <Filters.Displacement>
+      <Filters.Displacement scale={2} className="size-full overflow-auto">
         {/* ── Sidebar ─────────────────────────────────────────────────── */}
-        <Sidebar collapsible="offcanvas" className="border-r-4 border-foreground">
-          {/* Back link */}
-          <SidebarHeader className="p-0">
-            <Link
-              href="/"
-              className="flex items-center gap-2 px-4 py-3 border-b-4 border-foreground
-                       spotty-dot-sm spotty-spacing-sm spotty-opacity-30 spotty-bg-primary
-                       font-[Bangers] text-xl tracking-wide text-primary-foreground no-underline
-                       hover:opacity-80 transition-opacity"
-            >
-              ← POW UI
-            </Link>
-          </SidebarHeader>
-
+        <Sidebar
+          collapsible="offcanvas"
+          className="border-r-4 border-foreground"
+        >
           <SidebarContent className="bg-card">
             {GROUPS.map((group) => (
               <SidebarGroup key={group}>

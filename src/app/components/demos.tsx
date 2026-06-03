@@ -22,21 +22,27 @@ import { comicToast } from "@/components/ui/sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const BurstWrapper = dynamic(
-  () => import("@/components/ui/burst").then((m) => ({ default: m.BurstWrapper })),
-  { ssr: false }
+  () =>
+    import("@/components/ui/burst").then((m) => ({ default: m.BurstWrapper })),
+  { ssr: false },
 );
 const SpiderSenseWrapper = dynamic(
   () =>
     import("@/components/ui/spiderSenseWrapper").then((m) => ({
       default: m.SpiderSenseWrapper,
     })),
-  { ssr: false }
+  { ssr: false },
 );
 import { useEventOnomatopoeia } from "@/components/ui/onomatopoeia";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-export type DemoGroup = "Primitives" | "Layout" | "Visual Effects" | "Feedback";
+export type DemoGroup =
+  | "Primitives"
+  | "Layout"
+  | "Visual Effects"
+  | "Feedback"
+  | "Filters";
 
 export type ComponentDemo = {
   id: string;
@@ -70,7 +76,9 @@ function ButtonDemo() {
         </div>
       </div>
       <div>
-        <h4 className="font-[Bangers] text-xl tracking-wide mb-3">With Filter</h4>
+        <h4 className="font-[Bangers] text-xl tracking-wide mb-3">
+          With Filter
+        </h4>
         <Filters.Displacement scale={4} frequency={0.25}>
           <Button className="spotty-dot-sm spotty-spacing-sm spotty-bg-primary w-full h-12 text-lg font-[Bangers] tracking-widest">
             DISPLACEMENT BUTTON
@@ -81,7 +89,9 @@ function ButtonDemo() {
         <h4 className="font-[Bangers] text-xl tracking-wide mb-3">Disabled</h4>
         <div className="flex gap-3">
           <Button disabled>Disabled</Button>
-          <Button variant="destructive" disabled>Disabled</Button>
+          <Button variant="destructive" disabled>
+            Disabled
+          </Button>
         </div>
       </div>
     </div>
@@ -109,7 +119,9 @@ function AvatarDemo() {
         </div>
       </div>
       <div>
-        <h4 className="font-[Bangers] text-xl tracking-wide mb-3">Border Colors</h4>
+        <h4 className="font-[Bangers] text-xl tracking-wide mb-3">
+          Border Colors
+        </h4>
         <div className="flex gap-6 items-center flex-wrap">
           <Avatar className="size-16">
             <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alice" />
@@ -136,7 +148,9 @@ function AvatarDemo() {
             <AvatarFallback>POW</AvatarFallback>
           </Avatar>
           <Avatar className="size-16 border-amber-500">
-            <AvatarFallback className="font-[Bangers] text-2xl">!</AvatarFallback>
+            <AvatarFallback className="font-[Bangers] text-2xl">
+              !
+            </AvatarFallback>
           </Avatar>
         </div>
       </div>
@@ -162,8 +176,8 @@ function CheckboxDemo() {
   ] as const;
 
   return (
-    <div className="flex flex-col gap-4 w-full bg-amber-800 dark:bg-amber-700">
-      <h4 className="font-[Bangers] text-xl tracking-wide mb-1">Interactive List</h4>
+    <div className="flex flex-col px-6 py-12 gap-4 w-full bg-amber-800 items-baseline dark:bg-amber-700">
+      <h4 className="font-[Bangers] text-xl tracking-wide mb-1">To-do List</h4>
       {list.map(({ key, label }) => (
         <Checkbox
           key={key}
@@ -175,9 +189,6 @@ function CheckboxDemo() {
           onCheckedChange={() => toggle(key)}
         />
       ))}
-      <p className="text-sm text-muted-foreground font-bold mt-2">
-        {Object.values(items).filter(Boolean).length} of {list.length} checked
-      </p>
     </div>
   );
 }
@@ -188,11 +199,15 @@ function SliderDemo() {
   const [thickVal, setThickVal] = useState([75]);
 
   return (
-    <div className="flex flex-col gap-8 w-full max-w-md">
+    <div className="flex flex-col gap-8 w-full">
       <div>
         <div className="flex justify-between mb-2">
-          <h4 className="font-[Bangers] text-xl tracking-wide">Circular Thumb</h4>
-          <span className="font-[Bangers] text-2xl text-amber-600 dark:text-amber-400">{circVal[0]}</span>
+          <h4 className="font-[Bangers] text-xl tracking-wide">
+            Circular Thumb
+          </h4>
+          <span className="font-[Bangers] text-2xl text-amber-600 dark:text-amber-400">
+            {circVal[0]}
+          </span>
         </div>
         <Slider
           shape="circular"
@@ -205,8 +220,12 @@ function SliderDemo() {
       </div>
       <div>
         <div className="flex justify-between mb-2">
-          <h4 className="font-[Bangers] text-xl tracking-wide">Rectangular Thumb</h4>
-          <span className="font-[Bangers] text-2xl text-amber-600 dark:text-amber-400">{rectVal[0]}</span>
+          <h4 className="font-[Bangers] text-xl tracking-wide">
+            Rectangular Thumb
+          </h4>
+          <span className="font-[Bangers] text-2xl text-amber-600 dark:text-amber-400">
+            {rectVal[0]}
+          </span>
         </div>
         <Slider
           shape="rectangular"
@@ -220,7 +239,9 @@ function SliderDemo() {
       <div>
         <div className="flex justify-between mb-2">
           <h4 className="font-[Bangers] text-xl tracking-wide">Thick Track</h4>
-          <span className="font-[Bangers] text-2xl text-amber-600 dark:text-amber-400">{thickVal[0]}</span>
+          <span className="font-[Bangers] text-2xl text-amber-600 dark:text-amber-400">
+            {thickVal[0]}
+          </span>
         </div>
         <Slider
           value={thickVal}
@@ -234,40 +255,58 @@ function SliderDemo() {
   );
 }
 
-
 function TabsDemo() {
   return (
     <div className="flex flex-col gap-8 w-full">
       <div>
-        <h4 className="font-[Bangers] text-xl tracking-wide mb-3">Top Placement</h4>
+        <h4 className="font-[Bangers] text-xl tracking-wide mb-3">
+          Top Placement
+        </h4>
         <Tabs defaultValue="one" tabsPlacement="top">
           <TabsList>
             <TabsTrigger value="one">Panel One</TabsTrigger>
             <TabsTrigger value="two">Panel Two</TabsTrigger>
             <TabsTrigger value="three">Panel Three</TabsTrigger>
           </TabsList>
-          <TabsContent value="one" className="border-4 border-t-0 border-foreground p-4 bg-card text-card-foreground">
+          <TabsContent
+            value="one"
+            className="border-4 border-t-0 border-foreground p-4 bg-card text-card-foreground"
+          >
             <p className="font-bold">Content for Panel One — POW!</p>
           </TabsContent>
-          <TabsContent value="two" className="border-4 border-t-0 border-foreground p-4 bg-card text-card-foreground">
+          <TabsContent
+            value="two"
+            className="border-4 border-t-0 border-foreground p-4 bg-card text-card-foreground"
+          >
             <p className="font-bold">Content for Panel Two — ZAP!</p>
           </TabsContent>
-          <TabsContent value="three" className="border-4 border-t-0 border-foreground p-4 bg-card text-card-foreground">
+          <TabsContent
+            value="three"
+            className="border-4 border-t-0 border-foreground p-4 bg-card text-card-foreground"
+          >
             <p className="font-bold">Content for Panel Three — BAM!</p>
           </TabsContent>
         </Tabs>
       </div>
       <div>
-        <h4 className="font-[Bangers] text-xl tracking-wide mb-3">Left Placement</h4>
+        <h4 className="font-[Bangers] text-xl tracking-wide mb-3">
+          Left Placement
+        </h4>
         <Tabs defaultValue="x" tabsPlacement="left" tabWidth="100px">
           <TabsList>
             <TabsTrigger value="x">Alpha</TabsTrigger>
             <TabsTrigger value="y">Beta</TabsTrigger>
           </TabsList>
-          <TabsContent value="x" className="border-4 border-l-0 border-foreground p-4 bg-card text-card-foreground flex-1">
+          <TabsContent
+            value="x"
+            className="border-4 border-l-0 border-foreground p-4 bg-card text-card-foreground flex-1"
+          >
             <p className="font-bold">Alpha content — KAPOW!</p>
           </TabsContent>
-          <TabsContent value="y" className="border-4 border-l-0 border-foreground p-4 bg-card text-card-foreground flex-1">
+          <TabsContent
+            value="y"
+            className="border-4 border-l-0 border-foreground p-4 bg-card text-card-foreground flex-1"
+          >
             <p className="font-bold">Beta content — WHAM!</p>
           </TabsContent>
         </Tabs>
@@ -279,7 +318,9 @@ function TabsDemo() {
 function SheetDemo() {
   return (
     <div className="flex flex-col gap-4 w-full">
-      <h4 className="font-[Bangers] text-xl tracking-wide mb-2">Open from any side</h4>
+      <h4 className="font-[Bangers] text-xl tracking-wide mb-2">
+        Open from any side
+      </h4>
       <div className="flex flex-wrap gap-3 justify-center">
         {(["right", "left", "top", "bottom"] as const).map((side) => (
           <Sheet key={side}>
@@ -298,7 +339,9 @@ function SheetDemo() {
                 </SheetDescription>
               </SheetHeader>
               <div className="p-6 flex flex-col gap-4">
-                <p className="font-bold">This is a Sheet component sliding in from the {side}.</p>
+                <p className="font-bold">
+                  This is a Sheet component sliding in from the {side}.
+                </p>
                 <Button variant="secondary">Do something heroic</Button>
               </div>
             </SheetContent>
@@ -319,7 +362,10 @@ function BurstDemo() {
         <BurstWrapper
           heightVariance={variance[0]}
           peakSeparation={separation[0]}
-          borders={[{ color: "black", scale: 1.08 }, { color: "#F3B807", scale: 1.16 }]}
+          borders={[
+            { color: "black", scale: 1.08 },
+            { color: "#F3B807", scale: 1.16 },
+          ]}
           curvedDips={false}
         >
           <div className="bg-card text-card-foreground border-4 border-foreground px-10 py-6 text-center font-black text-2xl italic uppercase">
@@ -330,21 +376,49 @@ function BurstDemo() {
       <div className="flex flex-col gap-3">
         <div className="flex justify-between">
           <label className="font-bold">Height Variance</label>
-          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">{variance[0]}</span>
+          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">
+            {variance[0]}
+          </span>
         </div>
-        <Slider value={variance} onValueChange={setVariance} min={5} max={50} step={1} thickness={16} />
+        <Slider
+          value={variance}
+          onValueChange={setVariance}
+          min={5}
+          max={50}
+          step={1}
+          thickness={16}
+        />
         <div className="flex justify-between">
           <label className="font-bold">Peak Separation</label>
-          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">{separation[0]}</span>
+          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">
+            {separation[0]}
+          </span>
         </div>
-        <Slider value={separation} onValueChange={setSeparation} min={10} max={80} step={1} thickness={16} />
+        <Slider
+          value={separation}
+          onValueChange={setSeparation}
+          min={10}
+          max={80}
+          step={1}
+          thickness={16}
+        />
       </div>
       <div className="flex gap-4 justify-center flex-wrap">
-        <BurstWrapper huggingStyle="elliptical" borders={[{ color: "black", scale: 1.1 }]}>
-          <div className="bg-amber-400 px-6 py-3 font-black text-xl">Elliptical</div>
+        <BurstWrapper
+          huggingStyle="elliptical"
+          borders={[{ color: "black", scale: 1.1 }]}
+        >
+          <div className="bg-amber-400 px-6 py-3 font-black text-xl">
+            Elliptical
+          </div>
         </BurstWrapper>
-        <BurstWrapper huggingStyle="rectangular" borders={[{ color: "black", scale: 1.1 }]}>
-          <div className="bg-amber-400 px-6 py-3 font-black text-xl">Rectangular</div>
+        <BurstWrapper
+          huggingStyle="rectangular"
+          borders={[{ color: "black", scale: 1.1 }]}
+        >
+          <div className="bg-amber-400 px-6 py-3 font-black text-xl">
+            Rectangular
+          </div>
         </BurstWrapper>
       </div>
     </div>
@@ -371,14 +445,32 @@ function CloudDemo() {
       <div className="flex flex-col gap-3">
         <div className="flex justify-between">
           <label className="font-bold">Height Variance</label>
-          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">{variance[0]}</span>
+          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">
+            {variance[0]}
+          </span>
         </div>
-        <Slider value={variance} onValueChange={setVariance} min={5} max={40} step={1} thickness={16} />
+        <Slider
+          value={variance}
+          onValueChange={setVariance}
+          min={5}
+          max={40}
+          step={1}
+          thickness={16}
+        />
         <div className="flex justify-between">
           <label className="font-bold">Flattery Factor</label>
-          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">{flattery[0].toFixed(1)}</span>
+          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">
+            {flattery[0].toFixed(1)}
+          </span>
         </div>
-        <Slider value={flattery} onValueChange={setFlattery} min={0.5} max={4} step={0.1} thickness={16} />
+        <Slider
+          value={flattery}
+          onValueChange={setFlattery}
+          min={0.5}
+          max={4}
+          step={0.1}
+          thickness={16}
+        />
       </div>
     </div>
   );
@@ -392,16 +484,24 @@ function DisplacementDemo() {
     <div className="flex flex-col gap-6 w-full">
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
-          <span className="font-[Bangers] text-lg tracking-wide text-center">Original</span>
+          <span className="font-[Bangers] text-lg tracking-wide text-center">
+            Original
+          </span>
           <div className="bg-primary text-primary-foreground border-4 border-foreground p-6 text-center">
-            <span className="font-[Bangers] text-4xl tracking-widest text-primary-foreground">POW UI</span>
+            <span className="font-[Bangers] text-4xl tracking-widest text-primary-foreground">
+              POW UI
+            </span>
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <span className="font-[Bangers] text-lg tracking-wide text-center">Displaced</span>
+          <span className="font-[Bangers] text-lg tracking-wide text-center">
+            Displaced
+          </span>
           <Filters.Displacement scale={scale[0]} frequency={freq[0]}>
             <div className="bg-primary text-primary-foreground border-4 border-foreground p-6 text-center">
-              <span className="font-[Bangers] text-4xl tracking-widest text-primary-foreground">POW UI</span>
+              <span className="font-[Bangers] text-4xl tracking-widest text-primary-foreground">
+                POW UI
+              </span>
             </div>
           </Filters.Displacement>
         </div>
@@ -409,14 +509,32 @@ function DisplacementDemo() {
       <div className="flex flex-col gap-3">
         <div className="flex justify-between">
           <label className="font-bold">Scale</label>
-          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">{scale[0]}</span>
+          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">
+            {scale[0]}
+          </span>
         </div>
-        <Slider value={scale} onValueChange={setScale} min={1} max={30} step={1} thickness={16} />
+        <Slider
+          value={scale}
+          onValueChange={setScale}
+          min={1}
+          max={30}
+          step={1}
+          thickness={16}
+        />
         <div className="flex justify-between">
           <label className="font-bold">Frequency</label>
-          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">{freq[0].toFixed(2)}</span>
+          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">
+            {freq[0].toFixed(2)}
+          </span>
         </div>
-        <Slider value={freq} onValueChange={setFreq} min={0.01} max={0.8} step={0.01} thickness={16} />
+        <Slider
+          value={freq}
+          onValueChange={setFreq}
+          min={0.01}
+          max={0.8}
+          step={0.01}
+          thickness={16}
+        />
       </div>
     </div>
   );
@@ -429,16 +547,24 @@ function ChromaAberrDemo() {
     <div className="flex flex-col gap-6 w-full">
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
-          <span className="font-[Bangers] text-lg tracking-wide text-center">Original</span>
+          <span className="font-[Bangers] text-lg tracking-wide text-center">
+            Original
+          </span>
           <div className="bg-card text-card-foreground border-4 border-foreground p-6 text-center">
-            <span className="font-[Bangers] text-4xl tracking-widest">POW UI</span>
+            <span className="font-[Bangers] text-4xl tracking-widest">
+              POW UI
+            </span>
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <span className="font-[Bangers] text-lg tracking-wide text-center">Chroma Aberr.</span>
+          <span className="font-[Bangers] text-lg tracking-wide text-center">
+            Chroma Aberr.
+          </span>
           <Filters.ChromaAberr offset={offset[0]}>
             <div className="bg-card text-card-foreground border-4 border-foreground p-6 text-center">
-              <span className="font-[Bangers] text-4xl tracking-widest">POW UI</span>
+              <span className="font-[Bangers] text-4xl tracking-widest">
+                POW UI
+              </span>
             </div>
           </Filters.ChromaAberr>
         </div>
@@ -446,9 +572,18 @@ function ChromaAberrDemo() {
       <div className="flex flex-col gap-3">
         <div className="flex justify-between">
           <label className="font-bold">RGB Offset</label>
-          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">{offset[0]}</span>
+          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">
+            {offset[0]}
+          </span>
         </div>
-        <Slider value={offset} onValueChange={setOffset} min={0} max={15} step={0.5} thickness={16} />
+        <Slider
+          value={offset}
+          onValueChange={setOffset}
+          min={0}
+          max={15}
+          step={0.5}
+          thickness={16}
+        />
       </div>
     </div>
   );
@@ -461,16 +596,24 @@ function PosterizeDemo() {
     <div className="flex flex-col gap-6 w-full">
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
-          <span className="font-[Bangers] text-lg tracking-wide text-center">Original</span>
+          <span className="font-[Bangers] text-lg tracking-wide text-center">
+            Original
+          </span>
           <div className="bg-gradient-to-br from-amber-400 to-red-500 border-4 border-foreground p-6 text-center">
-            <span className="font-[Bangers] text-4xl tracking-widest text-white">POW UI</span>
+            <span className="font-[Bangers] text-4xl tracking-widest text-white">
+              POW UI
+            </span>
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <span className="font-[Bangers] text-lg tracking-wide text-center">Posterized</span>
+          <span className="font-[Bangers] text-lg tracking-wide text-center">
+            Posterized
+          </span>
           <Filters.Posterize buckets={buckets[0]}>
             <div className="bg-gradient-to-br from-amber-400 to-red-500 border-4 border-foreground p-6 text-center">
-              <span className="font-[Bangers] text-4xl tracking-widest text-white">POW UI</span>
+              <span className="font-[Bangers] text-4xl tracking-widest text-white">
+                POW UI
+              </span>
             </div>
           </Filters.Posterize>
         </div>
@@ -478,9 +621,18 @@ function PosterizeDemo() {
       <div className="flex flex-col gap-3">
         <div className="flex justify-between">
           <label className="font-bold">Color Buckets</label>
-          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">{buckets[0]}</span>
+          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">
+            {buckets[0]}
+          </span>
         </div>
-        <Slider value={buckets} onValueChange={setBuckets} min={2} max={10} step={1} thickness={16} />
+        <Slider
+          value={buckets}
+          onValueChange={setBuckets}
+          min={2}
+          max={10}
+          step={1}
+          thickness={16}
+        />
       </div>
     </div>
   );
@@ -489,31 +641,47 @@ function PosterizeDemo() {
 function SpiderSenseDemo() {
   return (
     <div className="flex flex-col gap-8 w-full">
-      <h4 className="font-[Bangers] text-xl tracking-wide">Hover each to trigger</h4>
-      <div className="flex flex-wrap gap-6 justify-center">
+      <h4 className="font-[Bangers] text-xl tracking-wide">
+        Interact with each to trigger
+      </h4>
+      <div className="flex flex-col flex-wrap gap-12 justify-center">
         <div className="flex flex-col items-center gap-2">
           <SpiderSenseWrapper trigger="hover" shape="zigzag">
             <Button size="lg" className="font-[Bangers] tracking-wider text-lg">
               Zigzag Hover
             </Button>
           </SpiderSenseWrapper>
-          <span className="text-sm font-bold text-muted-foreground">shape: zigzag</span>
+          <span className="text-sm font-bold text-muted-foreground">
+            shape: zigzag
+          </span>
         </div>
         <div className="flex flex-col items-center gap-2">
           <SpiderSenseWrapper trigger="hover" shape="line">
-            <Button size="lg" variant="secondary" className="font-[Bangers] tracking-wider text-lg">
+            <Button
+              size="lg"
+              variant="secondary"
+              className="font-[Bangers] tracking-wider text-lg"
+            >
               Line Hover
             </Button>
           </SpiderSenseWrapper>
-          <span className="text-sm font-bold text-muted-foreground">shape: line</span>
+          <span className="text-sm font-bold text-muted-foreground">
+            shape: line
+          </span>
         </div>
         <div className="flex flex-col items-center gap-2">
           <SpiderSenseWrapper trigger="click" shape="zigzag">
-            <Button size="lg" variant="outline" className="font-[Bangers] tracking-wider text-lg">
+            <Button
+              size="lg"
+              variant="outline"
+              className="font-[Bangers] tracking-wider text-lg"
+            >
               Click Me!
             </Button>
           </SpiderSenseWrapper>
-          <span className="text-sm font-bold text-muted-foreground">trigger: click</span>
+          <span className="text-sm font-bold text-muted-foreground">
+            trigger: click
+          </span>
         </div>
       </div>
     </div>
@@ -524,12 +692,18 @@ function TooltipDemo() {
   return (
     <div className="flex flex-col gap-6 w-full">
       <div>
-        <h4 className="font-[Bangers] text-xl tracking-wide mb-4">Normal Style — All Sides</h4>
+        <h4 className="font-[Bangers] text-xl tracking-wide mb-4">
+          Normal Style — All Sides
+        </h4>
         <div className="flex flex-wrap gap-6 justify-center items-center py-4">
           {(["top", "bottom", "left", "right"] as const).map((side) => (
             <Tooltip
               key={side}
-              triggerContent={<Button variant="outline" className="capitalize">{side}</Button>}
+              triggerContent={
+                <Button variant="outline" className="capitalize">
+                  {side}
+                </Button>
+              }
               content={`${side.charAt(0).toUpperCase() + side.slice(1)} tooltip!`}
               side={side}
               type="normal"
@@ -539,7 +713,9 @@ function TooltipDemo() {
       </div>
       <div className="border-t-4 border-foreground my-2" />
       <div>
-        <h4 className="font-[Bangers] text-xl tracking-wide mb-4">Bubble Style</h4>
+        <h4 className="font-[Bangers] text-xl tracking-wide mb-4">
+          Bubble Style
+        </h4>
         <div className="flex flex-wrap gap-6 justify-center items-center py-4">
           <Tooltip
             triggerContent={<Button>Bubble (normal path)</Button>}
@@ -549,7 +725,9 @@ function TooltipDemo() {
             bubblePath="normal"
           />
           <Tooltip
-            triggerContent={<Button variant="secondary">Bubble (arc path)</Button>}
+            triggerContent={
+              <Button variant="secondary">Bubble (arc path)</Button>
+            }
             content="Arcing through the air!"
             side="top"
             type="bubbles"
@@ -602,16 +780,30 @@ function ToastDemo() {
 
   return (
     <div className="flex flex-col gap-4 w-full">
-      <h4 className="font-[Bangers] text-xl tracking-wide mb-2">Click to fire each variant</h4>
+      <h4 className="font-[Bangers] text-xl tracking-wide mb-2">
+        Click to fire each variant
+      </h4>
       <div className="flex flex-wrap gap-3">
         {toasts.map(({ label, variant, title, description }) => (
           <Button
             key={variant}
             onClick={() => comicToast[variant](title, description)}
-            variant={variant === "error" ? "destructive" : variant === "default" ? "default" : "secondary"}
-            className={variant === "success" ? "bg-green-600 text-white border-foreground hover:bg-green-700" :
-                       variant === "warning" ? "bg-orange-500 text-white border-foreground hover:bg-orange-600" :
-                       variant === "info" ? "bg-blue-600 text-white border-foreground hover:bg-blue-700" : ""}
+            variant={
+              variant === "error"
+                ? "destructive"
+                : variant === "default"
+                  ? "default"
+                  : "secondary"
+            }
+            className={
+              variant === "success"
+                ? "bg-green-600 text-white border-foreground hover:bg-green-700"
+                : variant === "warning"
+                  ? "bg-orange-500 text-white border-foreground hover:bg-orange-600"
+                  : variant === "info"
+                    ? "bg-blue-600 text-white border-foreground hover:bg-blue-700"
+                    : ""
+            }
           >
             {label} Toast
           </Button>
@@ -666,10 +858,13 @@ function SkeletonDemo() {
             </div>
           </div>
           <p className="font-[Walter_Turncoat] font-bold text-lg">
-            Making the web more exciting, one punch at a time! Built with React, Tailwind, and pure comic energy.
+            Making the web more exciting, one punch at a time! Built with React,
+            Tailwind, and pure comic energy.
           </p>
           <div className="border-4 border-foreground rounded-xl spotty-dot-sm spotty-spacing-sm spotty-opacity-20 spotty-bg-primary text-primary-foreground h-32 flex items-center justify-center">
-            <span className="font-[Bangers] text-3xl tracking-widest">Content loaded!</span>
+            <span className="font-[Bangers] text-3xl tracking-widest">
+              Content loaded!
+            </span>
           </div>
         </div>
       )}
@@ -678,14 +873,18 @@ function SkeletonDemo() {
 }
 
 function OnomatopoeiaDemo() {
-  const { domElement, trigger } = useEventOnomatopoeia({ showClickBurst: true });
+  const { domElement, trigger } = useEventOnomatopoeia({
+    showClickBurst: true,
+  });
 
   const words = ["POW!", "ZAP!", "BAM!", "WHAM!", "CRASH!"];
 
   return (
     <div className="flex flex-col gap-4 w-full">
       {domElement}
-      <h4 className="font-[Bangers] text-xl tracking-wide">Click the buttons to trigger effects!</h4>
+      <h4 className="font-[Bangers] text-xl tracking-wide">
+        Click the buttons to trigger effects!
+      </h4>
       <div className="flex flex-wrap gap-3">
         {words.map((word) => (
           <Button
@@ -709,7 +908,8 @@ function OnomatopoeiaDemo() {
         ))}
       </div>
       <p className="text-sm font-bold text-muted-foreground">
-        The GlobalClickEffect in the layout also fires on every click across the site.
+        The GlobalClickEffect in the layout also fires on every click across the
+        site.
       </p>
     </div>
   );
@@ -785,7 +985,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
   {
     id: "displacement",
     label: "Displacement",
-    group: "Visual Effects",
+    group: "Filters",
     description:
       "SVG feTurbulence + feDisplacementMap filter for a wavy, organic distortion effect.",
     demo: <DisplacementDemo />,
@@ -793,7 +993,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
   {
     id: "chromaaberr",
     label: "Chroma Aberr.",
-    group: "Visual Effects",
+    group: "Filters",
     description:
       "RGB channel separation for a retro chromatic aberration effect — like a busted CRT.",
     demo: <ChromaAberrDemo />,
@@ -801,7 +1001,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
   {
     id: "posterize",
     label: "Posterize",
-    group: "Visual Effects",
+    group: "Filters",
     description:
       "Reduces the color palette to a fixed number of buckets, creating a flat screen-print look.",
     demo: <PosterizeDemo />,
