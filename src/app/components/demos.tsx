@@ -362,13 +362,10 @@ function BurstDemo() {
         <BurstWrapper
           heightVariance={variance[0]}
           peakSeparation={separation[0]}
-          borders={[
-            { color: "black", scale: 1.08 },
-            { color: "#F3B807", scale: 1.16 },
-          ]}
-          curvedDips={false}
+          borders={[{ color: "black", scale: 1.1 }]}
+          curvedDips
         >
-          <div className="bg-card text-card-foreground border-4 border-foreground px-10 py-6 text-center font-black text-2xl italic uppercase">
+          <div className="bg-accent text-card-foreground p-10 text-center font-black text-2xl italic uppercase">
             POW!
           </div>
         </BurstWrapper>
@@ -384,7 +381,7 @@ function BurstDemo() {
           value={variance}
           onValueChange={setVariance}
           min={5}
-          max={50}
+          max={20}
           step={1}
           thickness={16}
         />
@@ -403,20 +400,14 @@ function BurstDemo() {
           thickness={16}
         />
       </div>
-      <div className="flex gap-4 justify-center flex-wrap">
-        <BurstWrapper
-          huggingStyle="elliptical"
-          borders={[{ color: "black", scale: 1.1 }]}
-        >
-          <div className="bg-amber-400 px-6 py-3 font-black text-xl">
+      <div className="flex gap-4 justify-center items-center flex-wrap">
+        <BurstWrapper huggingStyle="elliptical">
+          <div className="bg-accent flex items-center justify-center p-8 aspect-square font-black">
             Elliptical
           </div>
         </BurstWrapper>
-        <BurstWrapper
-          huggingStyle="rectangular"
-          borders={[{ color: "black", scale: 1.1 }]}
-        >
-          <div className="bg-amber-400 px-6 py-3 font-black text-xl">
+        <BurstWrapper peakSeparation={30} huggingStyle="rectangular">
+          <div className="bg-accent flex items-center justify-center h-fit p-10 font-black text-xl">
             Rectangular
           </div>
         </BurstWrapper>
@@ -435,9 +426,9 @@ function CloudDemo() {
         <CloudWrapper
           heightVariance={variance[0]}
           flatteryFactor={flattery[0]}
-          huggingStyle="rectangular"
+          huggingStyle="elliptical"
         >
-          <div className="bg-card text-card-foreground border-4 border-foreground px-10 py-6 text-center font-bold text-xl min-w-[220px]">
+          <div className="bg-accent text-card-foreground size-40 p-14 flex items-center justify-center text-center font-bold text-xl min-w-[220px]">
             I&apos;m floating on a cloud!
           </div>
         </CloudWrapper>
