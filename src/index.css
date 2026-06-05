@@ -32,7 +32,7 @@
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.911 0.090 89.7);
+  --accent: oklch(0.911 0.09 89.7);
   --accent-foreground: oklch(0.145 0 0);
   --toast-default-bg: #f59e0b;
   --toast-default-badge-bg: #fcd34d;
@@ -86,7 +86,6 @@ h1 {
 button {
   cursor: pointer;
 }
-
 
 /* Ensure all spotty utility combinations are included in the CSS output
    even when used via dynamic class names (e.g. template literals in stories) */
@@ -158,7 +157,8 @@ button {
 
 /* spotty-bg-* — renders the stipple pattern using the configured variables */
 @utility spotty-bg-* {
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at center,
       rgba(0, 0, 0, var(--spotty-opacity, 0.3)) var(--spotty-dot, 0.02rem),
       --value([color]) 0
@@ -170,7 +170,8 @@ button {
 /* spotty-bg-diagonal-* — offset Ben-Day dot grid */
 @utility spotty-bg-diagonal-* {
   background-color: --value([color]);
-  background-image: radial-gradient(
+  background-image:
+    radial-gradient(
       circle at center,
       black var(--spotty-dot, 0.02rem),
       transparent 0
@@ -180,8 +181,11 @@ button {
       black var(--spotty-dot, 0.02rem),
       transparent 0
     );
-  background-size: calc(var(--spotty-spacing, 0.15rem) * 2) calc(var(--spotty-spacing, 0.15rem) * 2);
-  background-position: 0 0, var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
+  background-size: calc(var(--spotty-spacing, 0.15rem) * 2)
+    calc(var(--spotty-spacing, 0.15rem) * 2);
+  background-position:
+    0 0,
+    var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
 }
 
 @utility spotty-bg-primary {
@@ -284,12 +288,12 @@ button {
   --sidebar-accent-foreground: oklch(0.96 0.008 70);
   --sidebar-border: oklch(0.4 0.02 70 / 22%);
   --sidebar-ring: oklch(0.556 0 0);
-  --toast-default-bg: oklch(0.50 0.12 60);
-  --toast-default-badge-bg: oklch(0.70 0.10 80);
+  --toast-default-bg: oklch(0.5 0.12 60);
+  --toast-default-badge-bg: oklch(0.7 0.1 80);
   --toast-success-bg: oklch(0.48 0.13 142);
-  --toast-success-badge-bg: oklch(0.70 0.12 142);
-  --toast-error-bg: oklch(0.50 0.16 27);
-  --toast-error-badge-bg: oklch(0.70 0.13 27);
+  --toast-success-badge-bg: oklch(0.7 0.12 142);
+  --toast-error-bg: oklch(0.5 0.16 27);
+  --toast-error-badge-bg: oklch(0.7 0.13 27);
   --toast-warning-bg: oklch(0.55 0.15 50);
   --toast-warning-badge-bg: oklch(0.72 0.12 50);
   --toast-info-bg: oklch(0.48 0.14 245);
@@ -302,5 +306,29 @@ button {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@keyframes pow-skeleton {
+  0% {
+    background-color: var(--primary);
+    transform: scale(1);
+  }
+  50% {
+    background-color: var(--accent);
+    transform: scale(1.02);
+  }
+  100% {
+    background-color: var(--primary);
+    transform: scale(1);
+  }
+}
+
+@keyframes pow-skeleton-sweep {
+  0% {
+    transform: translateX(-110%);
+  }
+  100% {
+    transform: translateX(110%);
   }
 }

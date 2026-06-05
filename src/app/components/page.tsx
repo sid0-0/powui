@@ -51,7 +51,7 @@ function DemoPanel({ demo }: { demo: ComponentDemo }) {
 
       {/* Demo Area */}
       <div className="flex-1 min-h-fit p-8">
-        <div className="bg-primary text-primary-foreground border-4 border-foreground p-8 md:p-12 flex items-start justify-center h-full min-h-fit">
+        <div className="bg-primary text-primary-foreground border-4 border-foreground p-8 md:p-12 flex items-start justify-center min-h-fit">
           <Filters.Displacement
             scale={1.5}
             frequency={0.05}
