@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -250,6 +251,39 @@ function SliderDemo() {
           step={1}
           thickness={32}
         />
+      </div>
+    </div>
+  );
+}
+
+function InputDemo() {
+  return (
+    <div className="flex flex-col gap-6 w-full">
+      <div>
+        <h4 className="font-[Bangers] text-xl tracking-wide mb-3">Default</h4>
+        <Input placeholder="Your secret identity..." />
+      </div>
+      <div>
+        <h4 className="font-[Bangers] text-xl tracking-wide mb-3">
+          With Value
+        </h4>
+        <Input defaultValue="Clark Kent" />
+      </div>
+      <div>
+        <h4 className="font-[Bangers] text-xl tracking-wide mb-3">Types</h4>
+        <div className="flex flex-col gap-3">
+          <Input type="email" placeholder="you@dailyplanet.com" />
+          <Input type="password" placeholder="Top secret..." />
+          <Input type="number" placeholder="42" />
+        </div>
+      </div>
+      <div>
+        <h4 className="font-[Bangers] text-xl tracking-wide mb-3">Invalid</h4>
+        <Input defaultValue="not-an-email" aria-invalid />
+      </div>
+      <div>
+        <h4 className="font-[Bangers] text-xl tracking-wide mb-3">Disabled</h4>
+        <Input placeholder="Locked in the Fortress" disabled />
       </div>
     </div>
   );
@@ -940,6 +974,14 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Sliders with circular or rectangular thumbs, configurable thickness, and active feedback.",
     demo: <SliderDemo />,
+  },
+  {
+    id: "input",
+    label: "Input",
+    group: "Primitives",
+    description:
+      "Halftone-backed text fields with thick comic borders, hard offset shadow, tactile focus lift, and red-shadow invalid state.",
+    demo: <InputDemo />,
   },
   {
     id: "tabs",
