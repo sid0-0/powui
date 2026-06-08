@@ -21,7 +21,7 @@ function ThemeToggle() {
       type="button"
       aria-label={`Switch to ${next} mode`}
       onClick={() => setTheme(next)}
-      className="border-3 border-foreground bg-card text-foreground p-0 shadow-[-3px_3px_0_var(--foreground)] flex items-center justify-center size-9 cursor-pointer"
+      className="border-3 border-foreground bg-card text-foreground p-0 flex items-center justify-center size-9 cursor-pointer"
     >
       {mounted ? (
         isDark ? (
@@ -54,7 +54,7 @@ export function NavBar() {
       <div className="flex items-center gap-3">
         {!isComponentsPage && (
           <HoverWrap>
-            <div className="border-3 border-foreground bg-card text-foreground px-4 py-1.5 shadow-[-3px_3px_0_var(--foreground)] flex items-center h-9">
+            <div className="border-3 border-foreground bg-card text-foreground px-4 py-1.5 shadow-[-6px_6px_0_var(--foreground)] flex items-center h-9">
               <Link
                 href="/components"
                 className="font-bold text-sm text-foreground no-underline"
@@ -65,7 +65,7 @@ export function NavBar() {
           </HoverWrap>
         )}
         <HoverWrap>
-          <div className="border-3 border-foreground bg-card text-foreground px-4 py-1.5 shadow-[-3px_3px_0_var(--foreground)] flex items-center h-9">
+          <div className="border-3 border-foreground bg-card text-foreground px-4 py-1.5 shadow-[-6px_6px_0_var(--foreground)] flex items-center h-9">
             <a
               href="https://github.com/sid0-0/powui"
               target="_blank"

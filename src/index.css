@@ -91,6 +91,8 @@ button {
    even when used via dynamic class names (e.g. template literals in stories) */
 @source inline("{spotty-dot,spotty-spacing}-{xs,sm,md,lg,xl}");
 @source inline("spotty-opacity-{10,20,30,40,50,60,70,80,90}");
+@source inline("spotty-bg-[#F3B807]");
+@source inline("spotty-bg-diagonal-[#F3B807]");
 
 /* spotty-dot-* — controls the dot radius */
 @utility spotty-dot-xs {

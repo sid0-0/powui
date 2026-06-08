@@ -30,7 +30,9 @@ export default function Home() {
       {/* ── Hero ────────────────────────────────────────────────────────── */}
       <section className="flex flex-col items-center px-6 gap-8">
         <Filters.Displacement scale={3} frequency={2}>
-          <Button className="bg-card text-foreground dark:text-white w-80 h-32 text-7xl m-32">Pow UI</Button>
+          <Button className="bg-card text-foreground dark:text-white w-80 h-32 text-7xl m-32">
+            Pow UI
+          </Button>
         </Filters.Displacement>
 
         <div className="mx-auto max-w-2xl bg-card border-4 border-foreground shadow-[-8px_8px_0_0_var(--foreground)] overflow-hidden">
@@ -88,16 +90,24 @@ export default function Home() {
               className={[
                 "p-10 flex flex-col gap-5 border-foreground",
                 i % 2 === 0 ? "md:border-r-4" : "",
-                i < 2 ? "border-b-4" : i === 2 ? "border-b-4 md:border-b-0" : "",
+                i < 2
+                  ? "border-b-4"
+                  : i === 2
+                    ? "border-b-4 md:border-b-0"
+                    : "",
               ].join(" ")}
             >
               <div className="flex items-center gap-4">
                 <div className="size-16 bg-card text-foreground border-4 border-foreground flex items-center justify-center shrink-0">
                   {item.icon}
                 </div>
-                <h3 className="font-[Bangers] text-3xl tracking-wider">{item.title}</h3>
+                <h3 className="font-[Bangers] text-3xl tracking-wider">
+                  {item.title}
+                </h3>
               </div>
-              <p className="text-sm font-medium text-accent-foreground/70 leading-relaxed max-w-sm">{item.text}</p>
+              <p className="text-sm font-medium text-accent-foreground/70 leading-relaxed max-w-sm">
+                {item.text}
+              </p>
             </div>
           ))}
         </div>
@@ -119,7 +129,7 @@ export default function Home() {
         </p>
         <Button
           size="lg"
-          className="text-2xl px-10 h-16 font-[Bangers] tracking-widest bg-accent text-accent-foreground hover:bg-accent/80"
+          className="text-2xl px-10 h-16 font-[Bangers] tracking-widest bg-accent text-accent-foreground hover:bg-accent"
           asChild
         >
           <Link href="/components">Browse All Components →</Link>
@@ -134,11 +144,9 @@ export default function Home() {
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
           <div className="flex flex-col gap-4">
             <Filters.Displacement scale={2} frequency={0.06}>
-              <div className="border-4 border-foreground px-6 py-2 bg-card shadow-[-4px_4px_0_var(--foreground)] inline-block">
-                <span className="font-[Bangers] text-5xl tracking-widest text-foreground dark:text-white">
-                  POW UI
-                </span>
-              </div>
+              <Button className="px-6 py-8 font-[Bangers] text-5xl tracking-widest text-foreground bg-card dark:text-white">
+                POW UI
+              </Button>
             </Filters.Displacement>
             <p className="text-lg font-medium text-primary-foreground max-w-xs">
               Making the web more exciting,
@@ -146,25 +154,35 @@ export default function Home() {
               one punch at a time.
             </p>
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col items-end gap-3">
             <a
-              href="https://github.com/sid0-0/powui"
+              href=""
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-[Bangers] text-2xl tracking-wide border-b-4 border-foreground hover:text-amber-700 dark:hover:text-amber-300 transition-colors no-underline w-fit"
+            >
+              <svg
+                className="size-5 inline-block"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
+              </svg>
+            </a>
+            <a
+              href="https://www.chromatic.com/library?appId=68b33f12384a75f2c732fa44"
               target="_blank"
               rel="noopener noreferrer"
               className="font-[Bangers] text-2xl tracking-wide border-b-4 border-foreground hover:text-amber-700 dark:hover:text-amber-300 transition-colors no-underline"
             >
-              GitHub ↗
+              Storybook
             </a>
-            <Link
-              href="/components"
-              className="font-[Bangers] text-2xl tracking-wide border-b-4 border-foreground hover:text-amber-700 dark:hover:text-amber-300 transition-colors no-underline"
-            >
-              Components ↗
-            </Link>
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 border-t-4 border-foreground bg-accent text-accent-foreground px-8 py-4">
-          <p className="text-accent-foreground/70 text-sm font-medium">
+          <p className="text-accent-foreground/70 text-sm font-medium text-center">
             Built with React, Next.js, Tailwind CSS, and a whole lot of comic
             energy.
           </p>

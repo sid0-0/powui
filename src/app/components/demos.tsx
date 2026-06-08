@@ -83,7 +83,7 @@ function ButtonDemo() {
         <h4 className="font-[Bangers] text-xl tracking-wide mb-3">
           With Filter
         </h4>
-        <Filters.Displacement scale={4} frequency={0.25}>
+        <Filters.Displacement scale={2} frequency={0.25}>
           <Button className="spotty-dot-sm spotty-spacing-sm spotty-bg-primary w-full h-12 text-lg font-[Bangers] tracking-widest">
             DISPLACEMENT BUTTON
           </Button>
