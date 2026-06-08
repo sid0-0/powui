@@ -1,3 +1,5 @@
+"use client";
+
 import type React from "react";
 import { getEllipticalPoints, getRectangularPoints } from "@/lib/geometryUtils";
 import { useCallback, useMemo, useState } from "react";

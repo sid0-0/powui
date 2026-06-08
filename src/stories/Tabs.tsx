@@ -32,7 +32,7 @@ export const StorybookTabs = (props: {
             <TabsTrigger
               key={x.title}
               value={x.title}
-              className="spotty-bg-[#eab308] font-bold"
+              className="spotty-bg-primary font-bold"
             >
               {x.title}
             </TabsTrigger>

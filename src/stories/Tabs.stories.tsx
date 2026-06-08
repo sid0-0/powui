@@ -41,7 +41,7 @@ const CharacterContent = ({
   symbol: string;
   alignment: string;
 }) => (
-  <div className="space-y-2 min-h-80 p-4 spotty-bg-[#eab308]">
+  <div className="space-y-2 min-h-80 p-4 spotty-bg-primary">
     <p>
       <strong>Real Name:</strong> {real_name}
     </p>
@@ -192,7 +192,7 @@ export const FixedDimensions: Story = {
 };
 
 const ComicFact = ({ fact }: { fact: string }) => (
-  <div className="p-4 spotty-bg-[#eab308] min-h-24 flex items-center justify-center text-center">
+  <div className="p-4 spotty-bg-primary min-h-24 flex items-center justify-center text-center">
     <p className="font-bold text-sm italic">"{fact}"</p>
   </div>
 );
@@ -228,7 +228,7 @@ const SyncTabs = () => {
               <TabsTrigger
                 key={item.id}
                 value={item.id}
-                className="spotty-bg-[#eab308] font-black text-xs"
+                className="spotty-bg-primary font-black text-xs"
               >
                 {item.label}
               </TabsTrigger>

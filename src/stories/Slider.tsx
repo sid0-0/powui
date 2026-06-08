@@ -4,7 +4,7 @@ import { Filters } from "@/components/ui/filters";
 const StorybookSlider = (props: SliderProps) => {
   return (
     <Filters.Displacement>
-      <Slider rangeClassName="spotty-bg-[#eab308]" {...props} />
+      <Slider rangeClassName="spotty-bg-primary" {...props} />
     </Filters.Displacement>
   );
 };

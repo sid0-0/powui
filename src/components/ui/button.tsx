@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -5,25 +7,36 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import cx from "classnames";
 
+const ButtonState = {
+  Rest: "rest",
+  Pressed: "pressed",
+  Raised: "raised",
+} as const;
+
+type ButtonStateType = (typeof ButtonState)[keyof typeof ButtonState];
+
 const buttonVariants = cva(
   cx(
     "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
-    "border-3 border-solid border-black text-black shadow-[-6px_6px_0_black] py-2 px-4",
-    "transition-[translate,box-shadow] duration-50 linear",
+    "border-3 border-solid border-foreground text-foreground shadow-[-6px_6px_0_var(--foreground)] py-2 px-4",
+    // "transition-[translate,box-shadow] duration-[150ms] ease-linear",
+    "transition-[translate,box-shadow] duration-[150ms] ease-[cubic-bezier(.67,1.5,.95,1.24)]",
     "font-[Walter_Turncoat]",
   ),
   {
     variants: {
       variant: {
-        default: "",
+        default: "bg-primary text-primary-foreground hover:bg-accent",
+        primary: "bg-primary text-primary-foreground hover:bg-accent",
+        accent: "bg-accent text-accent-foreground hover:bg-accent",
         destructive:
-          "bg-destructive hover:bg-destructive/90 dark:bg-destructive/60",
+          "bg-destructive hover:bg-destructive dark:bg-destructive",
         outline:
-          "border bg-background hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "border bg-background hover:bg-accent hover:text-accent-foreground dark:bg-input dark:border-input dark:hover:bg-input",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "bg-secondary text-secondary-foreground hover:bg-secondary",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent border-0 shadow-none",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
@@ -56,11 +69,17 @@ function Button({
 
   const elem = React.useRef<HTMLButtonElement>(null);
 
-  const buttonStateToggle = (state: boolean, elem: HTMLButtonElement) => {
+  const buttonStateToggle = (
+    state: ButtonStateType,
+    elem: HTMLButtonElement,
+  ) => {
     if (!elem) return;
-    if (state) {
+    if (state === ButtonState.Pressed) {
       elem.style.setProperty("translate", "-4px 4px");
       elem.style.setProperty("box-shadow", "-2px 2px");
+    } else if (state === ButtonState.Raised) {
+      elem.style.setProperty("translate", "4px -4px");
+      elem.style.setProperty("box-shadow", "-8px 8px");
     } else {
       elem.style.removeProperty("translate");
       elem.style.removeProperty("box-shadow");
@@ -71,13 +90,16 @@ function Button({
     if (!node) return;
     elem.current = node;
     elem.current.addEventListener("mousedown", () => {
-      buttonStateToggle(true, node);
+      buttonStateToggle(ButtonState.Pressed, node);
     });
     elem.current.addEventListener("mouseup", () => {
-      buttonStateToggle(false, node);
+      buttonStateToggle(ButtonState.Raised, node);
     });
     elem.current.addEventListener("mouseleave", () => {
-      buttonStateToggle(false, node);
+      buttonStateToggle(ButtonState.Rest, node);
+    });
+    elem.current.addEventListener("mouseenter", () => {
+      buttonStateToggle(ButtonState.Raised, node);
     });
     if (ref && typeof ref === "function") {
       ref(node);

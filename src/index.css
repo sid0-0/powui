@@ -2,6 +2,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
+@source "!../build/**";
+@source "!../.next/**";
+@source "!../storybook-static/**";
 
 @custom-variant dark (&:is(.dark *));
 :root {
@@ -9,9 +12,8 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: light;
+  color: #000;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -24,14 +26,24 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.798 0.169 81.6);
+  --primary-foreground: oklch(0.145 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --accent: oklch(0.911 0.09 89.7);
+  --accent-foreground: oklch(0.145 0 0);
+  --toast-default-bg: #f59e0b;
+  --toast-default-badge-bg: #fcd34d;
+  --toast-success-bg: #16a34a;
+  --toast-success-badge-bg: #4ade80;
+  --toast-error-bg: #dc2626;
+  --toast-error-badge-bg: #f87171;
+  --toast-warning-bg: #ea580c;
+  --toast-warning-badge-bg: #fb923c;
+  --toast-info-bg: #2563eb;
+  --toast-info-badge-bg: #60a5fa;
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
@@ -53,17 +65,15 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: inherit;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: inherit;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -77,23 +87,12 @@ button {
   cursor: pointer;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
 /* Ensure all spotty utility combinations are included in the CSS output
    even when used via dynamic class names (e.g. template literals in stories) */
 @source inline("{spotty-dot,spotty-spacing}-{xs,sm,md,lg,xl}");
 @source inline("spotty-opacity-{10,20,30,40,50,60,70,80,90}");
+@source inline("spotty-bg-[#F3B807]");
+@source inline("spotty-bg-diagonal-[#F3B807]");
 
 /* spotty-dot-* — controls the dot radius */
 @utility spotty-dot-xs {
@@ -110,6 +109,9 @@ button {
 }
 @utility spotty-dot-xl {
   --spotty-dot: 0.12rem;
+}
+@utility spotty-dot-* {
+  --spotty-dot: --value([length]);
 }
 
 /* spotty-spacing-* — controls the tile/grid size */
@@ -128,51 +130,32 @@ button {
 @utility spotty-spacing-xl {
   --spotty-spacing: 0.5rem;
 }
+@utility spotty-spacing-* {
+  --spotty-spacing: --value([length]);
+}
 
-/* spotty-opacity-* — controls the dot overlay opacity (10–90) */
-@utility spotty-opacity-10 {
-  --spotty-opacity: 0.1;
-}
-@utility spotty-opacity-20 {
-  --spotty-opacity: 0.2;
-}
-@utility spotty-opacity-30 {
-  --spotty-opacity: 0.3;
-}
-@utility spotty-opacity-40 {
-  --spotty-opacity: 0.4;
-}
-@utility spotty-opacity-50 {
-  --spotty-opacity: 0.5;
-}
-@utility spotty-opacity-60 {
-  --spotty-opacity: 0.6;
-}
-@utility spotty-opacity-70 {
-  --spotty-opacity: 0.7;
-}
-@utility spotty-opacity-80 {
-  --spotty-opacity: 0.8;
-}
-@utility spotty-opacity-90 {
-  --spotty-opacity: 0.9;
+/* spotty-opacity-* — accepts bare integers (0–100) or bracketed values */
+@utility spotty-opacity-* {
+  --spotty-opacity: --value([number], [percentage]);
+  --spotty-opacity: calc(--value(integer) * 0.01);
 }
 
 /* spotty-bg-* — renders the stipple pattern using the configured variables */
 @utility spotty-bg-* {
-  background: radial-gradient(
-      circle at center,
-      rgba(0, 0, 0, var(--spotty-opacity, 0.3)) var(--spotty-dot, 0.02rem),
-      --value([color]) 0
-    ),
-    --value([color]);
+  background-color: --value([color], --color-*);
+  background-image: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, var(--spotty-opacity, 0.3)) var(--spotty-dot, 0.02rem),
+    transparent 0
+  );
   background-size: var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
 }
 
 /* spotty-bg-diagonal-* — offset Ben-Day dot grid */
 @utility spotty-bg-diagonal-* {
-  background-color: --value([color]);
-  background-image: radial-gradient(
+  background-color: --value([color], --color-*);
+  background-image:
+    radial-gradient(
       circle at center,
       black var(--spotty-dot, 0.02rem),
       transparent 0
@@ -182,8 +165,111 @@ button {
       black var(--spotty-dot, 0.02rem),
       transparent 0
     );
-  background-size: calc(var(--spotty-spacing, 0.15rem) * 2) calc(var(--spotty-spacing, 0.15rem) * 2);
-  background-position: 0 0, var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
+  background-size: calc(var(--spotty-spacing, 0.15rem) * 2)
+    calc(var(--spotty-spacing, 0.15rem) * 2);
+  background-position:
+    0 0,
+    var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
+}
+
+/* Ensure all hatched utility combinations are included in the CSS output
+   even when used via dynamic class names (e.g. template literals in stories) */
+@source inline("{hatched-thickness,hatched-spacing}-{xs,sm,md,lg,xl}");
+@source inline("hatched-opacity-{10,20,30,40,50,60,70,80,90}");
+@source inline("hatched-angle-{0,15,30,45,60,75,90,105,120,135,150,165}");
+@source inline("hatched-bg-[#F3B807]");
+@source inline("hatched-bg-cross-[#F3B807]");
+
+/* hatched-thickness-* — controls the line thickness */
+@utility hatched-thickness-xs {
+  --hatched-thickness: 1px;
+}
+@utility hatched-thickness-sm {
+  --hatched-thickness: 2px;
+}
+@utility hatched-thickness-md {
+  --hatched-thickness: 3px;
+}
+@utility hatched-thickness-lg {
+  --hatched-thickness: 5px;
+}
+@utility hatched-thickness-xl {
+  --hatched-thickness: 8px;
+}
+@utility hatched-thickness-* {
+  --hatched-thickness: --value([length]);
+}
+
+/* hatched-spacing-* — controls the gap between lines */
+@utility hatched-spacing-xs {
+  --hatched-spacing: 3px;
+}
+@utility hatched-spacing-sm {
+  --hatched-spacing: 7px;
+}
+@utility hatched-spacing-md {
+  --hatched-spacing: 12px;
+}
+@utility hatched-spacing-lg {
+  --hatched-spacing: 18px;
+}
+@utility hatched-spacing-xl {
+  --hatched-spacing: 28px;
+}
+@utility hatched-spacing-* {
+  --hatched-spacing: --value([length]);
+}
+
+/* hatched-opacity-* — accepts bare integers (0–100) or bracketed values */
+@utility hatched-opacity-* {
+  --hatched-opacity: --value([number], [percentage]);
+  --hatched-opacity: calc(--value(integer) * 0.01);
+}
+
+/* hatched-angle-* — controls the rotation of hatched-bg-* and hatched-bg-cross-* */
+@utility hatched-angle-* {
+  --hatched-angle: --value([angle]);
+  --hatched-angle: calc(--value(integer) * 1deg);
+}
+
+/* hatched-bg-* — diagonal hatched lines (default 45°, re-angle with hatched-angle-*) */
+@utility hatched-bg-* {
+  background-color: --value([color], --color-*);
+  background-image: repeating-linear-gradient(
+    var(--hatched-angle, 45deg),
+    transparent 0,
+    transparent calc(var(--hatched-spacing, 8px) / 2),
+    rgba(0, 0, 0, var(--hatched-opacity, 1))
+      calc(var(--hatched-spacing, 8px) / 2),
+    rgba(0, 0, 0, var(--hatched-opacity, 1))
+      calc((var(--hatched-spacing, 8px) / 2) + var(--hatched-thickness, 2px)),
+    transparent
+      calc((var(--hatched-spacing, 8px) / 2) + var(--hatched-thickness, 2px)),
+    transparent
+      calc(var(--hatched-thickness, 2px) + var(--hatched-spacing, 8px))
+  );
+}
+
+/* hatched-bg-cross-* — two perpendicular line sets (respects hatched-angle-*) */
+@utility hatched-bg-cross-* {
+  background-color: --value([color], --color-*);
+  background-image:
+    repeating-linear-gradient(
+      var(--hatched-angle, 45deg),
+      rgba(0, 0, 0, var(--hatched-opacity, 1)) 0,
+      rgba(0, 0, 0, var(--hatched-opacity, 1)) var(--hatched-thickness, 2px),
+      transparent var(--hatched-thickness, 2px),
+      transparent
+        calc(var(--hatched-thickness, 2px) + var(--hatched-spacing, 8px))
+    ),
+    repeating-linear-gradient(
+      calc(var(--hatched-angle, 45deg) + 90deg),
+      rgba(0, 0, 0, var(--hatched-opacity, 1)) 0,
+      rgba(0, 0, 0, var(--hatched-opacity, 1)) var(--hatched-thickness, 2px),
+      transparent var(--hatched-thickness, 2px),
+      transparent
+        calc(var(--hatched-thickness, 2px) + var(--hatched-spacing, 8px))
+    );
 }
 
 @utility clip-path-ellipse {
@@ -233,22 +319,22 @@ button {
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: oklch(0.155 0.012 70);
+  --foreground: oklch(0.96 0.008 70);
+  --card: oklch(0.21 0.015 70);
+  --card-foreground: oklch(0.96 0.008 70);
+  --popover: oklch(0.21 0.015 70);
+  --popover-foreground: oklch(0.96 0.008 70);
+  --primary: oklch(0.75 0.15 81.6);
+  --primary-foreground: oklch(0.145 0 0);
+  --secondary: oklch(0.27 0.012 70);
+  --secondary-foreground: oklch(0.96 0.008 70);
+  --muted: oklch(0.27 0.012 70);
+  --muted-foreground: oklch(0.72 0.01 70);
+  --accent: oklch(0.55 0.14 60);
+  --accent-foreground: oklch(0.96 0.008 70);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
+  --border: oklch(0.4 0.02 70 / 22%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
   --chart-1: oklch(0.488 0.243 264.376);
@@ -256,14 +342,24 @@ button {
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar: oklch(0.21 0.015 70);
+  --sidebar-foreground: oklch(0.96 0.008 70);
+  --sidebar-primary: oklch(0.75 0.15 81.6);
+  --sidebar-primary-foreground: oklch(0.145 0 0);
+  --sidebar-accent: oklch(0.27 0.012 70);
+  --sidebar-accent-foreground: oklch(0.96 0.008 70);
+  --sidebar-border: oklch(0.4 0.02 70 / 22%);
   --sidebar-ring: oklch(0.556 0 0);
+  --toast-default-bg: oklch(0.5 0.12 60);
+  --toast-default-badge-bg: oklch(0.7 0.1 80);
+  --toast-success-bg: oklch(0.48 0.13 142);
+  --toast-success-badge-bg: oklch(0.7 0.12 142);
+  --toast-error-bg: oklch(0.5 0.16 27);
+  --toast-error-badge-bg: oklch(0.7 0.13 27);
+  --toast-warning-bg: oklch(0.55 0.15 50);
+  --toast-warning-badge-bg: oklch(0.72 0.12 50);
+  --toast-info-bg: oklch(0.48 0.14 245);
+  --toast-info-badge-bg: oklch(0.68 0.12 245);
 }
 
 @layer base {
@@ -272,5 +368,29 @@ button {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@keyframes pow-skeleton {
+  0% {
+    background-color: var(--primary);
+    transform: scale(1);
+  }
+  50% {
+    background-color: var(--accent);
+    transform: scale(1.02);
+  }
+  100% {
+    background-color: var(--primary);
+    transform: scale(1);
+  }
+}
+
+@keyframes pow-skeleton-sweep {
+  0% {
+    transform: translateX(-110%);
+  }
+  100% {
+    transform: translateX(110%);
   }
 }

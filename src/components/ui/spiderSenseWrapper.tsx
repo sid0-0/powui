@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Credits to Mike Quinn for the original snippet which inspired this whole project
  * https://codepen.io/mprquinn/pen/OmOMrR
@@ -5,7 +7,20 @@
 
 import { pickRandomFromArray } from "@/utils/general";
 import mojs from "@mojs/core";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
+
+function throttle<Args extends unknown[]>(
+  fn: (...args: Args) => void,
+  ms: number,
+): (...args: Args) => void {
+  let lastTime = 0;
+  return (...args: Args) => {
+    const now = Date.now();
+    if (now - lastTime < ms) return;
+    lastTime = now;
+    fn(...args);
+  };
+}
 
 export const COLORS_LIST = [
   {
@@ -77,9 +92,17 @@ const SpiderSenseWrapper = (
     color?: string;
     trigger?: "hover" | "click" | "mount" | "manual";
     getManualTrigger?: (trigger: () => void) => void;
-  }>
+    containerClassName?: string;
+  }>,
 ) => {
-  const { children, color, shape, trigger = "hover", getManualTrigger } = props;
+  const {
+    children,
+    color,
+    shape,
+    trigger = "hover",
+    getManualTrigger,
+    containerClassName,
+  } = props;
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -98,17 +121,18 @@ const SpiderSenseWrapper = (
     const chosenShape = shape ?? pickRandomFromArray(["line", "zigzag"]);
 
     const averageRadius = (itemSize.x + itemSize.y) / 4;
+    const circumference = Math.PI * (itemSize.x + itemSize.y);
 
     const burst = new mojs.Burst({
-      left: itemDim.left + itemSize.x / 2,
-      top: itemDim.top + itemSize.y / 2,
-      radiusX: itemSize.x / 1.2,
-      radiusY: itemSize.y / 1.2,
-      count: Math.max(4, (Math.PI * averageRadius) / 20),
+      left: itemDim.left + itemSize.x / 2 + window.scrollX,
+      top: itemDim.top + itemSize.y / 2 + window.scrollY,
+      radiusX: itemSize.x + averageRadius / 5,
+      radiusY: itemSize.y + averageRadius / 5,
+      count: Math.max(4, circumference / 50),
 
       children: {
         shape: chosenShape,
-        radius: averageRadius / 4,
+        radius: averageRadius / 6,
         scale: {
           [windowWidth / (itemDim.width * 6)]:
             windowHeight / (itemDim.height * 6),
@@ -118,7 +142,7 @@ const SpiderSenseWrapper = (
         stroke: chosenColor,
         strokeDasharray: "100%",
         strokeDashoffset: { "-100%": "100%" },
-        strokeWidth: averageRadius / 20,
+        strokeWidth: averageRadius / 30,
         duration: 500,
         easing: "quad.out",
         isShowEnd: false,
@@ -128,24 +152,33 @@ const SpiderSenseWrapper = (
     burst.play();
   }, [color, shape]);
 
-  useEffect(() => {
-    getManualTrigger?.(shootLines);
-  }, [getManualTrigger, shootLines]);
+  const throttledShootLines = useMemo(
+    () => throttle(shootLines, 400),
+    [shootLines],
+  );
 
-  const registerRef = useCallback((node: HTMLDivElement | null) => {
-    if (node) {
-      containerRef.current = node;
-      if (trigger === "mount") {
-        setTimeout(shootLines, 0);
+  useEffect(() => {
+    getManualTrigger?.(throttledShootLines);
+  }, [getManualTrigger, throttledShootLines]);
+
+  const registerRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (node) {
+        containerRef.current = node;
+        if (trigger === "mount") {
+          setTimeout(throttledShootLines, 0);
+        }
       }
-    }
-  }, []);
+    },
+    [throttledShootLines],
+  );
 
   return (
     <div
       ref={registerRef}
-      onMouseOver={trigger === "hover" ? shootLines : () => {}}
-      onClick={trigger === "click" ? shootLines : () => {}}
+      onMouseOver={trigger === "hover" ? throttledShootLines : () => {}}
+      onClick={trigger === "click" ? throttledShootLines : () => {}}
+      className={containerClassName}
     >
       {children}
     </div>
