@@ -10,6 +10,10 @@ export const metadata: Metadata = {
   title: "PowUI — Comic-book React components",
   description:
     "PowUI is a punchy, comic-inspired UI library for interfaces that need to pack a visual punch. Bold colors, dynamic shapes, and fun animations — making the web more exciting, one punch at a time.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
