@@ -48,7 +48,7 @@ const CharacterContent = ({
   bio: string;
   traits: string[];
 }) => (
-  <div className="min-h-80 p-4 spotty-bg-[#F3B807] size-full">
+  <div className="min-h-80 p-4 spotty-bg-primary size-full">
     <div className="space-y-0.5">
       <p className="text-xs font-black uppercase tracking-widest opacity-50">{role}</p>
       <p className="text-sm font-bold">{real_name}</p>
@@ -85,7 +85,7 @@ const CharacterContent = ({
 );
 
 const BulletContent = ({ title, bullets }: { title: string; bullets: string[] }) => (
-  <div className="min-h-80 p-4 spotty-bg-[#F3B807] size-full">
+  <div className="min-h-80 p-4 spotty-bg-primary size-full">
     <p className="font-black text-sm uppercase tracking-widest">{title}</p>
     <ul className="space-y-1">
       {bullets.map((b) => (

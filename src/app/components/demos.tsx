@@ -21,6 +21,8 @@ import { Filters } from "@/components/ui/filters";
 import { Tooltip } from "@/components/ui/tooltip";
 import { comicToast } from "@/components/ui/sonner";
 import { Skeleton } from "@/components/ui/skeleton";
+import { StorybookSpottyBgMatrix } from "@/stories/SpottyBg";
+import { StorybookHatchedBgMatrix } from "@/stories/HatchedBg";
 
 const BurstWrapper = dynamic(
   () =>
@@ -43,7 +45,8 @@ export type DemoGroup =
   | "Layout"
   | "Visual Effects"
   | "Feedback"
-  | "Filters";
+  | "Filters"
+  | "Backgrounds";
 
 export type ComponentDemo = {
   id: string;
@@ -177,7 +180,7 @@ function CheckboxDemo() {
   ] as const;
 
   return (
-    <div className="flex flex-col px-6 py-12 gap-4 w-full bg-amber-800 items-baseline dark:bg-amber-700">
+    <div className="flex flex-col px-6 py-12 gap-4 w-full  items-baseline bg-accent">
       <h4 className="font-[Bangers] text-xl tracking-wide mb-1">To-do List</h4>
       {list.map(({ key, label }) => (
         <Checkbox
@@ -940,6 +943,56 @@ function OnomatopoeiaDemo() {
   );
 }
 
+function SpottyBgDemo() {
+  return (
+    <div className="flex flex-col gap-8 w-full">
+      {(["standard", "diagonal"] as const).map((v) => (
+        <div key={v}>
+          <h4 className="font-[Bangers] text-xl tracking-wide mb-3 capitalize">
+            {v}
+          </h4>
+          <StorybookSpottyBgMatrix color="#F3B807" variant={v} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function HatchedBgDemo() {
+  const angles = [0, 30, 45, 60, 90, 120, 135, 150] as const;
+  return (
+    <div className="flex flex-col gap-8 w-full">
+      <div>
+        <h4 className="font-[Bangers] text-xl tracking-wide mb-3 capitalize">
+          Diagonal
+        </h4>
+        <StorybookHatchedBgMatrix color="#F3B807" variant="diagonal" />
+      </div>
+      <div>
+        <h4 className="font-[Bangers] text-xl tracking-wide mb-3 capitalize">
+          Cross
+        </h4>
+        <StorybookHatchedBgMatrix color="#F3B807" variant="cross" />
+      </div>
+      <div>
+        <h4 className="font-[Bangers] text-xl tracking-wide mb-3">Angles</h4>
+        <div className="flex items-center justify-center size-full">
+          <div className="grid grid-cols-4 grid-rows-2 gap-2 p-1 w-fit">
+            {angles.map((a) => (
+              <div key={a} className="flex flex-col items-center gap-1 p-1">
+                <div
+                  className={`w-16 h-16 border-2 border-black hatched-thickness-sm hatched-spacing-md hatched-angle-${a} hatched-bg-primary`}
+                />
+                <span className="text-xs font-mono text-gray-500">{a}°</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Demo Registry ────────────────────────────────────────────────────────────
 
 export const COMPONENT_DEMOS: ComponentDemo[] = [
@@ -1078,5 +1131,21 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Portal-based click effects with SVG burst lines and random comic word animations.",
     demo: <OnomatopoeiaDemo />,
+  },
+  {
+    id: "spottybg",
+    label: "Spotty Bg",
+    group: "Backgrounds",
+    description:
+      "Stippled dot backgrounds with configurable dot size, spacing, and opacity. Two variants: standard grid and offset Ben-Day.",
+    demo: <SpottyBgDemo />,
+  },
+  {
+    id: "hatchedbg",
+    label: "Hatched Bg",
+    group: "Backgrounds",
+    description:
+      "Repeating-line backgrounds with configurable thickness, spacing, opacity, and angle. Four variants: diagonal, horizontal, vertical, and cross-hatch.",
+    demo: <HatchedBgDemo />,
   },
 ];

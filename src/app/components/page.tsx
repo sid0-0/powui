@@ -27,6 +27,7 @@ const GROUPS: DemoGroup[] = [
   "Visual Effects",
   "Filters",
   "Feedback",
+  "Backgrounds",
 ];
 
 // ─── Demo Panel ───────────────────────────────────────────────────────────────
@@ -36,7 +37,7 @@ function DemoPanel({ demo }: { demo: ComponentDemo }) {
     <div className="flex flex-col h-full overflow-y-auto">
       {/* Header */}
       <div
-        className="spotty-dot-sm spotty-spacing-sm spotty-opacity-25 spotty-bg-primary text-primary-foreground
+        className="bg-accent text-primary-foreground
                       px-8 pt-8 pb-6 border-b-4 border-foreground"
       >
         <Filters.Displacement scale={1.5} frequency={0.05}>
@@ -51,7 +52,7 @@ function DemoPanel({ demo }: { demo: ComponentDemo }) {
 
       {/* Demo Area */}
       <div className="flex-1 min-h-fit p-8">
-        <div className="bg-primary text-primary-foreground border-4 border-foreground p-8 md:p-12 flex items-start justify-center min-h-fit">
+        <div className="hatched-bg-primary text-primary-foreground border-4 border-foreground p-8 md:p-12 flex items-start justify-center min-h-fit">
           <Filters.Displacement
             scale={1.5}
             frequency={0.05}
@@ -110,7 +111,7 @@ export default function ComponentsPage() {
                         <SidebarMenuItem key={demo.id}>
                           <SidebarMenuButton
                             value={demo.id}
-                            className="font-[Walter_Turncoat] font-bold text-base"
+                            className="font-[Walter_Turncoat] font-bold spotty-bg-primary text-base"
                           >
                             <span>{demo.label}</span>
                           </SidebarMenuButton>

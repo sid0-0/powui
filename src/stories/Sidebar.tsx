@@ -60,7 +60,7 @@ export const StorybookSidebar = (props: {
         >
           <Sidebar side={side} collapsible="none">
             <SidebarHeader>
-              <div className="border-4 border-black bg-white spotty-bg-[#F3B807] [--spotty-spacing:0.18rem] px-3 py-2 flex items-center gap-2">
+              <div className="border-4 border-black bg-white spotty-bg-primary [--spotty-spacing:0.18rem] px-3 py-2 flex items-center gap-2">
                 <Rocket className="size-4 shrink-0" />
                 <span className="text-xs font-black uppercase tracking-widest leading-tight">
                   Guardians<br />of the Galaxy

@@ -108,6 +108,9 @@ button {
 @utility spotty-dot-xl {
   --spotty-dot: 0.12rem;
 }
+@utility spotty-dot-* {
+  --spotty-dot: --value([length]);
+}
 
 /* spotty-spacing-* — controls the tile/grid size */
 @utility spotty-spacing-xs {
@@ -125,51 +128,30 @@ button {
 @utility spotty-spacing-xl {
   --spotty-spacing: 0.5rem;
 }
+@utility spotty-spacing-* {
+  --spotty-spacing: --value([length]);
+}
 
-/* spotty-opacity-* — controls the dot overlay opacity (10–90) */
-@utility spotty-opacity-10 {
-  --spotty-opacity: 0.1;
-}
-@utility spotty-opacity-20 {
-  --spotty-opacity: 0.2;
-}
-@utility spotty-opacity-30 {
-  --spotty-opacity: 0.3;
-}
-@utility spotty-opacity-40 {
-  --spotty-opacity: 0.4;
-}
-@utility spotty-opacity-50 {
-  --spotty-opacity: 0.5;
-}
-@utility spotty-opacity-60 {
-  --spotty-opacity: 0.6;
-}
-@utility spotty-opacity-70 {
-  --spotty-opacity: 0.7;
-}
-@utility spotty-opacity-80 {
-  --spotty-opacity: 0.8;
-}
-@utility spotty-opacity-90 {
-  --spotty-opacity: 0.9;
+/* spotty-opacity-* — accepts bare integers (0–100) or bracketed values */
+@utility spotty-opacity-* {
+  --spotty-opacity: --value([number], [percentage]);
+  --spotty-opacity: calc(--value(integer) * 0.01);
 }
 
 /* spotty-bg-* — renders the stipple pattern using the configured variables */
 @utility spotty-bg-* {
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(0, 0, 0, var(--spotty-opacity, 0.3)) var(--spotty-dot, 0.02rem),
-      --value([color]) 0
-    ),
-    --value([color]);
+  background-color: --value([color], --color-*);
+  background-image: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, var(--spotty-opacity, 0.3)) var(--spotty-dot, 0.02rem),
+    transparent 0
+  );
   background-size: var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
 }
 
 /* spotty-bg-diagonal-* — offset Ben-Day dot grid */
 @utility spotty-bg-diagonal-* {
-  background-color: --value([color]);
+  background-color: --value([color], --color-*);
   background-image:
     radial-gradient(
       circle at center,
@@ -188,26 +170,104 @@ button {
     var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
 }
 
-@utility spotty-bg-primary {
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(0, 0, 0, var(--spotty-opacity, 0.3)) var(--spotty-dot, 0.02rem),
-      var(--primary) 0
-    ),
-    var(--primary);
-  background-size: var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
+/* Ensure all hatched utility combinations are included in the CSS output
+   even when used via dynamic class names (e.g. template literals in stories) */
+@source inline("{hatched-thickness,hatched-spacing}-{xs,sm,md,lg,xl}");
+@source inline("hatched-opacity-{10,20,30,40,50,60,70,80,90}");
+@source inline("hatched-angle-{0,15,30,45,60,75,90,105,120,135,150,165}");
+@source inline("hatched-bg-[#F3B807]");
+@source inline("hatched-bg-cross-[#F3B807]");
+
+/* hatched-thickness-* — controls the line thickness */
+@utility hatched-thickness-xs {
+  --hatched-thickness: 1px;
+}
+@utility hatched-thickness-sm {
+  --hatched-thickness: 2px;
+}
+@utility hatched-thickness-md {
+  --hatched-thickness: 3px;
+}
+@utility hatched-thickness-lg {
+  --hatched-thickness: 5px;
+}
+@utility hatched-thickness-xl {
+  --hatched-thickness: 8px;
+}
+@utility hatched-thickness-* {
+  --hatched-thickness: --value([length]);
 }
 
-@utility spotty-bg-accent {
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(0, 0, 0, var(--spotty-opacity, 0.3)) var(--spotty-dot, 0.02rem),
-      var(--accent) 0
+/* hatched-spacing-* — controls the gap between lines */
+@utility hatched-spacing-xs {
+  --hatched-spacing: 3px;
+}
+@utility hatched-spacing-sm {
+  --hatched-spacing: 7px;
+}
+@utility hatched-spacing-md {
+  --hatched-spacing: 12px;
+}
+@utility hatched-spacing-lg {
+  --hatched-spacing: 18px;
+}
+@utility hatched-spacing-xl {
+  --hatched-spacing: 28px;
+}
+@utility hatched-spacing-* {
+  --hatched-spacing: --value([length]);
+}
+
+/* hatched-opacity-* — accepts bare integers (0–100) or bracketed values */
+@utility hatched-opacity-* {
+  --hatched-opacity: --value([number], [percentage]);
+  --hatched-opacity: calc(--value(integer) * 0.01);
+}
+
+/* hatched-angle-* — controls the rotation of hatched-bg-* and hatched-bg-cross-* */
+@utility hatched-angle-* {
+  --hatched-angle: --value([angle]);
+  --hatched-angle: calc(--value(integer) * 1deg);
+}
+
+/* hatched-bg-* — diagonal hatched lines (default 45°, re-angle with hatched-angle-*) */
+@utility hatched-bg-* {
+  background-color: --value([color], --color-*);
+  background-image: repeating-linear-gradient(
+    var(--hatched-angle, 45deg),
+    transparent 0,
+    transparent calc(var(--hatched-spacing, 8px) / 2),
+    rgba(0, 0, 0, var(--hatched-opacity, 1))
+      calc(var(--hatched-spacing, 8px) / 2),
+    rgba(0, 0, 0, var(--hatched-opacity, 1))
+      calc((var(--hatched-spacing, 8px) / 2) + var(--hatched-thickness, 2px)),
+    transparent
+      calc((var(--hatched-spacing, 8px) / 2) + var(--hatched-thickness, 2px)),
+    transparent
+      calc(var(--hatched-thickness, 2px) + var(--hatched-spacing, 8px))
+  );
+}
+
+/* hatched-bg-cross-* — two perpendicular line sets (respects hatched-angle-*) */
+@utility hatched-bg-cross-* {
+  background-color: --value([color], --color-*);
+  background-image:
+    repeating-linear-gradient(
+      var(--hatched-angle, 45deg),
+      rgba(0, 0, 0, var(--hatched-opacity, 1)) 0,
+      rgba(0, 0, 0, var(--hatched-opacity, 1)) var(--hatched-thickness, 2px),
+      transparent var(--hatched-thickness, 2px),
+      transparent
+        calc(var(--hatched-thickness, 2px) + var(--hatched-spacing, 8px))
     ),
-    var(--accent);
-  background-size: var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
+    repeating-linear-gradient(
+      calc(var(--hatched-angle, 45deg) + 90deg),
+      rgba(0, 0, 0, var(--hatched-opacity, 1)) 0,
+      rgba(0, 0, 0, var(--hatched-opacity, 1)) var(--hatched-thickness, 2px),
+      transparent var(--hatched-thickness, 2px),
+      transparent
+        calc(var(--hatched-thickness, 2px) + var(--hatched-spacing, 8px))
+    );
 }
 
 @utility clip-path-ellipse {
