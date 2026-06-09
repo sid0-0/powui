@@ -14,5 +14,11 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: ["../public"],
+  viteFinal: async (config, { configType }) => {
+    if (configType === "PRODUCTION") {
+      config.base = "/storybook/";
+    }
+    return config;
+  },
 };
 export default config;

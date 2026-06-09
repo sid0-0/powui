@@ -1145,7 +1145,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Stippled dot backgrounds with configurable dot size, spacing, and opacity. Two variants: standard grid and offset Ben-Day.",
     demo: <SpottyBgDemo />,
-    registryName: "theme",
+    registryName: "spotty-bg",
   },
   {
     id: "hatchedbg",
@@ -1154,6 +1154,6 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Repeating-line backgrounds with configurable thickness, spacing, opacity, and angle. Four variants: diagonal, horizontal, vertical, and cross-hatch.",
     demo: <HatchedBgDemo />,
-    registryName: "theme",
+    registryName: "hatched-bg",
   },
 ];
