@@ -86,8 +86,7 @@ export const StorybookHatchedBgMatrix = ({
             <tr key={th}>
               <td className="p-2 font-mono text-gray-500">{th}</td>
               {SPACINGS.map((sp) => {
-                // const bgClass = variantBgClass(variant, color);
-                const bgClass = `hatched-bg-primary`;
+                const bgClass = variantBgClass(variant, color);
                 return (
                   <td key={sp} className="p-1">
                     <div
@@ -134,10 +133,7 @@ export const StorybookHatchedBgAngles = ({
   thickness = "sm",
   spacing = "md",
   opacity = 80,
-}: Pick<
-  HatchedBgProps,
-  "color" | "thickness" | "spacing" | "opacity"
->) => {
+}: Pick<HatchedBgProps, "color" | "thickness" | "spacing" | "opacity">) => {
   const bgClass = variantBgClass("diagonal", color);
   return (
     <div className="grid grid-cols-6 gap-3 p-4 w-fit">

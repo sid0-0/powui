@@ -27,9 +27,12 @@ pnpm start           # serve the static Next.js build locally
 ### Build & Lint
 
 ```bash
-pnpm build           # next build — static export to build/
+pnpm build           # build:registry + next build — static export to build/
+pnpm build:registry  # regenerate public/r/*.json from registry.json (shadcn build)
 pnpm lint            # eslint . (flat config, ESLint 9)
 ```
+
+`pnpm build` runs `pnpm build:registry` first so the deployed site always ships an up-to-date registry alongside the static pages.
 
 ### Testing
 
@@ -132,6 +135,56 @@ The project uses the shadcn/ui `new-york` style preset. When adding new shadcn/u
 - **Tailwind CSS file:** `src/index.css`
 - **Icon library:** `lucide`
 - **Aliases:** `@/components`, `@/lib/utils`, `@/components/ui`, `@/lib`, `@/hooks`
+
+---
+
+## Distribution Registry (`registry.json` → `public/r/`)
+
+Pow UI publishes itself as a shadcn-compatible registry. Consumers install components with `pnpm dlx shadcn@latest add https://powui.dev/r/<name>.json`.
+
+- **`registry.json`** at the repo root is the source of truth — every UI component, lib helper, hook, and the shared `theme` item is listed there with its `dependencies` (npm packages), `registryDependencies` (other registry items), and `files`.
+- **`pnpm build:registry`** runs `npx shadcn@latest build`, which emits one `<name>.json` per item into `public/r/`. This step runs automatically before `next build`, so the deployed site serves a fresh registry at `https://powui.dev/r/<name>.json`.
+- The **`theme`** item is special: it carries the `cssVars` (light + dark token sets) and a `css` block with every `@utility` and `@keyframes` rule from `src/index.css`. Every UI item lists `theme` in its `registryDependencies` so consumers automatically pull in the look-and-feel.
+- When adding a new UI component, add a matching entry to `registry.json` (dependencies + registryDependencies + files), then run `pnpm build:registry` to regenerate `public/r/`.
+- **`src/app/components/InstallCommands.tsx`** renders the pnpm/npm/yarn/bun install snippet below each component demo on `/components`. Mapping between demo `id` and registry item name (when they differ, e.g. `toast` → `sonner`, `displacement` → `filters`) lives on the demo objects in `src/app/components/demos.tsx` via the optional `registryName` field.
+
+### Validating the registry
+
+```bash
+pnpm validate:registry   # static checks; runs in <1s
+```
+
+`scripts/validate-registry.mjs` parses `registry.json` and reports:
+
+- broken `files[].path` (missing on disk)
+- dangling `registryDependencies` (no item by that name)
+- npm imports inside a component that aren't declared in `dependencies` / `devDependencies`
+- `@/components/ui/*` or `@/lib/...` imports that don't have a matching `registryDependencies` entry
+- relative imports (e.g. `./tooltip.module.scss`) that aren't in the item's own `files` list
+
+`pnpm build:registry` runs the validator first, so a bad registry blocks the build before `npx shadcn build` runs.
+
+### End-to-end install test
+
+When you want to confirm a registry item actually installs and renders in a real consumer project:
+
+```bash
+# Terminal 1 — in the powui repo
+pnpm dev   # Next.js serves /r/*.json at http://localhost:3000/r/<name>.json
+
+# Terminal 2 — in a throwaway directory
+pnpm create next-app@latest scratch --ts --tailwind --eslint --app
+cd scratch
+pnpm dlx shadcn@latest init -d   # accept defaults
+pnpm dlx shadcn@latest add http://localhost:3000/r/sidebar.json   # or any item
+pnpm dev   # render the component to verify it actually works
+```
+
+For a no-install preview (resolves files + lists the npm packages that would be installed, without touching `node_modules`):
+
+```bash
+pnpm dlx shadcn@latest view http://localhost:3000/r/sidebar.json
+```
 
 ---
 

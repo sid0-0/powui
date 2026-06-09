@@ -1,0 +1,73 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spotty-bg",
+  "registryDependencies": [],
+  "css": {
+    "@property --spotty-dot": {
+      "syntax": "\"<length>\"",
+      "inherits": "false",
+      "initial-value": "0.02rem"
+    },
+    "@property --spotty-spacing": {
+      "syntax": "\"<length>\"",
+      "inherits": "false",
+      "initial-value": "0.15rem"
+    },
+    "@property --spotty-opacity": {
+      "syntax": "\"<number>\"",
+      "inherits": "false",
+      "initial-value": "0.3"
+    },
+    "@utility spotty-dot-xs": {
+      "--spotty-dot": "0.005rem"
+    },
+    "@utility spotty-dot-sm": {
+      "--spotty-dot": "0.01rem"
+    },
+    "@utility spotty-dot-md": {
+      "--spotty-dot": "0.02rem"
+    },
+    "@utility spotty-dot-lg": {
+      "--spotty-dot": "0.05rem"
+    },
+    "@utility spotty-dot-xl": {
+      "--spotty-dot": "0.12rem"
+    },
+    "@utility spotty-dot-*": {
+      "--spotty-dot": "--value([length])"
+    },
+    "@utility spotty-spacing-xs": {
+      "--spotty-spacing": "0.075rem"
+    },
+    "@utility spotty-spacing-sm": {
+      "--spotty-spacing": "0.1rem"
+    },
+    "@utility spotty-spacing-md": {
+      "--spotty-spacing": "0.15rem"
+    },
+    "@utility spotty-spacing-lg": {
+      "--spotty-spacing": "0.2rem"
+    },
+    "@utility spotty-spacing-xl": {
+      "--spotty-spacing": "0.5rem"
+    },
+    "@utility spotty-spacing-*": {
+      "--spotty-spacing": "--value([length])"
+    },
+    "@utility spotty-opacity-*": {
+      "--spotty-opacity": "calc(--value(integer) * 0.01)"
+    },
+    "@utility spotty-bg-*": {
+      "background-color": "--value([color], --color-*)",
+      "background-image": "radial-gradient(circle at center, rgba(0, 0, 0, var(--spotty-opacity, 0.3)) var(--spotty-dot, 0.02rem), transparent 0)",
+      "background-size": "var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem)"
+    },
+    "@utility spotty-bg-diagonal-*": {
+      "background-color": "--value([color], --color-*)",
+      "background-image": "radial-gradient(circle at center, black var(--spotty-dot, 0.02rem), transparent 0), radial-gradient(circle at center, black var(--spotty-dot, 0.02rem), transparent 0)",
+      "background-size": "calc(var(--spotty-spacing, 0.15rem) * 2) calc(var(--spotty-spacing, 0.15rem) * 2)",
+      "background-position": "0 0, var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem)"
+    }
+  },
+  "type": "registry:theme"
+}

@@ -5,10 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm build:registry && next build",
     "start": "npx serve@latest ./build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "validate:registry": "node scripts/validate-registry.mjs",
+    "build:registry": "pnpm validate:registry && node scripts/build-registry.mjs",
     "storybook": "storybook dev -p 5174",
     "build-storybook": "storybook build",
     "chromatic": "chromatic --exit-zero-on-changes"

@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/sidebar";
 import type { ComponentDemo } from "./demos";
 import { Filters } from "@/components/ui/filters";
+import { InstallCommands } from "./InstallCommands";
 
 const GROUPS: DemoGroup[] = [
   "Primitives",
@@ -49,21 +50,23 @@ function DemoPanel({ demo }: { demo: ComponentDemo }) {
       </div>
 
       {/* Demo Area */}
-      <div className="flex-1 min-h-fit p-8">
-        <div className="hatched-bg-primary text-primary-foreground border-4 border-foreground p-8 md:p-12 flex items-start justify-center min-h-fit">
+      <div className="flex-1 min-h-fit p-8 flex flex-col gap-8">
+        <div className="hatched-bg-primary hatched-opacity-20 text-primary-foreground border-4 border-foreground p-8 md:p-12 flex items-start justify-center min-h-fit">
           <Filters.Displacement
             scale={1.5}
             frequency={0.05}
-            containerClassName="w-full max-w-2xl"
+            containerClassName="w-full flex items-center justify-center"
           >
             <div
               className="bg-card text-card-foreground border-4 border-foreground shadow-[-8px_8px_0_0_var(--foreground)]
-                         p-8 w-full"
+                         p-8 w-fit"
             >
               {demo.demo}
             </div>
           </Filters.Displacement>
         </div>
+
+        <InstallCommands name={demo.registryName ?? demo.id} />
       </div>
     </div>
   );

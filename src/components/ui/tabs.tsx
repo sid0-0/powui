@@ -123,7 +123,7 @@ function TabsList({
 }
 
 const tabsTriggerVariants = cva(
-  "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring text-foreground inline-flex flex-1 items-center justify-center gap-1.5 px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow,transform] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 border-foreground bg-card hover:bg-card/80",
+  "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring text-foreground inline-flex flex-1 items-center justify-center gap-1.5 px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow,transform] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 border-foreground bg-card hover:bg-card",
   {
     variants: {
       tabsPlacement: {
@@ -160,9 +160,6 @@ function TabsTrigger({
     React.useContext(TabsContext);
   return (
     <TabsPrimitive.Trigger
-      onClick={(e) => {
-        (e.target as HTMLElement).scrollIntoView();
-      }}
       data-slot="tabs-trigger"
       style={
         orientation === "horizontal" && tabHeight

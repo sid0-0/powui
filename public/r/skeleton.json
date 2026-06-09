@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "registryDependencies": [
+    "https://powui.dev/r/utils.json",
+    "https://powui.dev/r/theme.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/skeleton.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nfunction Skeleton({ className, style, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={cn(\n        \"relative overflow-hidden rounded-md\",\n        \"after:absolute after:inset-0 after:content-[''] after:bg-[linear-gradient(110deg,transparent_40%,rgba(255,255,255,0.45)_50%,transparent_60%)]\",\n        \"after:animate-[pow-skeleton-sweep_2.2s_cubic-bezier(.67,1.5,.95,1.24)_infinite]\",\n        className,\n      )}\n      style={{\n        backgroundImage:\n          \"radial-gradient(circle, rgba(0,0,0,0.3) 1px, transparent 1px)\",\n        backgroundSize: \"8px 8px\",\n        animation: \"pow-skeleton 2.2s cubic-bezier(.67,1.5,.95,1.24) infinite\",\n        ...style,\n      }}\n      {...props}\n    />\n  );\n}\n\nexport { Skeleton };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "css": {
+    "@keyframes pow-skeleton": {
+      "0%": {
+        "background-color": "var(--primary)",
+        "transform": "scale(1)"
+      },
+      "50%": {
+        "background-color": "var(--accent)",
+        "transform": "scale(1.02)"
+      },
+      "100%": {
+        "background-color": "var(--primary)",
+        "transform": "scale(1)"
+      }
+    },
+    "@keyframes pow-skeleton-sweep": {
+      "0%": {
+        "transform": "translateX(-110%)"
+      },
+      "100%": {
+        "transform": "translateX(110%)"
+      }
+    }
+  },
+  "type": "registry:ui"
+}

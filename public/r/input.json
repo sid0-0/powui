@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input",
+  "registryDependencies": [
+    "https://powui.dev/r/utils.json",
+    "https://powui.dev/r/theme.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/input.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Input({\n  className,\n  type,\n  style,\n  ...props\n}: React.ComponentProps<\"input\">) {\n  return (\n    <input\n      type={type}\n      data-slot=\"input\"\n      className={cn(\n        \"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground\",\n        \"flex h-9 w-full min-w-0 rounded-md px-3 py-1 text-base outline-none md:text-sm\",\n        \"border-3 border-solid border-foreground text-foreground shadow-[-3px_3px_0_var(--foreground)]\",\n        \"transition-[translate,box-shadow,border-color] duration-[150ms] ease-[cubic-bezier(.67,1.5,.95,1.24)]\",\n        \"focus-visible:translate-x-[1px] focus-visible:translate-y-[-1px] focus-visible:shadow-[-4px_4px_0_var(--foreground)]\",\n        \"aria-invalid:border-destructive aria-invalid:shadow-[-3px_3px_0_var(--destructive)]\",\n        \"aria-invalid:focus-visible:shadow-[-4px_4px_0_var(--destructive)]\",\n        \"file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium\",\n        \"disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50\",\n        className\n      )}\n      style={{\n        backgroundImage:\n          \"radial-gradient(circle, rgba(0,0,0,0.18) 0.7px, transparent 0.7px)\",\n        backgroundSize: \"5px 5px\",\n        backgroundColor: \"var(--accent)\",\n        ...style,\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Input }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

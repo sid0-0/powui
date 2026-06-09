@@ -1,0 +1,78 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hatched-bg",
+  "registryDependencies": [],
+  "css": {
+    "@property --hatched-thickness": {
+      "syntax": "\"<length>\"",
+      "inherits": "false",
+      "initial-value": "2px"
+    },
+    "@property --hatched-spacing": {
+      "syntax": "\"<length>\"",
+      "inherits": "false",
+      "initial-value": "8px"
+    },
+    "@property --hatched-opacity": {
+      "syntax": "\"<number>\"",
+      "inherits": "false",
+      "initial-value": "1"
+    },
+    "@property --hatched-angle": {
+      "syntax": "\"<angle>\"",
+      "inherits": "false",
+      "initial-value": "45deg"
+    },
+    "@utility hatched-thickness-xs": {
+      "--hatched-thickness": "1px"
+    },
+    "@utility hatched-thickness-sm": {
+      "--hatched-thickness": "2px"
+    },
+    "@utility hatched-thickness-md": {
+      "--hatched-thickness": "3px"
+    },
+    "@utility hatched-thickness-lg": {
+      "--hatched-thickness": "5px"
+    },
+    "@utility hatched-thickness-xl": {
+      "--hatched-thickness": "8px"
+    },
+    "@utility hatched-thickness-*": {
+      "--hatched-thickness": "--value([length])"
+    },
+    "@utility hatched-spacing-xs": {
+      "--hatched-spacing": "3px"
+    },
+    "@utility hatched-spacing-sm": {
+      "--hatched-spacing": "7px"
+    },
+    "@utility hatched-spacing-md": {
+      "--hatched-spacing": "12px"
+    },
+    "@utility hatched-spacing-lg": {
+      "--hatched-spacing": "18px"
+    },
+    "@utility hatched-spacing-xl": {
+      "--hatched-spacing": "28px"
+    },
+    "@utility hatched-spacing-*": {
+      "--hatched-spacing": "--value([length])"
+    },
+    "@utility hatched-opacity-*": {
+      "--hatched-opacity": "calc(--value(integer) * 0.01)"
+    },
+    "@utility hatched-angle-*": {
+      "--hatched-angle": "calc(--value(integer) * 1deg)"
+    },
+    "@utility hatched-bg-*": {
+      "background-color": "--value([color], --color-*)",
+      "background-image": "repeating-linear-gradient(var(--hatched-angle, 45deg), transparent 0, transparent calc(var(--hatched-spacing, 8px) / 2), rgba(0, 0, 0, var(--hatched-opacity, 1)) calc(var(--hatched-spacing, 8px) / 2), rgba(0, 0, 0, var(--hatched-opacity, 1)) calc((var(--hatched-spacing, 8px) / 2) + var(--hatched-thickness, 2px)), transparent calc((var(--hatched-spacing, 8px) / 2) + var(--hatched-thickness, 2px)), transparent calc(var(--hatched-thickness, 2px) + var(--hatched-spacing, 8px)))"
+    },
+    "@utility hatched-bg-cross-*": {
+      "background-color": "--value([color], --color-*)",
+      "background-image": "repeating-linear-gradient(var(--hatched-angle, 45deg), rgba(0, 0, 0, var(--hatched-opacity, 1)) 0, rgba(0, 0, 0, var(--hatched-opacity, 1)) var(--hatched-thickness, 2px), transparent var(--hatched-thickness, 2px), transparent calc(var(--hatched-thickness, 2px) + var(--hatched-spacing, 8px))), repeating-linear-gradient(calc(var(--hatched-angle, 45deg) + 90deg), rgba(0, 0, 0, var(--hatched-opacity, 1)) 0, rgba(0, 0, 0, var(--hatched-opacity, 1)) var(--hatched-thickness, 2px), transparent var(--hatched-thickness, 2px), transparent calc(var(--hatched-thickness, 2px) + var(--hatched-spacing, 8px)))"
+    }
+  },
+  "type": "registry:theme"
+}

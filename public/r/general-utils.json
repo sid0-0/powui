@@ -1,0 +1,13 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "general-utils",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/utils/general.ts",
+      "content": "export const pickRandomFromArray = <T>(arr: T[]): T =>\n  arr[Math.floor(Math.random() * arr.length)];\n",
+      "type": "registry:lib"
+    }
+  ],
+  "type": "registry:lib"
+}

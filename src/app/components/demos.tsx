@@ -54,6 +54,8 @@ export type ComponentDemo = {
   group: DemoGroup;
   description: string;
   demo: React.ReactNode;
+  // Optional override for the shadcn registry item name when it differs from `id`.
+  registryName?: string;
 };
 
 // ─── Individual Demo Components ───────────────────────────────────────────────
@@ -848,7 +850,7 @@ function SkeletonDemo() {
   const [loading, setLoading] = useState(true);
 
   return (
-    <div className="flex flex-col gap-4 w-full">
+    <div className="flex flex-col gap-4 w-4xl">
       <div className="flex items-center justify-between mb-2">
         <h4 className="font-[Bangers] text-xl tracking-wide">Loading State</h4>
         <Button
@@ -864,13 +866,12 @@ function SkeletonDemo() {
           <div className="flex items-center gap-4">
             <Skeleton className="size-16 rounded-full" />
             <div className="flex flex-col gap-2 flex-1">
-              <Skeleton className="h-4 w-3/4" />
-              <Skeleton className="h-4 w-1/2" />
+              <Skeleton className="h-4 w-52" />
+              <Skeleton className="h-4 w-52" />
             </div>
           </div>
           <Skeleton className="h-4 w-full" />
           <Skeleton className="h-4 w-5/6" />
-          <Skeleton className="h-4 w-4/6" />
           <Skeleton className="h-32 w-full rounded-xl" />
         </div>
       ) : (
@@ -1075,6 +1076,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "SVG feTurbulence + feDisplacementMap filter for a wavy, organic distortion effect.",
     demo: <DisplacementDemo />,
+    registryName: "filters",
   },
   {
     id: "chromaaberr",
@@ -1083,6 +1085,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "RGB channel separation for a retro chromatic aberration effect — like a busted CRT.",
     demo: <ChromaAberrDemo />,
+    registryName: "filters",
   },
   {
     id: "posterize",
@@ -1091,6 +1094,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Reduces the color palette to a fixed number of buckets, creating a flat screen-print look.",
     demo: <PosterizeDemo />,
+    registryName: "filters",
   },
   {
     id: "spidersense",
@@ -1099,6 +1103,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Burst animation lines from an element using mojs. Supports hover, click, or manual trigger.",
     demo: <SpiderSenseDemo />,
+    registryName: "spider-sense-wrapper",
   },
   {
     id: "tooltip",
@@ -1115,6 +1120,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Comic-book halftone toast notifications in five variants — each with a signature badge word.",
     demo: <ToastDemo />,
+    registryName: "sonner",
   },
   {
     id: "skeleton",
@@ -1139,6 +1145,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Stippled dot backgrounds with configurable dot size, spacing, and opacity. Two variants: standard grid and offset Ben-Day.",
     demo: <SpottyBgDemo />,
+    registryName: "theme",
   },
   {
     id: "hatchedbg",
@@ -1147,5 +1154,6 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Repeating-line backgrounds with configurable thickness, spacing, opacity, and angle. Four variants: diagonal, horizontal, vertical, and cross-hatch.",
     demo: <HatchedBgDemo />,
+    registryName: "theme",
   },
 ];
