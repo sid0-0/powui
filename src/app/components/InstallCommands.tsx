@@ -7,7 +7,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Filters } from "@/components/ui/filters";
 
-const REGISTRY_BASE = "https://powui.dev/r";
+const REGISTRY_BASE =
+  (process.env.NEXT_PUBLIC_REGISTRY_BASE_URL ??
+    (process.env.NEXT_PUBLIC_VERCEL_URL
+      ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+      : "https://powui.dev")) + "/r";
 
 type PackageManager = "pnpm" | "npm" | "yarn" | "bun";
 

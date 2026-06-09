@@ -172,7 +172,7 @@ export default function Home() {
               </svg>
             </a>
             <a
-              href="https://www.chromatic.com/library?appId=68b33f12384a75f2c732fa44"
+              href="/storybook/"
               target="_blank"
               rel="noopener noreferrer"
               className="font-[Bangers] text-xl sm:text-2xl tracking-wide border-b-4 border-foreground hover:text-amber-700 dark:hover:text-amber-300 transition-colors no-underline"
