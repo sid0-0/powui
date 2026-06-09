@@ -6,8 +6,8 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "utils",
-    "theme"
+    "https://powui.dev/r/utils.json",
+    "https://powui.dev/r/theme.json"
   ],
   "files": [
     {

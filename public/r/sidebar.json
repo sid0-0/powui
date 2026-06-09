@@ -7,15 +7,15 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "utils",
-    "use-mobile",
-    "button",
-    "input",
-    "separator",
-    "sheet",
-    "skeleton",
-    "tooltip",
-    "theme"
+    "https://powui.dev/r/utils.json",
+    "https://powui.dev/r/use-mobile.json",
+    "https://powui.dev/r/button.json",
+    "https://powui.dev/r/input.json",
+    "https://powui.dev/r/separator.json",
+    "https://powui.dev/r/sheet.json",
+    "https://powui.dev/r/skeleton.json",
+    "https://powui.dev/r/tooltip.json",
+    "https://powui.dev/r/theme.json"
   ],
   "files": [
     {

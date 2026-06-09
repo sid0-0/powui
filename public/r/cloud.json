@@ -2,9 +2,9 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "cloud",
   "registryDependencies": [
-    "utils",
-    "geometry-utils",
-    "theme"
+    "https://powui.dev/r/utils.json",
+    "https://powui.dev/r/geometry-utils.json",
+    "https://powui.dev/r/theme.json"
   ],
   "files": [
     {

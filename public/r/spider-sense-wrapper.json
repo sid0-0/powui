@@ -5,7 +5,7 @@
     "@mojs/core"
   ],
   "registryDependencies": [
-    "general-utils"
+    "https://powui.dev/r/general-utils.json"
   ],
   "files": [
     {

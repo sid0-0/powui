@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "use-mobile",
+  "registryDependencies": [],
   "files": [
     {
       "path": "src/hooks/use-mobile.ts",

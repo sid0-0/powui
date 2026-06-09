@@ -6,13 +6,17 @@
     {
       "name": "utils",
       "type": "registry:lib",
-      "dependencies": ["clsx", "tailwind-merge"],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
         {
           "path": "src/lib/utils.ts",
           "type": "registry:lib"
         }
-      ]
+      ],
+      "registryDependencies": []
     },
     {
       "name": "geometry-utils",
@@ -22,7 +26,8 @@
           "path": "src/lib/geometryUtils.ts",
           "type": "registry:lib"
         }
-      ]
+      ],
+      "registryDependencies": []
     },
     {
       "name": "general-utils",
@@ -32,7 +37,8 @@
           "path": "src/utils/general.ts",
           "type": "registry:lib"
         }
-      ]
+      ],
+      "registryDependencies": []
     },
     {
       "name": "use-mobile",
@@ -42,7 +48,8 @@
           "path": "src/hooks/use-mobile.ts",
           "type": "registry:hook"
         }
-      ]
+      ],
+      "registryDependencies": []
     },
     {
       "name": "theme",
@@ -132,18 +139,42 @@
           "url('https://fonts.googleapis.com/css2?family=Bangers&display=swap')",
           "tw-animate-css"
         ],
-        "@utility spotty-dot-xs": { "--spotty-dot": "0.005rem" },
-        "@utility spotty-dot-sm": { "--spotty-dot": "0.01rem" },
-        "@utility spotty-dot-md": { "--spotty-dot": "0.02rem" },
-        "@utility spotty-dot-lg": { "--spotty-dot": "0.05rem" },
-        "@utility spotty-dot-xl": { "--spotty-dot": "0.12rem" },
-        "@utility spotty-dot-*": { "--spotty-dot": "--value([length])" },
-        "@utility spotty-spacing-xs": { "--spotty-spacing": "0.075rem" },
-        "@utility spotty-spacing-sm": { "--spotty-spacing": "0.1rem" },
-        "@utility spotty-spacing-md": { "--spotty-spacing": "0.15rem" },
-        "@utility spotty-spacing-lg": { "--spotty-spacing": "0.2rem" },
-        "@utility spotty-spacing-xl": { "--spotty-spacing": "0.5rem" },
-        "@utility spotty-spacing-*": { "--spotty-spacing": "--value([length])" },
+        "@utility spotty-dot-xs": {
+          "--spotty-dot": "0.005rem"
+        },
+        "@utility spotty-dot-sm": {
+          "--spotty-dot": "0.01rem"
+        },
+        "@utility spotty-dot-md": {
+          "--spotty-dot": "0.02rem"
+        },
+        "@utility spotty-dot-lg": {
+          "--spotty-dot": "0.05rem"
+        },
+        "@utility spotty-dot-xl": {
+          "--spotty-dot": "0.12rem"
+        },
+        "@utility spotty-dot-*": {
+          "--spotty-dot": "--value([length])"
+        },
+        "@utility spotty-spacing-xs": {
+          "--spotty-spacing": "0.075rem"
+        },
+        "@utility spotty-spacing-sm": {
+          "--spotty-spacing": "0.1rem"
+        },
+        "@utility spotty-spacing-md": {
+          "--spotty-spacing": "0.15rem"
+        },
+        "@utility spotty-spacing-lg": {
+          "--spotty-spacing": "0.2rem"
+        },
+        "@utility spotty-spacing-xl": {
+          "--spotty-spacing": "0.5rem"
+        },
+        "@utility spotty-spacing-*": {
+          "--spotty-spacing": "--value([length])"
+        },
         "@utility spotty-opacity-*": {
           "--spotty-opacity": "calc(--value(integer) * 0.01)"
         },
@@ -158,19 +189,39 @@
           "background-size": "calc(var(--spotty-spacing, 0.15rem) * 2) calc(var(--spotty-spacing, 0.15rem) * 2)",
           "background-position": "0 0, var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem)"
         },
-        "@utility hatched-thickness-xs": { "--hatched-thickness": "1px" },
-        "@utility hatched-thickness-sm": { "--hatched-thickness": "2px" },
-        "@utility hatched-thickness-md": { "--hatched-thickness": "3px" },
-        "@utility hatched-thickness-lg": { "--hatched-thickness": "5px" },
-        "@utility hatched-thickness-xl": { "--hatched-thickness": "8px" },
+        "@utility hatched-thickness-xs": {
+          "--hatched-thickness": "1px"
+        },
+        "@utility hatched-thickness-sm": {
+          "--hatched-thickness": "2px"
+        },
+        "@utility hatched-thickness-md": {
+          "--hatched-thickness": "3px"
+        },
+        "@utility hatched-thickness-lg": {
+          "--hatched-thickness": "5px"
+        },
+        "@utility hatched-thickness-xl": {
+          "--hatched-thickness": "8px"
+        },
         "@utility hatched-thickness-*": {
           "--hatched-thickness": "--value([length])"
         },
-        "@utility hatched-spacing-xs": { "--hatched-spacing": "3px" },
-        "@utility hatched-spacing-sm": { "--hatched-spacing": "7px" },
-        "@utility hatched-spacing-md": { "--hatched-spacing": "12px" },
-        "@utility hatched-spacing-lg": { "--hatched-spacing": "18px" },
-        "@utility hatched-spacing-xl": { "--hatched-spacing": "28px" },
+        "@utility hatched-spacing-xs": {
+          "--hatched-spacing": "3px"
+        },
+        "@utility hatched-spacing-sm": {
+          "--hatched-spacing": "7px"
+        },
+        "@utility hatched-spacing-md": {
+          "--hatched-spacing": "12px"
+        },
+        "@utility hatched-spacing-lg": {
+          "--hatched-spacing": "18px"
+        },
+        "@utility hatched-spacing-xl": {
+          "--hatched-spacing": "28px"
+        },
         "@utility hatched-spacing-*": {
           "--hatched-spacing": "--value([length])"
         },
@@ -188,10 +239,14 @@
           "background-color": "--value([color], --color-*)",
           "background-image": "repeating-linear-gradient(var(--hatched-angle, 45deg), rgba(0, 0, 0, var(--hatched-opacity, 1)) 0, rgba(0, 0, 0, var(--hatched-opacity, 1)) var(--hatched-thickness, 2px), transparent var(--hatched-thickness, 2px), transparent calc(var(--hatched-thickness, 2px) + var(--hatched-spacing, 8px))), repeating-linear-gradient(calc(var(--hatched-angle, 45deg) + 90deg), rgba(0, 0, 0, var(--hatched-opacity, 1)) 0, rgba(0, 0, 0, var(--hatched-opacity, 1)) var(--hatched-thickness, 2px), transparent var(--hatched-thickness, 2px), transparent calc(var(--hatched-thickness, 2px) + var(--hatched-spacing, 8px)))"
         },
-        "@utility clip-path-ellipse": { "clip-path": "ellipse()" },
+        "@utility clip-path-ellipse": {
+          "clip-path": "ellipse()"
+        },
         "@utility no-scrollbar": {
           "scrollbar-width": "none",
-          "&::-webkit-scrollbar": { "display": "none" }
+          "&::-webkit-scrollbar": {
+            "display": "none"
+          }
         },
         "@keyframes pow-skeleton": {
           "0%": {
@@ -208,16 +263,26 @@
           }
         },
         "@keyframes pow-skeleton-sweep": {
-          "0%": { "transform": "translateX(-110%)" },
-          "100%": { "transform": "translateX(110%)" }
+          "0%": {
+            "transform": "translateX(-110%)"
+          },
+          "100%": {
+            "transform": "translateX(110%)"
+          }
         }
-      }
+      },
+      "registryDependencies": []
     },
     {
       "name": "avatar",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-avatar"],
-      "registryDependencies": ["utils", "theme"],
+      "dependencies": [
+        "@radix-ui/react-avatar"
+      ],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/avatar.tsx",
@@ -228,7 +293,11 @@
     {
       "name": "burst",
       "type": "registry:ui",
-      "registryDependencies": ["utils", "geometry-utils", "theme"],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/geometry-utils.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/burst.tsx",
@@ -244,7 +313,10 @@
         "class-variance-authority",
         "classnames"
       ],
-      "registryDependencies": ["utils", "theme"],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/button.tsx",
@@ -255,8 +327,14 @@
     {
       "name": "checkbox",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-checkbox", "lucide-react"],
-      "registryDependencies": ["utils", "theme"],
+      "dependencies": [
+        "@radix-ui/react-checkbox",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/checkbox.tsx",
@@ -267,7 +345,11 @@
     {
       "name": "cloud",
       "type": "registry:ui",
-      "registryDependencies": ["utils", "geometry-utils", "theme"],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/geometry-utils.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/cloud.tsx",
@@ -278,8 +360,15 @@
     {
       "name": "field",
       "type": "registry:ui",
-      "dependencies": ["class-variance-authority"],
-      "registryDependencies": ["utils", "label", "separator", "theme"],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/label.json",
+        "https://powui.dev/r/separator.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/field.tsx",
@@ -290,7 +379,9 @@
     {
       "name": "filters",
       "type": "registry:ui",
-      "registryDependencies": ["theme"],
+      "registryDependencies": [
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/filters.tsx",
@@ -301,7 +392,10 @@
     {
       "name": "input",
       "type": "registry:ui",
-      "registryDependencies": ["utils", "theme"],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/input.tsx",
@@ -312,8 +406,13 @@
     {
       "name": "label",
       "type": "registry:ui",
-      "dependencies": ["radix-ui"],
-      "registryDependencies": ["utils", "theme"],
+      "dependencies": [
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/label.tsx",
@@ -324,7 +423,10 @@
     {
       "name": "onomatopoeia",
       "type": "registry:ui",
-      "registryDependencies": ["utils", "theme"],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/onomatopoeia.tsx",
@@ -335,8 +437,13 @@
     {
       "name": "separator",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-separator"],
-      "registryDependencies": ["utils", "theme"],
+      "dependencies": [
+        "@radix-ui/react-separator"
+      ],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/separator.tsx",
@@ -347,8 +454,14 @@
     {
       "name": "sheet",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-dialog", "lucide-react"],
-      "registryDependencies": ["utils", "theme"],
+      "dependencies": [
+        "@radix-ui/react-dialog",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/sheet.tsx",
@@ -365,15 +478,15 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "utils",
-        "use-mobile",
-        "button",
-        "input",
-        "separator",
-        "sheet",
-        "skeleton",
-        "tooltip",
-        "theme"
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/use-mobile.json",
+        "https://powui.dev/r/button.json",
+        "https://powui.dev/r/input.json",
+        "https://powui.dev/r/separator.json",
+        "https://powui.dev/r/sheet.json",
+        "https://powui.dev/r/skeleton.json",
+        "https://powui.dev/r/tooltip.json",
+        "https://powui.dev/r/theme.json"
       ],
       "files": [
         {
@@ -385,7 +498,10 @@
     {
       "name": "skeleton",
       "type": "registry:ui",
-      "registryDependencies": ["utils", "theme"],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/skeleton.tsx",
@@ -396,8 +512,13 @@
     {
       "name": "slider",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-slider"],
-      "registryDependencies": ["utils", "theme"],
+      "dependencies": [
+        "@radix-ui/react-slider"
+      ],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/slider.tsx",
@@ -408,8 +529,15 @@
     {
       "name": "sonner",
       "type": "registry:ui",
-      "dependencies": ["sonner", "next-themes"],
-      "registryDependencies": ["utils", "filters", "theme"],
+      "dependencies": [
+        "sonner",
+        "next-themes"
+      ],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/filters.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/sonner.tsx",
@@ -420,8 +548,12 @@
     {
       "name": "spider-sense-wrapper",
       "type": "registry:ui",
-      "dependencies": ["@mojs/core"],
-      "registryDependencies": ["general-utils"],
+      "dependencies": [
+        "@mojs/core"
+      ],
+      "registryDependencies": [
+        "https://powui.dev/r/general-utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/spiderSenseWrapper.tsx",
@@ -432,8 +564,14 @@
     {
       "name": "tabs",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-tabs", "class-variance-authority"],
-      "registryDependencies": ["utils", "theme"],
+      "dependencies": [
+        "@radix-ui/react-tabs",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/tabs.tsx",
@@ -444,9 +582,16 @@
     {
       "name": "tooltip",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-tooltip"],
-      "devDependencies": ["sass"],
-      "registryDependencies": ["utils", "theme"],
+      "dependencies": [
+        "@radix-ui/react-tooltip"
+      ],
+      "devDependencies": [
+        "sass"
+      ],
+      "registryDependencies": [
+        "https://powui.dev/r/utils.json",
+        "https://powui.dev/r/theme.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/tooltip.tsx",

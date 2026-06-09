@@ -5,10 +5,10 @@
     "class-variance-authority"
   ],
   "registryDependencies": [
-    "utils",
-    "label",
-    "separator",
-    "theme"
+    "https://powui.dev/r/utils.json",
+    "https://powui.dev/r/label.json",
+    "https://powui.dev/r/separator.json",
+    "https://powui.dev/r/theme.json"
   ],
   "files": [
     {

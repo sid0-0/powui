@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "general-utils",
+  "registryDependencies": [],
   "files": [
     {
       "path": "src/utils/general.ts",

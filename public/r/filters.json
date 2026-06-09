@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "filters",
   "registryDependencies": [
-    "theme"
+    "https://powui.dev/r/theme.json"
   ],
   "files": [
     {

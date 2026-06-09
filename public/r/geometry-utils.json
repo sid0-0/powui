@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "geometry-utils",
+  "registryDependencies": [],
   "files": [
     {
       "path": "src/lib/geometryUtils.ts",

@@ -2,8 +2,8 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "input",
   "registryDependencies": [
-    "utils",
-    "theme"
+    "https://powui.dev/r/utils.json",
+    "https://powui.dev/r/theme.json"
   ],
   "files": [
     {

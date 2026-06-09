@@ -6,9 +6,9 @@
     "next-themes"
   ],
   "registryDependencies": [
-    "utils",
-    "filters",
-    "theme"
+    "https://powui.dev/r/utils.json",
+    "https://powui.dev/r/filters.json",
+    "https://powui.dev/r/theme.json"
   ],
   "files": [
     {
