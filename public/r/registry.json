@@ -54,6 +54,9 @@
     {
       "name": "theme",
       "type": "registry:theme",
+      "dependencies": [
+        "tw-animate-css"
+      ],
       "cssVars": {
         "light": {
           "radius": "0.625rem",
@@ -114,11 +117,9 @@
         }
       },
       "css": {
-        "@import": [
-          "url('https://fonts.googleapis.com/css2?family=Walter+Turncoat&display=swap')",
-          "url('https://fonts.googleapis.com/css2?family=Bangers&display=swap')",
-          "\"tw-animate-css\""
-        ],
+        "@import url('https://fonts.googleapis.com/css2?family=Walter+Turncoat&display=swap')": {},
+        "@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap')": {},
+        "@import 'tw-animate-css'": {},
         "@utility clip-path-ellipse": {
           "clip-path": "ellipse()"
         },

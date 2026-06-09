@@ -20,7 +20,7 @@ const buttonVariants = cva(
     "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
     "border-3 border-solid border-foreground text-foreground shadow-[-6px_6px_0_var(--foreground)] py-2 px-4",
     "transition-[translate,box-shadow] duration-[150ms] ease-[cubic-bezier(.67,1.5,.95,1.24)]",
-    "font-[Walter_Turncoat] cursor-pointer",
+    "cursor-pointer",
   ),
   {
     variants: {
