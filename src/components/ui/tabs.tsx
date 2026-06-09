@@ -160,9 +160,6 @@ function TabsTrigger({
     React.useContext(TabsContext);
   return (
     <TabsPrimitive.Trigger
-      onClick={(e) => {
-        (e.target as HTMLElement).scrollIntoView();
-      }}
       data-slot="tabs-trigger"
       style={
         orientation === "horizontal" && tabHeight
