@@ -5,7 +5,7 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
 import { cn } from "@/lib/utils";
 
-import styles from "@/styles/tooltip.module.scss";
+import styles from "./tooltip.module.scss";
 
 function TooltipProvider({
   delayDuration = 0,

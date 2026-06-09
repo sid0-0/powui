@@ -148,6 +148,44 @@ Pow UI publishes itself as a shadcn-compatible registry. Consumers install compo
 - When adding a new UI component, add a matching entry to `registry.json` (dependencies + registryDependencies + files), then run `pnpm build:registry` to regenerate `public/r/`.
 - **`src/app/components/InstallCommands.tsx`** renders the pnpm/npm/yarn/bun install snippet below each component demo on `/components`. Mapping between demo `id` and registry item name (when they differ, e.g. `toast` → `sonner`, `displacement` → `filters`) lives on the demo objects in `src/app/components/demos.tsx` via the optional `registryName` field.
 
+### Validating the registry
+
+```bash
+pnpm validate:registry   # static checks; runs in <1s
+```
+
+`scripts/validate-registry.mjs` parses `registry.json` and reports:
+
+- broken `files[].path` (missing on disk)
+- dangling `registryDependencies` (no item by that name)
+- npm imports inside a component that aren't declared in `dependencies` / `devDependencies`
+- `@/components/ui/*` or `@/lib/...` imports that don't have a matching `registryDependencies` entry
+- relative imports (e.g. `./tooltip.module.scss`) that aren't in the item's own `files` list
+
+`pnpm build:registry` runs the validator first, so a bad registry blocks the build before `npx shadcn build` runs.
+
+### End-to-end install test
+
+When you want to confirm a registry item actually installs and renders in a real consumer project:
+
+```bash
+# Terminal 1 — in the powui repo
+pnpm dev   # Next.js serves /r/*.json at http://localhost:3000/r/<name>.json
+
+# Terminal 2 — in a throwaway directory
+pnpm create next-app@latest scratch --ts --tailwind --eslint --app
+cd scratch
+pnpm dlx shadcn@latest init -d   # accept defaults
+pnpm dlx shadcn@latest add http://localhost:3000/r/sidebar.json   # or any item
+pnpm dev   # render the component to verify it actually works
+```
+
+For a no-install preview (resolves files + lists the npm packages that would be installed, without touching `node_modules`):
+
+```bash
+pnpm dlx shadcn@latest view http://localhost:3000/r/sidebar.json
+```
+
 ---
 
 ## SVG Filter Architecture (Critical)

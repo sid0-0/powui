@@ -9,7 +9,8 @@
     "start": "npx serve@latest ./build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:registry": "npx shadcn@latest build",
+    "validate:registry": "node scripts/validate-registry.mjs",
+    "build:registry": "pnpm validate:registry && npx shadcn@latest build",
     "storybook": "storybook dev -p 5174",
     "build-storybook": "storybook build",
     "chromatic": "chromatic --exit-zero-on-changes"
