@@ -87,6 +87,23 @@ button {
   cursor: pointer;
 }
 
+/* Prevent spotty custom properties from inheriting down the DOM tree */
+@property --spotty-dot {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0.02rem;
+}
+@property --spotty-spacing {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0.15rem;
+}
+@property --spotty-opacity {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0.3;
+}
+
 /* Ensure all spotty utility combinations are included in the CSS output
    even when used via dynamic class names (e.g. template literals in stories) */
 @source inline("{spotty-dot,spotty-spacing}-{xs,sm,md,lg,xl}");
@@ -170,6 +187,28 @@ button {
   background-position:
     0 0,
     var(--spotty-spacing, 0.15rem) var(--spotty-spacing, 0.15rem);
+}
+
+/* Prevent hatched custom properties from inheriting down the DOM tree */
+@property --hatched-thickness {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 2px;
+}
+@property --hatched-spacing {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 8px;
+}
+@property --hatched-opacity {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+@property --hatched-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 45deg;
 }
 
 /* Ensure all hatched utility combinations are included in the CSS output

@@ -3,6 +3,21 @@
   "name": "spotty-bg",
   "registryDependencies": [],
   "css": {
+    "@property --spotty-dot": {
+      "syntax": "\"<length>\"",
+      "inherits": "false",
+      "initial-value": "0.02rem"
+    },
+    "@property --spotty-spacing": {
+      "syntax": "\"<length>\"",
+      "inherits": "false",
+      "initial-value": "0.15rem"
+    },
+    "@property --spotty-opacity": {
+      "syntax": "\"<number>\"",
+      "inherits": "false",
+      "initial-value": "0.3"
+    },
     "@utility spotty-dot-xs": {
       "--spotty-dot": "0.005rem"
     },

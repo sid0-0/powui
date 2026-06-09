@@ -3,6 +3,26 @@
   "name": "hatched-bg",
   "registryDependencies": [],
   "css": {
+    "@property --hatched-thickness": {
+      "syntax": "\"<length>\"",
+      "inherits": "false",
+      "initial-value": "2px"
+    },
+    "@property --hatched-spacing": {
+      "syntax": "\"<length>\"",
+      "inherits": "false",
+      "initial-value": "8px"
+    },
+    "@property --hatched-opacity": {
+      "syntax": "\"<number>\"",
+      "inherits": "false",
+      "initial-value": "1"
+    },
+    "@property --hatched-angle": {
+      "syntax": "\"<angle>\"",
+      "inherits": "false",
+      "initial-value": "45deg"
+    },
     "@utility hatched-thickness-xs": {
       "--hatched-thickness": "1px"
     },

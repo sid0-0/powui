@@ -120,6 +120,9 @@
       "name": "spotty-bg",
       "type": "registry:theme",
       "css": {
+        "@property --spotty-dot": { "syntax": "\"<length>\"", "inherits": "false", "initial-value": "0.02rem" },
+        "@property --spotty-spacing": { "syntax": "\"<length>\"", "inherits": "false", "initial-value": "0.15rem" },
+        "@property --spotty-opacity": { "syntax": "\"<number>\"", "inherits": "false", "initial-value": "0.3" },
         "@utility spotty-dot-xs": { "--spotty-dot": "0.005rem" },
         "@utility spotty-dot-sm": { "--spotty-dot": "0.01rem" },
         "@utility spotty-dot-md": { "--spotty-dot": "0.02rem" },
@@ -152,6 +155,10 @@
       "name": "hatched-bg",
       "type": "registry:theme",
       "css": {
+        "@property --hatched-thickness": { "syntax": "\"<length>\"", "inherits": "false", "initial-value": "2px" },
+        "@property --hatched-spacing": { "syntax": "\"<length>\"", "inherits": "false", "initial-value": "8px" },
+        "@property --hatched-opacity": { "syntax": "\"<number>\"", "inherits": "false", "initial-value": "1" },
+        "@property --hatched-angle": { "syntax": "\"<angle>\"", "inherits": "false", "initial-value": "45deg" },
         "@utility hatched-thickness-xs": { "--hatched-thickness": "1px" },
         "@utility hatched-thickness-sm": { "--hatched-thickness": "2px" },
         "@utility hatched-thickness-md": { "--hatched-thickness": "3px" },
