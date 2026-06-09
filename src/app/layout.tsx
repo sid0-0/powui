@@ -5,6 +5,7 @@ import { GlobalBackground } from "@/components/GlobalBackground";
 import { GlobalClickEffect } from "@/components/GlobalClickEffect";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/website/ThemeProvider";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "PowUI — Comic-book React components",
@@ -36,6 +37,7 @@ export default function RootLayout({
           <GlobalClickEffect />
           <Toaster />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
