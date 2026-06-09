@@ -55,11 +55,11 @@ function DemoPanel({ demo }: { demo: ComponentDemo }) {
           <Filters.Displacement
             scale={1.5}
             frequency={0.05}
-            containerClassName="w-full max-w-2xl"
+            containerClassName="w-full flex items-center justify-center"
           >
             <div
               className="bg-card text-card-foreground border-4 border-foreground shadow-[-8px_8px_0_0_var(--foreground)]
-                         p-8 w-full"
+                         p-8 w-fit"
             >
               {demo.demo}
             </div>

@@ -40,7 +40,7 @@ function CommandRow({ command }: { command: string }) {
   };
 
   return (
-    <div className="flex items-center gap-3 p-3 md:p-4 bg-card">
+    <div className="flex items-center gap-12 p-3 md:p-4 bg-card">
       <code className="flex-1 font-mono text-xs md:text-sm text-foreground overflow-x-auto whitespace-nowrap no-scrollbar select-all">
         {command}
       </code>
@@ -63,19 +63,28 @@ export function InstallCommands({ name }: { name: string }) {
   const url = `${REGISTRY_BASE}/${name}.json`;
 
   return (
-    <div className="hatched-bg-primary hatched-thickness-sm hatched-spacing-md hatched-opacity-20 border-4 border-foreground p-6 md:p-8 flex flex-col gap-4">
+    <div className="hatched-bg-primary hatched-thickness-sm hatched-opacity-20 border-4 border-foreground p-6 md:p-8 flex flex-col gap-4">
       <h3 className="font-[Bangers] text-2xl md:text-3xl tracking-widest text-foreground">
         Install
       </h3>
 
-      <Filters.Displacement scale={1.3} frequency={0.05}>
-        <Tabs defaultValue="pnpm" tabsPlacement="top" tabHeight="2rem">
+      <Filters.Displacement
+        scale={1.3}
+        frequency={0.05}
+        className="flex items-center justify-center"
+      >
+        <Tabs
+          defaultValue="pnpm"
+          tabsPlacement="top"
+          tabHeight="45px"
+          className="w-fit"
+        >
           <TabsList>
             {PACKAGE_MANAGERS.map((pm) => (
               <TabsTrigger
                 key={pm}
                 value={pm}
-                className="font-[Bangers] tracking-wider uppercase"
+                className="font-[Bangers] tracking-wider uppercase text-xl"
               >
                 {pm}
               </TabsTrigger>
