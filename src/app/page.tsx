@@ -42,14 +42,14 @@ export default function Home() {
             </span>
           </div>
           <div className="p-6">
-            <p className="text-2xl md:text-3xl font-bold leading-tight">
+            <div className="text-2xl md:text-3xl font-bold leading-tight">
               A punchy, comic-inspired UI library for interfaces that{" "}
               <SpiderSenseWrapper containerClassName="inline" trigger="hover">
                 <span className="text-orange-400 dark:text-orange-300 underline decoration-foreground underline-offset-4">
                   POP!
                 </span>
               </SpiderSenseWrapper>
-            </p>
+            </div>
             <p className="mt-4 text-lg text-foreground/70 font-medium">
               Pow UI brings the energy of golden-age comics to your web apps
               with bold borders, expressive shapes, and tactile interactions.
