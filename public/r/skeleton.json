@@ -12,5 +12,29 @@
       "type": "registry:ui"
     }
   ],
+  "css": {
+    "@keyframes pow-skeleton": {
+      "0%": {
+        "background-color": "var(--primary)",
+        "transform": "scale(1)"
+      },
+      "50%": {
+        "background-color": "var(--accent)",
+        "transform": "scale(1.02)"
+      },
+      "100%": {
+        "background-color": "var(--primary)",
+        "transform": "scale(1)"
+      }
+    },
+    "@keyframes pow-skeleton-sweep": {
+      "0%": {
+        "transform": "translateX(-110%)"
+      },
+      "100%": {
+        "transform": "translateX(110%)"
+      }
+    }
+  },
   "type": "registry:ui"
 }

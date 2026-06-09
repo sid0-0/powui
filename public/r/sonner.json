@@ -17,5 +17,31 @@
       "type": "registry:ui"
     }
   ],
+  "cssVars": {
+    "light": {
+      "toast-default-bg": "#f59e0b",
+      "toast-default-badge-bg": "#fcd34d",
+      "toast-success-bg": "#16a34a",
+      "toast-success-badge-bg": "#4ade80",
+      "toast-error-bg": "#dc2626",
+      "toast-error-badge-bg": "#f87171",
+      "toast-warning-bg": "#ea580c",
+      "toast-warning-badge-bg": "#fb923c",
+      "toast-info-bg": "#2563eb",
+      "toast-info-badge-bg": "#60a5fa"
+    },
+    "dark": {
+      "toast-default-bg": "oklch(0.5 0.12 60)",
+      "toast-default-badge-bg": "oklch(0.7 0.1 80)",
+      "toast-success-bg": "oklch(0.48 0.13 142)",
+      "toast-success-badge-bg": "oklch(0.7 0.12 142)",
+      "toast-error-bg": "oklch(0.5 0.16 27)",
+      "toast-error-badge-bg": "oklch(0.7 0.13 27)",
+      "toast-warning-bg": "oklch(0.55 0.15 50)",
+      "toast-warning-badge-bg": "oklch(0.72 0.12 50)",
+      "toast-info-bg": "oklch(0.48 0.14 245)",
+      "toast-info-badge-bg": "oklch(0.68 0.12 245)"
+    }
+  },
   "type": "registry:ui"
 }
