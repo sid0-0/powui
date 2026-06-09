@@ -2,57 +2,88 @@ View Storybook of all components: [![Storybook](https://img.shields.io/badge/Sto
 
 # 🎨 Pow UI — Comic-Inspired React Component Library
 
-**Comic UI** is a work-in-progress component library built with **React + TypeScript**, inspired by classic comic books.  
-It’s all about playful UIs: speech bubbles, action panels, halftone textures, and bold borders.
+**Pow UI** is a work-in-progress component library built with **React + TypeScript**, inspired by classic comic books.
+It's all about playful UIs: speech bubbles, action panels, halftone textures, and bold borders.
 
 ---
 
 ## ✨ Features (WIP)
 
 - 🗯️ Comic-inspired components: speech bubbles, panels, captions
-- ⚡ Built with **React + TypeScript + Tailwind**
+- ⚡ Built with **React + TypeScript + Tailwind v4**
+- 📦 **shadcn-compatible registry** — drop components into any project with one command
 - 📚 Storybook docs for live preview and testing
 - 🛠️ Lightweight, modular, and accessible
 
 ---
 
-## 🚀 Getting Started (Local Development)
+## 📦 Install a Component
 
-This project is not yet published on npm.  
-You can try it out by cloning the repo:
+Every component is published as a shadcn registry item at `https://powui.dev/r/<name>.json`. Add one to your project with your package manager of choice:
 
 ```bash
-git clone https://github.com/your-username/comic-ui.git
-cd comic-ui
-npm install
-npm run storybook
+pnpm dlx shadcn@latest add https://powui.dev/r/button.json
+npx shadcn@latest add https://powui.dev/r/button.json
+yarn dlx shadcn@latest add https://powui.dev/r/button.json
+bunx --bun shadcn@latest add https://powui.dev/r/button.json
 ```
 
-Then open Storybook at [http://localhost:5174](http://localhost:5174).
+The `theme` item ships the CSS variables, custom utilities (`spotty-bg-*`, `hatched-bg-*`), and keyframes the components rely on, and is pulled in automatically as a dependency. Browse all items at [powui.dev/components](https://powui.dev/components) — each demo includes a copy-able install snippet.
 
 ---
 
-## 📚 Components (so far)
+## 🚀 Getting Started (Local Development)
 
-- `Avatar` — comic-style user avatars
-- `Burst` — comic-burst for those onomatopoeia effects (“BANG!”, “POW!”, “ZAP!”)
-- `Button` — comic style button with dotted background and click animations
-- `Checkbox` — funky hand drawn looking checkbox
-- `Cloud` — speech bubbles and thought clouds
-- `Filters` — comic-inspired image filters
-- `Onomatopoeia` — dynamic action text overlays
-- `Slider` — playful range input with comic aesthetics
-- `Sonner` — comic-style notifications
-- `SpiderSense` — draw attention to a certain element in page
-- `Tabs` — tabbed navigation with bold borders
-- `Tooltip` — popup hints with speech bubble styling
+Clone and install with **pnpm**:
+
+```bash
+git clone https://github.com/yodel/powui.git
+cd powui
+pnpm install
+```
+
+Run the marketing site / components showcase:
+
+```bash
+pnpm dev               # Next.js dev server
+```
+
+Run Storybook for isolated component development:
+
+```bash
+pnpm storybook         # http://localhost:5174
+```
+
+---
+
+## 📚 Components
+
+| Component | Description |
+|---|---|
+| `Avatar` | Comic-style user avatars with heavy borders |
+| `Burst` | Jagged onomatopoeia bursts ("BANG!", "POW!", "ZAP!") |
+| `Button` | Tactile button with comic borders and press physics |
+| `Checkbox` | Hand-drawn-looking checkbox |
+| `Cloud` | Speech bubbles and thought clouds |
+| `Field` | Form field wrapper with label/description/error |
+| `Filters` | SVG filter wrappers — Displacement, ChromaAberr, Posterize |
+| `Input` | Halftone-backed text field |
+| `Onomatopoeia` | Portal-based click effects with comic words |
+| `Sheet` | Slide-in drawer that enters from any edge |
+| `Sidebar` | Comic-styled sidebar/navigation layout |
+| `Skeleton` | Pulsing loading placeholders |
+| `Slider` | Range input with circular or rectangular thumbs |
+| `Sonner` | Comic-book toast notifications (5 variants) |
+| `SpiderSense` | Burst animation lines drawing attention to an element |
+| `Tabs` | Tabs with configurable placement (top/bottom/left/right) |
+| `Tooltip` | Popup hints with speech-bubble styling |
 
 ---
 
 ## 🗺️ Roadmap
 
-- [ ] Package for npm
-- [ ] Customizable themes (colors, fonts, halftone patterns)
+- [x] shadcn-compatible install registry
+- [x] Customizable themes (colors, fonts, halftone patterns)
 - [ ] Add `CalendarPicker` and more
 - [ ] Build docs site
 
