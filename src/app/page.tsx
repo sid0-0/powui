@@ -29,7 +29,7 @@ export default function Home() {
     <div className="relative min-h-screen selection:bg-amber-300 dark:selection:bg-amber-700">
       {/* ── Hero ────────────────────────────────────────────────────────── */}
       <section className="flex flex-col items-center px-4 sm:px-6 gap-4 sm:gap-8">
-        <Filters.Displacement scale={3} frequency={2}>
+        <Filters.Displacement scale={5} frequency={0.5}>
           <Button className="bg-card text-foreground dark:text-white w-48 h-20 text-4xl m-8 sm:w-64 sm:h-24 sm:text-5xl sm:m-16 md:w-80 md:h-32 md:text-7xl md:m-32">
             Pow UI
           </Button>
@@ -105,7 +105,7 @@ export default function Home() {
                   {item.title}
                 </h3>
               </div>
-              <p className="text-sm font-medium text-accent-foreground/70 leading-relaxed max-w-sm">
+              <p className="text-xl font-medium text-accent-foreground/70 leading-relaxed">
                 {item.text}
               </p>
             </div>
