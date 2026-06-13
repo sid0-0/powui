@@ -56,3 +56,34 @@ export const Posterize = {
     <StorybookFilters filterType="Posterize" componentArgs={{ buckets }} />
   ),
 };
+
+export const Ripple = {
+  args: {
+    scale: 6,
+    minFrequency: 0.01,
+    maxFrequency: 0.03,
+    duration: 6,
+  },
+  argTypes: {
+    scale: { control: { type: "range", min: 1, max: 30, step: 1 } },
+    minFrequency: { control: { type: "range", min: 0.005, max: 0.1, step: 0.005 } },
+    maxFrequency: { control: { type: "range", min: 0.005, max: 0.1, step: 0.005 } },
+    duration: { control: { type: "range", min: 1, max: 20, step: 1 } },
+  },
+  render: ({
+    scale,
+    minFrequency,
+    maxFrequency,
+    duration,
+  }: {
+    scale: number;
+    minFrequency: number;
+    maxFrequency: number;
+    duration: number;
+  }) => (
+    <StorybookFilters
+      filterType="Ripple"
+      componentArgs={{ scale, minFrequency, maxFrequency, duration }}
+    />
+  ),
+};

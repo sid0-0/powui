@@ -203,8 +203,64 @@ const Posterize = (
   );
 };
 
+const Ripple = (
+  props: PropsWithChildren<{
+    scale?: number;
+    minFrequency?: number;
+    maxFrequency?: number;
+    duration?: number;
+    className?: string;
+    containerClassName?: string;
+  }>,
+) => {
+  const {
+    scale = 6,
+    minFrequency = 0.01,
+    maxFrequency = 0.03,
+    duration = 2,
+    className = "",
+    containerClassName = "",
+    children,
+  } = props;
+  const values = `${minFrequency};${maxFrequency};${minFrequency}`;
+  return (
+    <SVGWithFilterDefs
+      className={className}
+      containerClassName={containerClassName}
+      filterBody={
+        <>
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency={minFrequency}
+            numOctaves="2"
+            stitchTiles="stitch"
+            result="noise"
+          >
+            <animate
+              attributeName="baseFrequency"
+              values={values}
+              dur={`${duration}s`}
+              repeatCount="indefinite"
+            />
+          </feTurbulence>
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="noise"
+            scale={scale}
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </>
+      }
+    >
+      {children}
+    </SVGWithFilterDefs>
+  );
+};
+
 export const Filters = {
   Displacement,
   ChromaAberr,
   Posterize,
+  Ripple,
 };

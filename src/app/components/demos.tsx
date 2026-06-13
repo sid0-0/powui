@@ -669,6 +669,105 @@ function PosterizeDemo() {
   );
 }
 
+function RippleDemo() {
+  const [scale, setScale] = useState([6]);
+  const [minFreq, setMinFreq] = useState([0.01]);
+  const [maxFreq, setMaxFreq] = useState([0.03]);
+  const [duration, setDuration] = useState([6]);
+
+  return (
+    <div className="flex flex-col gap-6 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="flex flex-col gap-2">
+          <span className="font-[Bangers] text-lg tracking-wide text-center">
+            Original
+          </span>
+          <div className="bg-primary text-primary-foreground border-4 border-foreground p-6 text-center">
+            <span className="font-[Bangers] text-3xl sm:text-4xl tracking-widest text-primary-foreground">
+              POW UI
+            </span>
+          </div>
+        </div>
+        <div className="flex flex-col gap-2">
+          <span className="font-[Bangers] text-lg tracking-wide text-center">
+            Rippling
+          </span>
+          <Filters.Ripple
+            scale={scale[0]}
+            minFrequency={minFreq[0]}
+            maxFrequency={maxFreq[0]}
+            duration={duration[0]}
+          >
+            <div className="bg-primary text-primary-foreground border-4 border-foreground p-6 text-center">
+              <span className="font-[Bangers] text-3xl sm:text-4xl tracking-widest text-primary-foreground">
+                POW UI
+              </span>
+            </div>
+          </Filters.Ripple>
+        </div>
+      </div>
+      <div className="flex flex-col gap-3">
+        <div className="flex justify-between">
+          <label className="font-bold">Scale</label>
+          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">
+            {scale[0]}
+          </span>
+        </div>
+        <Slider
+          value={scale}
+          onValueChange={setScale}
+          min={1}
+          max={30}
+          step={1}
+          thickness={16}
+        />
+        <div className="flex justify-between">
+          <label className="font-bold">Min Frequency</label>
+          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">
+            {minFreq[0].toFixed(3)}
+          </span>
+        </div>
+        <Slider
+          value={minFreq}
+          onValueChange={setMinFreq}
+          min={0.005}
+          max={0.1}
+          step={0.005}
+          thickness={16}
+        />
+        <div className="flex justify-between">
+          <label className="font-bold">Max Frequency</label>
+          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">
+            {maxFreq[0].toFixed(3)}
+          </span>
+        </div>
+        <Slider
+          value={maxFreq}
+          onValueChange={setMaxFreq}
+          min={0.005}
+          max={0.1}
+          step={0.005}
+          thickness={16}
+        />
+        <div className="flex justify-between">
+          <label className="font-bold">Duration (s)</label>
+          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">
+            {duration[0]}
+          </span>
+        </div>
+        <Slider
+          value={duration}
+          onValueChange={setDuration}
+          min={1}
+          max={20}
+          step={1}
+          thickness={16}
+        />
+      </div>
+    </div>
+  );
+}
+
 function SpiderSenseDemo() {
   return (
     <div className="flex flex-col gap-8 w-full">
@@ -1095,6 +1194,15 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Reduces the color palette to a fixed number of buckets, creating a flat screen-print look.",
     demo: <PosterizeDemo />,
+    registryName: "filters",
+  },
+  {
+    id: "ripple",
+    label: "Ripple",
+    group: "Filters",
+    description:
+      "Animated turbulence + displacement filter — children warp continuously like heat haze or water.",
+    demo: <RippleDemo />,
     registryName: "filters",
   },
   {

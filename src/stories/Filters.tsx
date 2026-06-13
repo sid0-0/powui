@@ -2,7 +2,7 @@ import { Filters } from "@/components/ui/filters";
 import { type ComponentProps } from "react";
 
 export const StorybookFilters = (props: {
-  filterType?: "Displacement" | "ChromaAberr" | "Posterize";
+  filterType?: "Displacement" | "ChromaAberr" | "Posterize" | "Ripple";
   componentArgs?: ComponentProps<(typeof Filters)[keyof typeof Filters]>;
 }) => {
   const { filterType = "Displacement", componentArgs } = props;
@@ -18,6 +18,15 @@ export const StorybookFilters = (props: {
   } else if (filterType === "Posterize") {
     FilterWrapper = Filters.Posterize;
     args = { buckets: 5, ...args };
+  } else if (filterType === "Ripple") {
+    FilterWrapper = Filters.Ripple;
+    args = {
+      scale: 6,
+      minFrequency: 0.01,
+      maxFrequency: 0.03,
+      duration: 6,
+      ...args,
+    };
   }
   return (
     <div className="flex items-center justify-center gap-20">
