@@ -20,7 +20,7 @@ export const StorybookFilters = (props: {
     args = { buckets: 5, ...args };
   }
   return (
-    <div className="flex">
+    <div className="flex items-center justify-center gap-20">
       <div className="flex flex-col items-center">
         <h2>Original Image</h2>
         <img

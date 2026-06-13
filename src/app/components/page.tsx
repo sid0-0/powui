@@ -39,7 +39,7 @@ function DemoPanel({ demo }: { demo: ComponentDemo }) {
         className="bg-accent text-primary-foreground
                       px-4 pt-6 pb-4 md:px-8 md:pt-8 md:pb-6 border-b-4 border-foreground"
       >
-        <Filters.Displacement scale={1.5} frequency={0.05}>
+        <Filters.Displacement scale={4} frequency={0.1}>
           <h1 className="font-[Bangers] text-3xl md:text-5xl tracking-widest">
             {demo.label}
           </h1>
@@ -53,8 +53,7 @@ function DemoPanel({ demo }: { demo: ComponentDemo }) {
       <div className="flex-1 min-h-fit p-4 gap-6 md:p-8 md:gap-8 flex flex-col">
         <div className="hatched-bg-primary hatched-opacity-20 text-primary-foreground border-4 border-foreground p-4 md:p-12 flex items-start justify-center min-h-fit">
           <Filters.Displacement
-            scale={1.5}
-            frequency={0.05}
+            scale={4}
             containerClassName="w-full flex items-center justify-center"
           >
             <div
@@ -93,7 +92,7 @@ export default function ComponentsPage() {
       }}
       className="flex-grow-1 min-h-0 bg-transparent overflow-hidden"
     >
-      <Filters.Displacement scale={2} className="size-full overflow-auto">
+      <Filters.Displacement scale={4} className="size-full overflow-auto">
         {/* ── Sidebar ─────────────────────────────────────────────────── */}
         <Sidebar
           collapsible="offcanvas"

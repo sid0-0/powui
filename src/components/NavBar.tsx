@@ -7,6 +7,7 @@ import { useTheme } from "next-themes";
 import { HoverWrap } from "./website/Hoverwrap";
 import { Button } from "./ui/button";
 import { usePathname } from "next/navigation";
+import { RandomFilterWrap } from "./website/RandomFilterWrap";
 
 function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -41,16 +42,17 @@ export function NavBar() {
   const isComponentsPage = path.startsWith("/components");
   return (
     <nav className="sticky top-0 left-0 right-0 z-50 h-14 sm:h-18 border-b-4 border-foreground spotty-dot-sm spotty-spacing-sm spotty-opacity-30 spotty-bg-accent flex-shrink-0 flex items-center justify-between pr-3 sm:pr-6">
-      <div className="bg-black px-4 sm:px-8 justify-center flex items-center h-full">
-        <HoverWrap withAnimation>
+      <RandomFilterWrap className="h-full">
+        {/* <div className="bg-gradient-to-r from-black via-black to-accent/60 dark:to-accent/40 px-4 sm:px-8 justify-center flex items-center h-full"> */}
+        <div className="bg-black px-4 sm:px-8 justify-center flex items-center h-full">
           <Link
             href="/"
             className="font-[Bangers] text-3xl sm:text-5xl text-white! no-underline hover:opacity-80 transition-opacity"
           >
             POW UI
           </Link>
-        </HoverWrap>
-      </div>
+        </div>
+      </RandomFilterWrap>
       <div className="flex items-center gap-2 sm:gap-3">
         {!isComponentsPage && (
           <HoverWrap>

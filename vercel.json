@@ -8,5 +8,9 @@
         { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
       ]
     }
+  ],
+  "rewrites": [
+    { "source": "/storybook",  "destination": "/storybook/index.html" },
+    { "source": "/storybook/", "destination": "/storybook/index.html" }
   ]
 }

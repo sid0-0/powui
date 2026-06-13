@@ -29,7 +29,7 @@ export default function Home() {
     <div className="relative min-h-screen selection:bg-amber-300 dark:selection:bg-amber-700">
       {/* ── Hero ────────────────────────────────────────────────────────── */}
       <section className="flex flex-col items-center px-4 sm:px-6 gap-4 sm:gap-8">
-        <Filters.Displacement scale={3} frequency={2}>
+        <Filters.Displacement scale={5} frequency={0.05}>
           <Button className="bg-card text-foreground dark:text-white w-48 h-20 text-4xl m-8 sm:w-64 sm:h-24 sm:text-5xl sm:m-16 md:w-80 md:h-32 md:text-7xl md:m-32">
             Pow UI
           </Button>
@@ -105,7 +105,7 @@ export default function Home() {
                   {item.title}
                 </h3>
               </div>
-              <p className="text-sm font-medium text-accent-foreground/70 leading-relaxed max-w-sm">
+              <p className="text-xl font-medium text-accent-foreground/70 leading-relaxed">
                 {item.text}
               </p>
             </div>
@@ -172,7 +172,7 @@ export default function Home() {
               </svg>
             </a>
             <a
-              href="https://www.chromatic.com/library?appId=68b33f12384a75f2c732fa44"
+              href="/storybook/"
               target="_blank"
               rel="noopener noreferrer"
               className="font-[Bangers] text-xl sm:text-2xl tracking-wide border-b-4 border-foreground hover:text-amber-700 dark:hover:text-amber-300 transition-colors no-underline"
