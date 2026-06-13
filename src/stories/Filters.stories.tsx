@@ -59,12 +59,12 @@ export const Posterize = {
 
 export const Electricity = {
   args: {
-    scale: 15,
-    frequency: 0.065,
+    scale: 0.05,
+    frequency: 0.2,
     duration: 2.5,
   },
   argTypes: {
-    scale: { control: { type: "range", min: 1, max: 60, step: 1 } },
+    scale: { control: { type: "range", min: 0, max: 1, step: 0.02 } },
     frequency: { control: { type: "range", min: 0.01, max: 0.5, step: 0.005 } },
     duration: { control: { type: "range", min: 0.5, max: 10, step: 0.5 } },
   },

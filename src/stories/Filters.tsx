@@ -20,7 +20,7 @@ export const StorybookFilters = (props: {
     args = { buckets: 5, ...args };
   } else if (filterType === "Electricity") {
     FilterWrapper = Filters.Electricity;
-    args = { scale: 15, frequency: 0.065, duration: 2.5, ...args };
+    args = { scale: 0.05, frequency: 0.2, duration: 2.5, ...args };
   }
   return (
     <div className="flex items-center justify-center gap-20">
