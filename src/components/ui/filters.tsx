@@ -203,8 +203,116 @@ const Posterize = (
   );
 };
 
+const Electricity = (
+  props: PropsWithChildren<{
+    scale?: number;
+    frequency?: number;
+    duration?: number;
+    className?: string;
+    containerClassName?: string;
+  }>,
+) => {
+  const {
+    scale = 15,
+    frequency = 0.065,
+    duration = 2.5,
+    className = "",
+    containerClassName = "",
+    children,
+  } = props;
+
+  const xFilterId = useCreateFilterId();
+  const yFilterId = useCreateFilterId();
+
+  return (
+    <div className={`relative overflow-hidden ${containerClassName}`}>
+      <style>{`
+        @keyframes pow-electricity-slide {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute size-0 invisible"
+      >
+        <defs>
+          {/* X-axis displacement: noise in R, G pinned to 0.5 → only X moves */}
+          <filter id={xFilterId}>
+            <feTurbulence
+              type="turbulence"
+              baseFrequency={frequency}
+              numOctaves="2"
+              seed="1"
+              result="noise"
+            />
+            <feColorMatrix
+              in="noise"
+              type="matrix"
+              values="1 0 0 0 0  0 0 0 0 0.5  0 0 1 0 0  0 0 0 1 0"
+              result="noiseX"
+            />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="noiseX"
+              scale={scale}
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+          {/* Y-axis displacement: R pinned to 0.5, noise moved to G → only Y moves */}
+          <filter id={yFilterId}>
+            <feTurbulence
+              type="turbulence"
+              baseFrequency={frequency}
+              numOctaves="2"
+              seed="2"
+              result="noise"
+            />
+            <feColorMatrix
+              in="noise"
+              type="matrix"
+              values="0 0 0 0 0.5  1 0 0 0 0  0 0 1 0 0  0 0 0 1 0"
+              result="noiseY"
+            />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="noiseY"
+              scale={scale}
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+        </defs>
+      </svg>
+      <div
+        style={{
+          display: "flex",
+          width: "200%",
+          willChange: "transform",
+          animation: `pow-electricity-slide ${duration}s linear infinite`,
+        }}
+      >
+        <div
+          className={className}
+          style={{ width: "50%", filter: `url(#${xFilterId})` }}
+        >
+          {children}
+        </div>
+        <div
+          className={className}
+          style={{ width: "50%", filter: `url(#${yFilterId})` }}
+        >
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const Filters = {
   Displacement,
   ChromaAberr,
   Posterize,
+  Electricity,
 };
