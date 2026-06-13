@@ -73,8 +73,8 @@ export function InstallCommands({ name }: { name: string }) {
       </h3>
 
       <Filters.Displacement
-        scale={1.3}
-        frequency={0.05}
+        scale={3}
+        frequency={0.2}
         containerClassName="w-full"
         className="w-full flex items-center justify-center"
       >

@@ -85,7 +85,7 @@ function ButtonDemo() {
         <h4 className="font-[Bangers] text-xl tracking-wide mb-3">
           With Filter
         </h4>
-        <Filters.Displacement scale={2} frequency={0.25}>
+        <Filters.Displacement scale={5} frequency={0.05}>
           <Button className="spotty-dot-sm spotty-spacing-sm spotty-bg-primary w-full h-12 text-lg font-[Bangers] tracking-widest">
             DISPLACEMENT BUTTON
           </Button>
@@ -588,8 +588,9 @@ function ChromaAberrDemo() {
         </div>
         <div className="flex flex-col gap-2">
           <span className="font-[Bangers] text-lg tracking-wide text-center">
-            Chroma Aberr.
+            Chroma Aberration
           </span>
+          {/* <code>{offset[0]}</code> */}
           <Filters.ChromaAberr offset={offset[0]}>
             <div className="bg-card text-card-foreground border-4 border-foreground p-6 text-center">
               <span className="font-[Bangers] text-3xl sm:text-4xl tracking-widest">
@@ -1080,7 +1081,7 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
   },
   {
     id: "chromaaberr",
-    label: "Chroma Aberr.",
+    label: "Chroma Aberration",
     group: "Filters",
     description:
       "RGB channel separation for a retro chromatic aberration effect — like a busted CRT.",

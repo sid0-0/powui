@@ -107,30 +107,59 @@ const ChromaAberr = (
       containerClassName={containerClassName}
       filterBody={
         <>
-          <feComponentTransfer in="SourceGraphic">
-            <feFuncR type="identity" />
-            <feFuncG type="table" tableValues="0" />
-            <feFuncB type="table" tableValues="0" />
-          </feComponentTransfer>
-          <feOffset dx={-offset} dy={offset} result="redChannel" />
+          <feColorMatrix
+            in="SourceGraphic"
+            type="matrix"
+            values="
+            1 0 0 0 0
+            0 0 0 0 0
+            0 0 0 0 0
+            0 0 0 1 0"
+            result="redOnly"
+          />
+          <feOffset in="redOnly" dx={-offset} dy={offset} result="redChannel" />
 
-          <feComponentTransfer in="SourceGraphic">
-            <feFuncR type="table" tableValues="0" />
-            <feFuncG type="identity" />
-            <feFuncB type="table" tableValues="0" />
-          </feComponentTransfer>
-          <feOffset dx={offset} dy={-offset} result="greenChannel" />
+          <feColorMatrix
+            in="SourceGraphic"
+            type="matrix"
+            values="
+            0 0 0 0 0
+            0 1 0 0 0
+            0 0 0 0 0
+            0 0 0 1 0"
+            result="greenOnly"
+          />
+          <feOffset
+            in="greenOnly"
+            dx={offset}
+            dy={-offset}
+            result="greenChannel"
+          />
 
-          <feComponentTransfer in="SourceGraphic">
-            <feFuncR type="table" tableValues="0" />
-            <feFuncG type="table" tableValues="0" />
-            <feFuncB type="identity" />
-          </feComponentTransfer>
-          <feOffset dx={2 * offset} dy={-2 * offset} result="blueChannel" />
+          <feColorMatrix
+            in="SourceGraphic"
+            type="matrix"
+            values="
+            0 0 0 0 0
+            0 0 0 0 0
+            0 0 1 0 0
+            0 0 0 1 0"
+            result="blueOnly"
+          />
+          <feOffset
+            in="blueOnly"
+            dx={2 * offset}
+            dy={-2 * offset}
+            result="blueChannel"
+          />
 
-          <feBlend in="redChannel" mode="lighten" />
-          <feBlend in="greenChannel" mode="lighten" />
-          <feBlend in="blueChannel" mode="lighten" />
+          <feBlend
+            in="redChannel"
+            in2="greenChannel"
+            mode="screen"
+            result="rgBlend"
+          />
+          <feBlend in="rgBlend" in2="blueChannel" mode="screen" />
         </>
       }
     >
