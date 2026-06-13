@@ -31,7 +31,10 @@ const SVGWithFilterDefs = (
   const filterId = useCreateFilterId();
   return (
     <div className={containerClassName}>
-      <svg xmlns="http://www.w3.org/2000/svg" className="hidden">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute size-0 invisible"
+      >
         <defs>
           <filter id={filterId}>{filterBody}</filter>
         </defs>
