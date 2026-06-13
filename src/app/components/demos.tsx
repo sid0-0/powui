@@ -620,6 +620,89 @@ function ChromaAberrDemo() {
   );
 }
 
+function ElectricityDemo() {
+  const [scale, setScale] = useState([15]);
+  const [freq, setFreq] = useState([0.065]);
+  const [duration, setDuration] = useState([2.5]);
+
+  return (
+    <div className="flex flex-col gap-6 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="flex flex-col gap-2">
+          <span className="font-[Bangers] text-lg tracking-wide text-center">
+            Original
+          </span>
+          <div className="bg-blue-950 border-4 border-foreground p-6 text-center">
+            <span className="font-[Bangers] text-3xl sm:text-4xl tracking-widest text-cyan-300">
+              ZAP!
+            </span>
+          </div>
+        </div>
+        <div className="flex flex-col gap-2">
+          <span className="font-[Bangers] text-lg tracking-wide text-center">
+            Electricity
+          </span>
+          <Filters.Electricity
+            scale={scale[0]}
+            frequency={freq[0]}
+            duration={duration[0]}
+          >
+            <div className="bg-blue-950 border-4 border-foreground p-6 text-center">
+              <span className="font-[Bangers] text-3xl sm:text-4xl tracking-widest text-cyan-300">
+                ZAP!
+              </span>
+            </div>
+          </Filters.Electricity>
+        </div>
+      </div>
+      <div className="flex flex-col gap-3">
+        <div className="flex justify-between">
+          <label className="font-bold">Scale</label>
+          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">
+            {scale[0]}
+          </span>
+        </div>
+        <Slider
+          value={scale}
+          onValueChange={setScale}
+          min={1}
+          max={60}
+          step={1}
+          thickness={16}
+        />
+        <div className="flex justify-between">
+          <label className="font-bold">Frequency</label>
+          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">
+            {freq[0].toFixed(3)}
+          </span>
+        </div>
+        <Slider
+          value={freq}
+          onValueChange={setFreq}
+          min={0.01}
+          max={0.5}
+          step={0.005}
+          thickness={16}
+        />
+        <div className="flex justify-between">
+          <label className="font-bold">Duration (s)</label>
+          <span className="font-[Bangers] text-xl text-amber-600 dark:text-amber-400">
+            {duration[0].toFixed(1)}
+          </span>
+        </div>
+        <Slider
+          value={duration}
+          onValueChange={setDuration}
+          min={0.5}
+          max={10}
+          step={0.5}
+          thickness={16}
+        />
+      </div>
+    </div>
+  );
+}
+
 function PosterizeDemo() {
   const [buckets, setBuckets] = useState([4]);
 
@@ -1095,6 +1178,15 @@ export const COMPONENT_DEMOS: ComponentDemo[] = [
     description:
       "Reduces the color palette to a fixed number of buckets, creating a flat screen-print look.",
     demo: <PosterizeDemo />,
+    registryName: "filters",
+  },
+  {
+    id: "electricity",
+    label: "Electricity",
+    group: "Filters",
+    description:
+      "Two turbulence panels animate left-to-right — X-axis displacement transitions to Y-axis displacement in a continuous electric loop.",
+    demo: <ElectricityDemo />,
     registryName: "filters",
   },
   {
