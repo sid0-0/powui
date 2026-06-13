@@ -40,7 +40,7 @@ function CommandRow({ command }: { command: string }) {
   };
 
   return (
-    <div className="flex items-center gap-12 p-3 md:p-4 bg-card">
+    <div className="flex items-center gap-3 md:gap-12 p-3 md:p-4 bg-card">
       <code className="flex-1 font-mono text-xs md:text-sm text-foreground overflow-x-auto whitespace-nowrap no-scrollbar select-all">
         {command}
       </code>
@@ -71,20 +71,21 @@ export function InstallCommands({ name }: { name: string }) {
       <Filters.Displacement
         scale={1.3}
         frequency={0.05}
-        className="flex items-center justify-center"
+        containerClassName="w-full"
+        className="w-full flex items-center justify-center"
       >
         <Tabs
           defaultValue="pnpm"
           tabsPlacement="top"
           tabHeight="45px"
-          className="w-fit"
+          className="w-full md:max-w-1/2"
         >
-          <TabsList>
+          <TabsList className="w-full">
             {PACKAGE_MANAGERS.map((pm) => (
               <TabsTrigger
                 key={pm}
                 value={pm}
-                className="font-[Bangers] tracking-wider uppercase text-xl"
+                className="font-[Bangers] tracking-wider uppercase text-base sm:text-xl"
               >
                 {pm}
               </TabsTrigger>
