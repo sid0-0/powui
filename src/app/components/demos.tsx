@@ -467,7 +467,7 @@ function CloudDemo() {
           flatteryFactor={flattery[0]}
           huggingStyle="elliptical"
         >
-          <div className="bg-accent text-card-foreground size-40 p-14 flex items-center justify-center text-center font-bold text-xl min-w-[220px]">
+          <div className="bg-accent text-card-foreground size-32 p-8 min-w-[180px] text-base sm:size-40 sm:p-14 sm:min-w-[220px] sm:text-xl flex items-center justify-center text-center font-bold">
             I&apos;m floating on a cloud!
           </div>
         </CloudWrapper>
@@ -512,13 +512,13 @@ function DisplacementDemo() {
 
   return (
     <div className="flex flex-col gap-6 w-full">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
           <span className="font-[Bangers] text-lg tracking-wide text-center">
             Original
           </span>
           <div className="bg-primary text-primary-foreground border-4 border-foreground p-6 text-center">
-            <span className="font-[Bangers] text-4xl tracking-widest text-primary-foreground">
+            <span className="font-[Bangers] text-3xl sm:text-4xl tracking-widest text-primary-foreground">
               POW UI
             </span>
           </div>
@@ -529,7 +529,7 @@ function DisplacementDemo() {
           </span>
           <Filters.Displacement scale={scale[0]} frequency={freq[0]}>
             <div className="bg-primary text-primary-foreground border-4 border-foreground p-6 text-center">
-              <span className="font-[Bangers] text-4xl tracking-widest text-primary-foreground">
+              <span className="font-[Bangers] text-3xl sm:text-4xl tracking-widest text-primary-foreground">
                 POW UI
               </span>
             </div>
@@ -575,13 +575,13 @@ function ChromaAberrDemo() {
 
   return (
     <div className="flex flex-col gap-6 w-full">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
           <span className="font-[Bangers] text-lg tracking-wide text-center">
             Original
           </span>
           <div className="bg-card text-card-foreground border-4 border-foreground p-6 text-center">
-            <span className="font-[Bangers] text-4xl tracking-widest">
+            <span className="font-[Bangers] text-3xl sm:text-4xl tracking-widest">
               POW UI
             </span>
           </div>
@@ -592,7 +592,7 @@ function ChromaAberrDemo() {
           </span>
           <Filters.ChromaAberr offset={offset[0]}>
             <div className="bg-card text-card-foreground border-4 border-foreground p-6 text-center">
-              <span className="font-[Bangers] text-4xl tracking-widest">
+              <span className="font-[Bangers] text-3xl sm:text-4xl tracking-widest">
                 POW UI
               </span>
             </div>
@@ -624,13 +624,13 @@ function PosterizeDemo() {
 
   return (
     <div className="flex flex-col gap-6 w-full">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
           <span className="font-[Bangers] text-lg tracking-wide text-center">
             Original
           </span>
           <div className="bg-gradient-to-br from-amber-400 to-red-500 border-4 border-foreground p-6 text-center">
-            <span className="font-[Bangers] text-4xl tracking-widest text-white">
+            <span className="font-[Bangers] text-3xl sm:text-4xl tracking-widest text-white">
               POW UI
             </span>
           </div>
@@ -641,7 +641,7 @@ function PosterizeDemo() {
           </span>
           <Filters.Posterize buckets={buckets[0]}>
             <div className="bg-gradient-to-br from-amber-400 to-red-500 border-4 border-foreground p-6 text-center">
-              <span className="font-[Bangers] text-4xl tracking-widest text-white">
+              <span className="font-[Bangers] text-3xl sm:text-4xl tracking-widest text-white">
                 POW UI
               </span>
             </div>
@@ -850,7 +850,7 @@ function SkeletonDemo() {
   const [loading, setLoading] = useState(true);
 
   return (
-    <div className="flex flex-col gap-4 w-4xl">
+    <div className="flex flex-col gap-4 w-full max-w-4xl">
       <div className="flex items-center justify-between mb-2">
         <h4 className="font-[Bangers] text-xl tracking-wide">Loading State</h4>
         <Button
@@ -978,7 +978,7 @@ function HatchedBgDemo() {
       <div>
         <h4 className="font-[Bangers] text-xl tracking-wide mb-3">Angles</h4>
         <div className="flex items-center justify-center size-full">
-          <div className="grid grid-cols-4 grid-rows-2 gap-2 p-1 w-fit">
+          <div className="grid grid-cols-3 grid-rows-3 sm:grid-cols-4 sm:grid-rows-2 gap-2 p-1 w-fit">
             {angles.map((a) => (
               <div key={a} className="flex flex-col items-center gap-1 p-1">
                 <div

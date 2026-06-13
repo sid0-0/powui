@@ -28,21 +28,21 @@ export default function Home() {
   return (
     <div className="relative min-h-screen selection:bg-amber-300 dark:selection:bg-amber-700">
       {/* ── Hero ────────────────────────────────────────────────────────── */}
-      <section className="flex flex-col items-center px-6 gap-8">
+      <section className="flex flex-col items-center px-4 sm:px-6 gap-4 sm:gap-8">
         <Filters.Displacement scale={3} frequency={2}>
-          <Button className="bg-card text-foreground dark:text-white w-80 h-32 text-7xl m-32">
+          <Button className="bg-card text-foreground dark:text-white w-48 h-20 text-4xl m-8 sm:w-64 sm:h-24 sm:text-5xl sm:m-16 md:w-80 md:h-32 md:text-7xl md:m-32">
             Pow UI
           </Button>
         </Filters.Displacement>
 
-        <div className="mx-auto max-w-2xl bg-card border-4 border-foreground shadow-[-8px_8px_0_0_var(--foreground)] overflow-hidden">
+        <div className="mx-auto max-w-2xl bg-card border-4 border-foreground shadow-[-4px_4px_0_0_var(--foreground)] md:shadow-[-8px_8px_0_0_var(--foreground)] overflow-hidden">
           <div className="spotty-dot-sm spotty-spacing-sm spotty-opacity-25 spotty-bg-accent px-6 py-2 border-b-4 border-foreground">
             <span className="font-[Bangers] text-sm tracking-[0.3em] uppercase">
               The Comic UI Library
             </span>
           </div>
           <div className="p-6">
-            <div className="text-2xl md:text-3xl font-bold leading-tight">
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold leading-tight">
               A punchy, comic-inspired UI library for interfaces that{" "}
               <SpiderSenseWrapper containerClassName="inline" trigger="hover">
                 <span className="text-orange-400 dark:text-orange-300 underline decoration-foreground underline-offset-4">
@@ -65,22 +65,22 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2">
           {[
             {
-              icon: <TailwindIcon className="size-8" />,
+              icon: <TailwindIcon className="size-6 md:size-8" />,
               title: "Made with Tailwind",
               text: "Utility-first styling with no custom CSS to fight. Every style is a class — compose, override, and ship without leaving your markup.",
             },
             {
-              icon: <Code2 className="size-8" />,
+              icon: <Code2 className="size-6 md:size-8" />,
               title: "Open Source",
               text: "MIT licensed. Free forever. Fork it, own it, and build something worth shouting about. No paywalls, no lock-in.",
             },
             {
-              icon: <Layers className="size-8" />,
+              icon: <Layers className="size-6 md:size-8" />,
               title: "Based on shadcn",
               text: "Built on shadcn/ui primitives. Familiar copy-paste setup, zero runtime overhead, comic-book personality baked in.",
             },
             {
-              icon: <SlidersHorizontal className="size-8" />,
+              icon: <SlidersHorizontal className="size-6 md:size-8" />,
               title: "Fully Customizable",
               text: "Every component is a starting point, not an endpoint. Override anything with Tailwind classes — no specificity fights.",
             },
@@ -88,7 +88,7 @@ export default function Home() {
             <div
               key={i}
               className={[
-                "p-10 flex flex-col gap-5 border-foreground",
+                "p-6 md:p-10 flex flex-col gap-5 border-foreground",
                 i % 2 === 0 ? "md:border-r-4" : "",
                 i < 2
                   ? "border-b-4"
@@ -98,10 +98,10 @@ export default function Home() {
               ].join(" ")}
             >
               <div className="flex items-center gap-4">
-                <div className="size-16 bg-card text-foreground border-4 border-foreground flex items-center justify-center shrink-0">
+                <div className="size-12 md:size-16 bg-card text-foreground border-4 border-foreground flex items-center justify-center shrink-0">
                   {item.icon}
                 </div>
-                <h3 className="font-[Bangers] text-3xl tracking-wider">
+                <h3 className="font-[Bangers] text-2xl md:text-3xl tracking-wider">
                   {item.title}
                 </h3>
               </div>
@@ -116,20 +116,20 @@ export default function Home() {
       {/* ── CTA Banner ──────────────────────────────────────────────────── */}
       <section
         className="spotty-dot-sm spotty-spacing-sm spotty-opacity-20 spotty-bg-primary text-primary-foreground
-                   border-y-4 border-foreground py-16 px-6 flex flex-col items-center gap-8"
+                   border-y-4 border-foreground py-10 px-4 sm:py-16 sm:px-6 flex flex-col items-center gap-8"
       >
         <Filters.Displacement scale={2} frequency={0.06}>
-          <h2 className="font-[Bangers] text-6xl md:text-8xl text-primary-foreground text-center tracking-widest">
+          <h2 className="font-[Bangers] text-4xl sm:text-6xl md:text-8xl text-primary-foreground text-center tracking-widest">
             READY TO BUILD?
           </h2>
         </Filters.Displacement>
-        <p className="text-primary-foreground/70 text-xl text-center max-w-xl font-medium">
+        <p className="text-primary-foreground/70 text-base sm:text-xl text-center max-w-xl font-medium">
           Explore all 18 components — buttons, shapes, filters, animations,
           toasts, sidebars, and more.
         </p>
         <Button
           size="lg"
-          className="text-2xl px-10 h-16 font-[Bangers] tracking-widest bg-accent text-accent-foreground hover:bg-accent"
+          className="text-lg px-6 h-12 sm:text-2xl sm:px-10 sm:h-16 font-[Bangers] tracking-widest bg-accent text-accent-foreground hover:bg-accent"
           asChild
         >
           <Link href="/components">Browse All Components →</Link>
@@ -139,27 +139,27 @@ export default function Home() {
       {/* ── Footer ──────────────────────────────────────────────────────── */}
       <footer
         className="spotty-dot-sm spotty-spacing-sm spotty-opacity-20 spotty-bg-primary text-primary-foreground
-                   border-t-4 border-foreground px-8 pt-16 pb-20 relative"
+                   border-t-4 border-foreground px-4 sm:px-8 pt-10 sm:pt-16 pb-24 sm:pb-20 relative"
       >
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-8 md:gap-12">
           <div className="flex flex-col gap-4">
-            <Filters.Displacement scale={2} frequency={0.06}>
-              <Button className="px-6 py-8 font-[Bangers] text-5xl tracking-widest text-foreground bg-card dark:text-white">
+            <Filters.Displacement scale={4} frequency={0.06}>
+              <Button className="px-4 py-6 text-3xl sm:px-6 sm:py-8 sm:text-5xl font-[Bangers] tracking-widest text-foreground bg-card dark:text-white">
                 POW UI
               </Button>
             </Filters.Displacement>
-            <p className="text-lg font-medium text-primary-foreground max-w-xs">
+            <p className="text-base sm:text-lg font-medium text-primary-foreground max-w-xs">
               Making the web more exciting,
               <br />
               one punch at a time.
             </p>
           </div>
-          <div className="flex flex-col items-end gap-3">
+          <div className="flex flex-col items-start md:items-end gap-3">
             <a
               href=""
               target="_blank"
               rel="noopener noreferrer"
-              className="font-[Bangers] text-2xl tracking-wide border-b-4 border-foreground hover:text-amber-700 dark:hover:text-amber-300 transition-colors no-underline w-fit"
+              className="font-[Bangers] text-xl sm:text-2xl tracking-wide border-b-4 border-foreground hover:text-amber-700 dark:hover:text-amber-300 transition-colors no-underline w-fit"
             >
               <svg
                 className="size-5 inline-block"
@@ -175,13 +175,13 @@ export default function Home() {
               href="https://www.chromatic.com/library?appId=68b33f12384a75f2c732fa44"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-[Bangers] text-2xl tracking-wide border-b-4 border-foreground hover:text-amber-700 dark:hover:text-amber-300 transition-colors no-underline"
+              className="font-[Bangers] text-xl sm:text-2xl tracking-wide border-b-4 border-foreground hover:text-amber-700 dark:hover:text-amber-300 transition-colors no-underline"
             >
               Storybook
             </a>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 border-t-4 border-foreground bg-accent text-accent-foreground px-8 py-4">
+        <div className="absolute bottom-0 left-0 right-0 border-t-4 border-foreground bg-accent text-accent-foreground px-4 py-3 sm:px-8 sm:py-4">
           <p className="text-accent-foreground/70 text-sm font-medium text-center">
             Built with React, Next.js, Tailwind CSS, and a whole lot of comic
             energy.

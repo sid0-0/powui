@@ -37,29 +37,29 @@ function DemoPanel({ demo }: { demo: ComponentDemo }) {
       {/* Header */}
       <div
         className="bg-accent text-primary-foreground
-                      px-8 pt-8 pb-6 border-b-4 border-foreground"
+                      px-4 pt-6 pb-4 md:px-8 md:pt-8 md:pb-6 border-b-4 border-foreground"
       >
         <Filters.Displacement scale={1.5} frequency={0.05}>
-          <h1 className="font-[Bangers] text-5xl tracking-widest">
+          <h1 className="font-[Bangers] text-3xl md:text-5xl tracking-widest">
             {demo.label}
           </h1>
         </Filters.Displacement>
-        <p className="mt-2 font-medium text-primary-foreground/70 text-lg max-w-2xl">
+        <p className="mt-2 font-medium text-primary-foreground/70 text-base md:text-lg max-w-2xl">
           {demo.description}
         </p>
       </div>
 
       {/* Demo Area */}
-      <div className="flex-1 min-h-fit p-8 flex flex-col gap-8">
-        <div className="hatched-bg-primary hatched-opacity-20 text-primary-foreground border-4 border-foreground p-8 md:p-12 flex items-start justify-center min-h-fit">
+      <div className="flex-1 min-h-fit p-4 gap-6 md:p-8 md:gap-8 flex flex-col">
+        <div className="hatched-bg-primary hatched-opacity-20 text-primary-foreground border-4 border-foreground p-4 md:p-12 flex items-start justify-center min-h-fit">
           <Filters.Displacement
             scale={1.5}
             frequency={0.05}
             containerClassName="w-full flex items-center justify-center"
           >
             <div
-              className="bg-card text-card-foreground border-4 border-foreground shadow-[-8px_8px_0_0_var(--foreground)]
-                         p-8 w-fit"
+              className="bg-card text-card-foreground border-4 border-foreground shadow-[-4px_4px_0_0_var(--foreground)] md:shadow-[-8px_8px_0_0_var(--foreground)]
+                         p-4 md:p-8 w-fit max-w-full"
             >
               {demo.demo}
             </div>
